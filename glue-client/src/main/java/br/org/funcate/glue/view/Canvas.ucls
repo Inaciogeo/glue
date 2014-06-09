@@ -1,0 +1,175 @@
+<class-diagram version="1.0.4" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.ZoomToolService" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/ZoomToolService.java" binary="false">    
+    <position x="356" y="167" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.TransparencySliderService" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/TransparencySliderService.java" 
+    binary="false">    
+    <position x="604" y="23" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.PanToolService" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/PanToolService.java" binary="false">    
+    <position x="300" y="28" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.PanToolGraphics" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/PanToolGraphics.java" binary="false">    
+    <position x="116" y="148" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.GeneralTileSchema" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/GeneralTileSchema.java" binary="false">    
+    <position x="790" y="239" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.CanvasService" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/CanvasService.java" binary="false">    
+    <position x="1068" y="238" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.CanvasGraphicsBuffer" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/CanvasGraphicsBuffer.java" binary="false">    
+    <position x="715" y="320" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <interface id="8" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.ToolGraphics" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/ToolGraphics.java" binary="false">    
+    <position x="258" y="324" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <class id="9" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.ZoomAreaGraphics" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/ZoomAreaGraphics.java" binary="false">    
+    <position x="420" y="248" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="10" corner="BOTTOM_RIGHT" language="java" name="br.org.funcate.glue.model.canvas.CanvasState" 
+    project="glue-client-eagles" 
+    file="/glue-client-eagles/src/main/java/br/org/funcate/glue/model/canvas/CanvasState.java" binary="false">    
+    <position x="656" y="164" width="-1" height="-1"/>    
+    <display autosize="true" package="false" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <dependency>    
+    <end type="SOURCE" nodeId="2"/>    
+    <end type="TARGET" nodeId="10"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="7" navigable="false">      
+      <attribute name="toolGraphics"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="7"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="7"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="10"/>  
+  </dependency>  
+  <realization>    
+    <end type="SOURCE" nodeId="4"/>    
+    <end type="TARGET" nodeId="8"/>  
+  </realization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="9"/>  
+  </dependency>  
+  <realization>    
+    <end type="SOURCE" nodeId="9"/>    
+    <end type="TARGET" nodeId="8"/>  
+  </realization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="10"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="8"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="10"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="7"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="8"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="7"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="10"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="10" navigable="false">      
+      <attribute name="canvasGraphicsBuffer"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <classifier-display autosize="true" package="false" initial-value="false" signature="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false"/>    
+    <operations public="false" package="false" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

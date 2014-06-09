@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry exported="true" kind="lib" path="lib/eagles.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/opencsv-2.3.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/terrajava-api"/>
+	<classpathentry exported="true" kind="lib" path="lib/postgresql-9.3-1101.jdbc3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/json-simple-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/log4j-1.2.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jdom-2.0.5.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
