@@ -118,10 +118,12 @@ public class SearchPanel extends JPanel {
 		add(textSearch);
 		textSearch.setColumns(10);
 		btnSearch = new JButton("Ir");
+		btnSearch.setEnabled(false);
 
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				btnSearch.setEnabled(false);
 				AppSingleton singleton = AppSingleton.getInstance();
 				TerraJavaClient services = singleton.getServices();
 				Mediator mediator = singleton.getMediator();
@@ -201,6 +203,7 @@ public class SearchPanel extends JPanel {
 					lblGO.setVisible(true);
 					setBounds(200, 80, 440, 120);
 					scrollPane.setBounds(11, 74, 420, 26);
+					btnSearch.setEnabled(true);
 				}
 			}
 		});
