@@ -1,0 +1,140 @@
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '563'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '344'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '273'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '294'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '255'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '486'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '233'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE 1
+error=ERRO:  argumento do WHERE deve ser do tipo boolean, e não do tipo integer
+LINE 1: ... te_collection_1.c_object_id = Municipios.object_id) WHERE 1
+                                                                      ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id =1
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = 1
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = 1
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id > 1
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id == 1
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id_1 = 1
+error=ERRO:  operador não existe: character varying = integer
+LINE 1: ..._1.c_object_id = Municipios.object_id) WHERE object_id_1 = 1
+                                                                    ^
+HINT:  Nenhum operador corresponde com o nome e o(s) tipo(s) de argumento(s) informados. Você precisa adicionar conversões de tipo explícitas.
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id_1 = 1
+error=ERRO:  operador não existe: character varying = integer
+LINE 1: ..._1.c_object_id = Municipios.object_id) WHERE object_id_1 = 1
+                                                                    ^
+HINT:  Nenhum operador corresponde com o nome e o(s) tipo(s) de argumento(s) informados. Você precisa adicionar conversões de tipo explícitas.
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = 1
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = 190
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = 19
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '19'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '12'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '12'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '12'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
+-------------------
+sql=SELECT MIN(((Municipios.spatial_box[1])[0])), MIN(((Municipios.spatial_box[1])[1])), MAX(((Municipios.spatial_box[0])[0])), MAX(((Municipios.spatial_box[0])[1]))  FROM ((te_collection_1_aux LEFT JOIN te_collection_1 ON te_collection_1_aux.object_id = te_collection_1.c_object_id ) LEFT JOIN Municipios ON te_collection_1.c_object_id = Municipios.object_id) WHERE object_id = '12'
+error=ERRO:  referência à coluna "object_id" é ambígua
+LINE 1: ...ction_1.c_object_id = Municipios.object_id) WHERE object_id ...
+                                                             ^
+
