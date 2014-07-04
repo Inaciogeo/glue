@@ -361,7 +361,6 @@ public class TreeController implements EventDispatcher, EventListener {
 		try {
 			dispatch(this.eventTransmitter, e);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}

@@ -43,8 +43,7 @@ public abstract class GeneralTileSchema {
 		double canvasBoxX1 = box.getX1();
 		double offSetX = 0;// Double.parseDouble(projection.getOffx());
 		double canvasResolution = model.getResolution();
-		int tileIndexX = (int) (Math.floor((canvasBoxX1 - offSetX)
-				/ (TILE_SIZE * canvasResolution)));
+		int tileIndexX = (int) (Math.floor((canvasBoxX1 - offSetX)/(TILE_SIZE * canvasResolution)));
 		return tileIndexX;
 	}
 

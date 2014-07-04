@@ -1,6 +1,7 @@
 package br.org.funcate.glue.model.request;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -15,6 +16,10 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 
 import br.org.funcate.glue.model.Box;
+import br.org.funcate.glue.model.CalculatorService;
+import br.org.funcate.glue.model.Coord;
+import br.org.funcate.glue.model.ESRILatLongTile;
+import br.org.funcate.glue.model.PointF;
 import br.org.funcate.glue.utilities.PropertiesReader;
 import br.org.funcate.glue.utilities.XMLJDomReader;
 import br.org.funcate.glue.view.ScreenRequetServices;
@@ -36,23 +41,12 @@ public class CGIRequest {
 		String url = null;
 		String finalUrl = null;
 		String CGIName = ScreenRequetServices.getValue();
-
+		String positionUrl = null;
 		try {
-//			 rootNode = XMLJDomReader.JDomRead("../glue-client/src/main/java/br/org/funcate/glue/utilities/TilePropertyRequest.xml");
-//			 List nodeList = rootNode.getChildren("content");
-//	 
-//			for (int i = 0; i < nodeList.size(); i++) { 
-//			   Element node = (Element) nodeList.get(i);
-//			   id = node.getChildText("id");
-//			   name = node.getChildText("name");
-//			   if(id.equals("1")&& name.equals(CGIName))// id=0 openStreetMap, id = 1 cgi, id = 2 google;
-//				   url = node.getChildText("url");
-//			}
-			url = PropertiesReader.getProperty("canvas.request.cgi.url."+CGIName);			
 			
+			url = PropertiesReader.getProperty("canvas.request.cgi.url."+CGIName);
 			finalUrl = url + zoomLevel +"/"+  (int) (Math.pow(2, zoomLevel) / 2 + tileIndexX)+ "/"+ ((int) (Math.pow(2, zoomLevel) / 2 - tileIndexY) - 1)+".png";
-			//finalUrl = url + zoomLevel +"/"+  (int) (Math.pow(2, zoomLevel) / 2 + tileIndexX)+ "/"+ ((int) (Math.pow(2, zoomLevel) / 2 - tileIndexY) - 1);
-			
+			positionUrl = "z:"+ zoomLevel +" x:"+  (int) (Math.pow(2, zoomLevel) / 2 + tileIndexX)+ " y:"+ ((int) (Math.pow(2, zoomLevel) / 2 - tileIndexY) - 1);
 			return ImageIO.read(new URL(finalUrl));
 			
 		} catch (IOException e) {
@@ -73,15 +67,42 @@ public class CGIRequest {
 			System.out.println("Deu erro na URL:");
 			System.out.println(finalUrl);
 
-			g.setColor(Color.lightGray);
+			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, 256, 256);
-			g.setColor(Color.black);
-			g.drawString("A imagem não pode", 14, 20);
-			g.drawString("ser requisitada.", 3, 35);
-			g.drawString("Verifique o nível de zoom,", 3, 50);
+			g.setColor(Color.DARK_GRAY);
+			g.setFont(new Font("Arial", Font.BOLD, 12));
+			g.drawString("A imagem não pode", 6, 20);
+			g.drawString("ser requisitada.", 6, 35);
+			g.drawString("Verifique o nível de zoom,", 6, 50);
 			g.drawString("ou a conexão com a internet.", 6, 65);
+			g.drawString("tile: "+positionUrl, 6, 85);
 			return errorImage;
 		} 
+	}
+	public static double y2lat(double aY) {
+	    return Math.toDegrees(2* Math.atan(Math.exp(Math.toRadians(aY))) - Math.PI/2);
+	}
+	public static double[] toGeographic(double mercatorX_lon, double mercatorY_lat){
+		double[] coord = {0,0};
+	    if (Math.abs(mercatorX_lon) < 180 && Math.abs(mercatorY_lat) < 90)
+	        return coord;
+
+	    if ((Math.abs(mercatorX_lon) > 20037508.3427892) || (Math.abs(mercatorY_lat) > 20037508.3427892))
+	        return coord;
+
+	    double x = mercatorX_lon;
+	    double y = mercatorY_lat;
+	    double num3 = x / 6378137.0;
+	    double num4 = num3 * 57.295779513082323;
+	    double num5 = Math.floor((double)((num4 + 180.0) / 360.0));
+	    double num6 = num4 - (num5 * 360.0);
+	    double num7 = 1.5707963267948966 - (2.0 * Math.atan(Math.exp((-1.0 * y) / 6378137.0)));
+	    mercatorX_lon = num6;
+	    mercatorY_lat = num7 * 57.295779513082323;
+	    
+	    coord[0]= mercatorX_lon;
+	    coord[1]= mercatorY_lat;
+		return coord;
 	}
 
 	// this method makes tile request using Google Static Maps API

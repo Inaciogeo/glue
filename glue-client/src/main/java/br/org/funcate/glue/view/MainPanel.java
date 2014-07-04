@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import br.org.funcate.glue.controller.MainPanelController;
+import br.org.funcate.glue.controller.Mediator;
 import br.org.funcate.glue.controller.TabbedToolBarsController;
 import br.org.funcate.glue.controller.listener.DragOutlookBarAdapter;
 import br.org.funcate.glue.controller.listener.LabelCanvasExpanderAdapter;
@@ -180,7 +181,7 @@ public class MainPanel extends JPanel{
 		createTabbedToolBars();
 		createCanvas();
 		createTransparencySlider();
-		
+		//loadOSM();
 		
 		System.out.println("The application has loaded in "
 				+ (System.currentTimeMillis() - loadingTime) / 1000.f
@@ -197,6 +198,11 @@ public class MainPanel extends JPanel{
 		searchPanel.setBounds(200, 80, 440, 45);
 		this.add(searchPanel);
 		setComponentZOrder(searchPanel, 0);
+	}
+	public void loadOSM(){
+		AppSingleton singleton = AppSingleton.getInstance();
+		Mediator mediator = singleton.getMediator();
+		mediator.setToolBarSource("0");
 	}
 	
 	private void createTerraLibText() {

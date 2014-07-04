@@ -5,18 +5,17 @@ import java.util.EventObject;
 
 @SuppressWarnings("serial")
 public class DrawFeatureEvent extends EventObject{
-	ArrayList<String> ids;
-	
+	ArrayList<String> lineIds;
 	public DrawFeatureEvent(Object source){
 		super(source);	
 	}
 
-	public ArrayList<String> getIds() {
-		return ids;
+	public ArrayList<String> getLineIds() {
+		return lineIds;
 	}
 
-	public void setIds(ArrayList<String> ids) {
-		this.ids = ids;
+	public void setLineIds(ArrayList<String> ids) {
+		this.lineIds = ids;
 	}
 
 	

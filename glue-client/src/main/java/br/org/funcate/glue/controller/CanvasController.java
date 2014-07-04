@@ -39,7 +39,7 @@ import br.org.funcate.glue.event.SelectedThemeEvent;
 import br.org.funcate.glue.event.UnselectedThemeEvent;
 import br.org.funcate.glue.event.UpdateCursorEvent;
 import br.org.funcate.glue.main.AppSingleton;
-import br.org.funcate.glue.main.Main;
+
 import br.org.funcate.glue.model.CalculatorService;
 import br.org.funcate.glue.model.canvas.BufferEnum;
 import br.org.funcate.glue.model.canvas.CanvasService;
@@ -56,7 +56,7 @@ import br.org.funcate.glue.view.InfoToolView;
 import br.org.funcate.glue.view.SearchPanel;
 
 
-public class CanvasController implements EventDispatcher, EventListener {
+public class CanvasController implements EventDispatcher, EventListener, Runnable {
 
 	private AbstractCanvas canvasView;
 	private ListenersHandler listeners;
@@ -144,11 +144,8 @@ public class CanvasController implements EventDispatcher, EventListener {
 		} catch (GlueServerException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 	public void executeMouseDrag(MouseEvent e) {
@@ -197,13 +194,6 @@ public class CanvasController implements EventDispatcher, EventListener {
 		GeneralTileSchema.setWheelMoved(true);
 		BoxChangedEvent event = new BoxChangedEvent(this);
 		ScaleChangedEvent scaleChangedEvent = new ScaleChangedEvent(this);
-		DrawFeatureEvent drawFeatureEvent = new DrawFeatureEvent(this);
-		drawFeatureEvent.setIds(SearchPanel.getResultIds());
-		try {
-			this.dispatch(transmitter,drawFeatureEvent);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 		
 		try {
 			this.dispatch(transmitter,scaleChangedEvent);
@@ -223,6 +213,7 @@ public class CanvasController implements EventDispatcher, EventListener {
 	}
 
 	public void executeMousePress(MouseEvent e) {
+		CanvasService.deleteMark();
 		double[] point = CalculatorService.convertFromPixelToWorld(e.getX(),e.getY());
 		MousePressedEvent mousePressedEvent = new MousePressedEvent(this, e.getButton(), point[0],
 				point[1], e.getX(), e.getY());
@@ -234,13 +225,7 @@ public class CanvasController implements EventDispatcher, EventListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		DrawFeatureEvent drawFeatureEvent = new DrawFeatureEvent(this);
-		drawFeatureEvent.setIds(SearchPanel.getResultIds());
-		try {
-			this.dispatch(transmitter,drawFeatureEvent);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		
 	}
 
 	public void executeMouseClick(MouseEvent e) {
@@ -321,7 +306,6 @@ public class CanvasController implements EventDispatcher, EventListener {
 		} catch (GlueServerException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -408,8 +392,7 @@ public class CanvasController implements EventDispatcher, EventListener {
 	}
 	
 	@Override
-	public void dispatch(EventTransmitter tc, EventObject e)
-			throws Exception {
+	public void dispatch(EventTransmitter tc, EventObject e)throws Exception {
 		tc.dispatch(e);
 	}
 
@@ -537,5 +520,17 @@ public class CanvasController implements EventDispatcher, EventListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void run() {
+		DrawFeatureEvent drawFeatureEvent = new DrawFeatureEvent(this);
+		drawFeatureEvent.setLineIds(SearchPanel.getResultIds());
+		try {
+			this.dispatch(transmitter,drawFeatureEvent);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
 	}
 }

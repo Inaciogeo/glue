@@ -18,6 +18,7 @@ import br.org.funcate.glue.controller.Mediator;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.Box;
 import br.org.funcate.glue.model.CalculatorService;
+import br.org.funcate.glue.model.ESRILatLongTile;
 import br.org.funcate.glue.model.Projection;
 import br.org.funcate.glue.model.RgbColor;
 import br.org.funcate.glue.model.ScaleService;
@@ -113,6 +114,20 @@ public abstract class CanvasService {
 					/ ((Math.pow(2, state.getZoomLevel())) * TILE_SIZE);
 			state.setResolution(newResolution);
 		}
+		//if ("ESRI".equals(currentProjection.getName())) {//BIRA RESOLUTION
+//		if("LatLong".equals(currentProjection.getName())) {
+//			int zoom = 0;
+//			r = r*TILE_SIZE;
+//			setZoomLevel();
+//			for (int i = 0; i < ESRILatLongTile.getResolution().length; i++) {
+//				if(r>ESRILatLongTile.getResolution()[i]){
+//					zoom = i;
+//					break;
+//				}
+//			}
+//			double newResolution = ESRILatLongTile.getResolution()[zoom]/TILE_SIZE;
+//			state.setResolution(newResolution);
+//		}
 	}
 
 	/**
@@ -124,8 +139,7 @@ public abstract class CanvasService {
 		AppSingleton singleton = AppSingleton.getInstance();
 		CanvasState state = singleton.getCanvasState();
 		double numberOfTiles = EXTENT / state.getResolution() / TILE_SIZE;
-		int newZoomLevel = (int) (Math.round(Math.log(numberOfTiles)
-				/ Math.log(2)));
+		int newZoomLevel = (int) (Math.round(Math.log(numberOfTiles)/ Math.log(2)));
 		state.setZoomLevel(newZoomLevel);
 		ScaleService.verifyZoomLevelLimits(newZoomLevel);
 	}
@@ -259,6 +273,12 @@ public abstract class CanvasService {
 		CanvasGraphicsBuffer canvasGraphicsBuffer = state.getCanvasGraphicsBuffer();
 		canvasGraphicsBuffer.createMarker();
 		
+	}
+	public static void deleteMark(){
+		AppSingleton singleton = AppSingleton.getInstance();
+		CanvasState state = singleton.getCanvasState();
+		CanvasGraphicsBuffer canvasGraphicsBuffer = state.getCanvasGraphicsBuffer();
+		canvasGraphicsBuffer.deleteMarker();	
 	}
 
 	private static void clearCache() {
@@ -696,8 +716,10 @@ public abstract class CanvasService {
 	private static Projection createLatLongProjection() {
 		Projection wmsProjection = new Projection();
 		wmsProjection.setDatum("SAD69");
+		//wmsProjection.setDatum("WGS84");//bira
 		wmsProjection.setUnits("DecimalDegrees");
 		wmsProjection.setName("LatLong");
+		//wmsProjection.setName("ESRI");//bira
 		wmsProjection.setLat0(0.0);
 		wmsProjection.setLon0(0.0);
 		wmsProjection.setStlat1(0.0);

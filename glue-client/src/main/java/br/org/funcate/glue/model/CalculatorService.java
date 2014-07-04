@@ -219,7 +219,8 @@ public class CalculatorService {
 
 		double resolution = calculateResolution(defaultWidth, defaultHeight, boxX1, boxY1, boxX2, boxY2);
 
-		if (projection.getName().toUpperCase().equals("LATLONG"))
+		//if (projection.getName().equals("LatLong")|| projection.getName().equals("ESRI"))
+		if (projection.getName().equals("LatLong"))
 			meterConversor = 111133;
 		else
 			meterConversor = 1;
@@ -232,6 +233,7 @@ public class CalculatorService {
 	public static int getMeterConversor(Projection projection) {
 		int meterConversor = 1;
 
+		//if ("LatLong".equals(projection.getName()) || projection.getName().equals("ESRI")) {
 		if ("LatLong".equals(projection.getName())) {
 			meterConversor = 111133;
 		}

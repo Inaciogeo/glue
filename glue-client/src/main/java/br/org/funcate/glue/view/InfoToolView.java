@@ -29,27 +29,29 @@ public class InfoToolView extends JFrame {
 	private JPanel panel_1;
 
 	private InfoToolView() {
+		setBackground(new Color(176, 196, 222));
 		mainPanel = new JPanel();
 		mainPanel.setBackground(Color.white);
-		mainPanel.setBounds(5, 5, 543, 376);
+		mainPanel.setBounds(5, 5, 540, 298);
 		mainPanel.setLayout(null);
 		
 		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(176, 196, 222));
-		panel_1.setBounds(0, 0, 543, 35);
+		panel_1.setBounds(0, 0, 543, 25);
 		mainPanel.add(panel_1);
 		panel_1.setLayout(null);
 
 		lblTitle = new JLabel("Resultado do Apontamento");
-		lblTitle.setBounds(0, 5, 543, 25);
+		lblTitle.setBounds(0, 1, 543, 25);
 		panel_1.add(lblTitle);
 		lblTitle.setBackground(new Color(255, 255, 255));
-		lblTitle.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblTitle.setFont(new Font("Dialog", Font.ITALIC, 13));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
 		InfoToolAdapter adapter = new InfoToolAdapter(this);
 
 		btMap = new JButton("Ver mapa");
+		btMap.setVisible(false);
 		btMap.setBackground(new Color(255, 255, 255));
 		btMap.setBounds(330, 345, 100, 25);
 		btMap.addActionListener(adapter);
@@ -57,7 +59,7 @@ public class InfoToolView extends JFrame {
 
 		btClose = new JButton("Fechar");
 		btClose.setBackground(new Color(255, 255, 255));
-		btClose.setBounds(431, 345, 100, 25);
+		btClose.setBounds(459, 260, 72, 28);
 		btClose.addActionListener(adapter);
 		mainPanel.add(btClose);
 
@@ -66,7 +68,7 @@ public class InfoToolView extends JFrame {
 		themesTabbedPane.setTabPlacement(JTabbedPane.BOTTOM);
 		themesTabbedPane.setFont(new Font("DejaVu Sans", Font.BOLD | Font.ITALIC, 10));
 		themesTabbedPane.setBackground(new Color(255, 255, 255));
-		themesTabbedPane.setBounds(0, 34, 543, 280);
+		themesTabbedPane.setBounds(35, 50, 469, 198);
 		mainPanel.add(themesTabbedPane);
 
 		getContentPane().add(mainPanel);
@@ -79,7 +81,8 @@ public class InfoToolView extends JFrame {
 
 		this.setUndecorated(true);
 		this.setAlwaysOnTop(true);
-		this.setSize(554, 387);
+		//this.setSize(554, 387);
+		this.setBounds(0, 0, 551, 309);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setResizable(false);

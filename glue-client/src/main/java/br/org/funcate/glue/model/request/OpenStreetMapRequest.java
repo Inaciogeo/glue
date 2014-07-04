@@ -14,6 +14,8 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 
 import br.org.funcate.glue.model.Box;
+import br.org.funcate.glue.model.CalculatorService;
+import br.org.funcate.glue.model.Coord;
 import br.org.funcate.glue.utilities.PropertiesReader;
 import br.org.funcate.glue.utilities.XMLJDomReader;
 
@@ -52,7 +54,7 @@ abstract class OpenStreetMapRequest {
 					+ "/"
 					+ ((int) (Math.pow(2, zoomLevel) / 2 - tileIndexY) - 1)+".png";
 			
-			
+	
 			return ImageIO.read(new URL(finalUrl));
 			
 		} catch (IOException e) {

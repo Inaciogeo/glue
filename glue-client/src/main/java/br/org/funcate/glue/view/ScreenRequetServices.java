@@ -26,8 +26,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import org.jdom2.Element;
-
 import br.org.funcate.glue.controller.Mediator;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.utilities.Utils;
@@ -70,10 +68,9 @@ public class ScreenRequetServices extends JDialog {
 	private DefaultListModel<String> listModel;
 	private HashMap<String, String> requestMap;
 	private HashMap<String, String> descMap;
-	private String name;
+	
 	private JLabel lbl_url;
 	private JTextArea textAreaDesc;
-	private Element rootNode;
 	private HashMap<String, String> idMap;
 
 	private static String value;
@@ -83,6 +80,7 @@ public class ScreenRequetServices extends JDialog {
 	private JLabel lblImage;
 
 	private JButton btnCleanMap;
+	private static String mapId;
 
 	/**
 	 * Create the dialog.
@@ -95,6 +93,7 @@ public class ScreenRequetServices extends JDialog {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
 				Toolbar.getWms().setEnabled(true);
+				Toolbar.getBtnTileRequest().setEnabled(true);
 			}
 
 			@Override
@@ -133,6 +132,7 @@ public class ScreenRequetServices extends JDialog {
 				idMap.put("GoogleMaps", "2");
 				idMap.put("Bauru", "1");
 				idMap.put("Tr\u00E2nsito", "1");
+				idMap.put("IGC", "1");
 
 			}
 		});
@@ -152,11 +152,10 @@ public class ScreenRequetServices extends JDialog {
 				String value = list.getSelectedValue();
 				if (value != null && value != "") {
 					// if(!requestMap.get(list.getSelectedValue()).isEmpty())
-					String id = idMap.get(list.getSelectedValue());
-					mediator.setToolBarSource(id);
+					 mapId = idMap.get(list.getSelectedValue());
+					mediator.setToolBarSource(mapId);
 				} else {
-					GlueMessageDialog.show("selecione um opção de mapa", null,
-							2);
+					GlueMessageDialog.show("selecione um opção de mapa", null,2);
 				}
 			}
 		});
@@ -184,17 +183,12 @@ public class ScreenRequetServices extends JDialog {
 
 		list = new JList<String>();
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] { "OpenStreetMap", "GoogleMaps",
-					"Bauru", "Tr\u00E2nsito" };
-
-			@Override
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-
-			@Override
+			String[] values = new String[] {"OpenStreetMap", "GoogleMaps", "Bauru", "IGC"};
 			public int getSize() {
 				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
 			}
 		});
 		list.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
@@ -280,6 +274,7 @@ public class ScreenRequetServices extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				Mediator mediator = AppSingleton.getInstance().getMediator();
 				mediator.setToolBarSource(null);
+				setMapId(null);
 			}
 		});
 		btnCleanMap.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -294,4 +289,13 @@ public class ScreenRequetServices extends JDialog {
 				+ "</u></font></html>";
 		return text;
 	}
+
+	public static String getMapId() {
+		return mapId;
+	}
+
+	public static void setMapId(String mapId) {
+		ScreenRequetServices.mapId = mapId;
+	}
+	
 }

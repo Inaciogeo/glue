@@ -9,7 +9,6 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 import br.org.funcate.glue.model.Box;
 import br.org.funcate.glue.model.LoadingStatusService;
@@ -20,7 +19,10 @@ import br.org.funcate.glue.model.cache.TileType;
 import br.org.funcate.glue.model.canvas.CanvasService;
 import br.org.funcate.glue.model.canvas.GeneralTileSchema;
 import br.org.funcate.glue.model.canvas.ImageSourceDefinition;
-
+/**
+ * @author inacio
+ *
+ */
 public class TileRequest extends Thread {
 	private Tile tile;
 	private TileType tileType;
@@ -70,11 +72,14 @@ public class TileRequest extends Thread {
 			}
 			break;
 		case WMS:
-			try {
+			try {//bira
 				threadTileImage = ImageIO.read(new URL((String) source
 						+ box.getX1() + "," + box.getY1() + "," + box.getX2()
 						+ "," + box.getY2() + "&WIDTH=" + tileSize + "&HEIGHT="
 						+ tileSize));
+//				String Y =  String.valueOf((int)(ESRILatLongTile.originLocation.y/ESRILatLongTile.getResolution()[zoomLevel])-tile.getIndexY());
+//				String X =  String.valueOf((int)(-ESRILatLongTile.originLocation.x/ESRILatLongTile.getResolution()[zoomLevel])+tile.getIndexX());			
+//				threadTileImage = ImageIO.read(new URL((String)"http://geoportal.igc.sp.gov.br:6080/arcgis/rest/services/IGC/GeoPortal_Ortofotos_Mapeamento2010_ImgSrv/ImageServer/tile/"+String.valueOf(zoomLevel)+"/"+Y+"/"+X)); 
 
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -121,12 +121,8 @@ public class CanvasGraphicsBuffer implements GraphicsPainter, CanvasSubject {
 				yTextPosition = 39;
 			}
 		}
-		
-		//double[] pixel =  CalculatorService.WGS84LatLongToVirtualEarthMercato(new Coord(-45.549746,-23.034243));
-		
-		//canvasBufferGraph.drawImage(imgMark,(int)(pixel[0]),(int)(pixel[1]), null);
-		
-		//canvasBufferGraph.drawImage(imgMark,(state.getCanvasHeight()/2), (state.getCanvasWidth()/2), null);
+	
+		canvasBufferGraph.drawImage(imgMark,(state.getCanvasWidth()/2)-50, (state.getCanvasHeight()/2)+50, null);
 		
 		g.drawImage(canvasBuffer, 0, 0, null);
 
@@ -161,6 +157,15 @@ public class CanvasGraphicsBuffer implements GraphicsPainter, CanvasSubject {
 		try{
 			marker = new BufferedImage(32, 32, BufferedImage.TYPE_INT_BGR);
 			imgMark = ImageIO.read(new File("../glue-client/src/main/java/br/org/funcate/glue/image/Flag-2.png"));
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void deleteMarker(){
+		try{
+			marker = null;
+			imgMark = null;
 			
 		}catch (Exception e) {
 			e.printStackTrace();

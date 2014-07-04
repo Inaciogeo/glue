@@ -5,7 +5,7 @@ import javax.swing.JComboBox;
 import br.org.funcate.glue.controller.listener.ComboBoxScaleAdapter;
 
 @SuppressWarnings("serial")
-public class ComboBoxScale extends JComboBox {
+public class ComboBoxScale extends JComboBox<Object> {
 
 	public ComboBoxScale() {
 		ComboBoxScaleAdapter adapter = new ComboBoxScaleAdapter(this);
