@@ -1,0 +1,154 @@
+#Arquivo de Properties.
+#Utilizar sempre "chave.de.referencia=valor guardado"
+#dê preferência em utilizar  .  para semprar a chave de referencia
+#em pacotes.
+#
+#Chame com AppSingleton.getPropertiesReader().getProperties("chave.de.referencia");
+#ou
+#tenha um objeto PropertiesReader e chame o getProperties().
+# 
+#Utilizar  #  no inicio da linha para deixá-la de comentário.
+
+#Service ip.
+service.ip=192.168.4.177
+
+#Service port.
+service.port=8080
+
+#Service wsdl url-path.
+service.wsdl=/glue-server/TerraJavaServices?wsdl
+
+#BDUsername
+db.username=postgres
+
+#Glue Servlet
+terrajava.servlet=/glue-server/TerraJavaServlet
+
+#PARAMENTROS DE REQUISIÇÃO PARA MAPA PADRAO OPENSTREETMAP 
+canvas.request.openstreetmap.name=OpenStreetMap
+canvas.request.openstreetmap.id=0
+canvas.request.openstreetmap.default=http://c.tile.openstreetmap.org/
+canvas.request.openstreetmap.descption=Requisição do mapa de arruamentos padrão OpenStreeMap.
+
+#NUMERO DE CGIS-SEMPRE ATUALIZAR AO ADICIONAR NOVO
+canvas.request.cgi.nun=3
+#PARAMENTROS DE REQUISIÇÃO PARA MAPA CGI BAURU
+#USAR NOME COMO DEFINIÇÃO DE PARAMETRO, EX: ...cgi.nome.sp=sp 
+canvas.request.cgi.nome=Bauru
+canvas.request.cgi.id.Bauru=1
+canvas.request.cgi.url.Bauru=http://192.168.111.135/cgi/tile/
+canvas.request.cgi.description.Bauru=Requisição do mapa digital da cidade de Bauru.
+
+#PARAMENTROS DE REQUISIÇÃO PARA MAPA CGI TRAMSITO DO BRASIL
+#USAR NOME COMO DEFINIÇÃO DE PARAMETRO, EX: ...cgi.nome.sp=sp 
+canvas.request.cgi.nome=IGC
+canvas.request.cgi.id.IGC=1
+canvas.request.cgi.url.IGC=http://geoportal.igc.sp.gov.br:6080/arcgis/rest/services/IGC/GeoPortal_Ortofotos_Mapeamento2010_ImgSrv/ImageServer/tile/
+canvas.request.cgi.description.IGC=IGC
+
+#PARAMENTROS DE REQUISIÇÃO PARA MAPA CGI TRAMSITO DO BRASIL
+#USAR NOME COMO DEFINIÇÃO DE PARAMETRO, EX: ...cgi.nome.sp=sp 
+canvas.request.cgi.nome=Trânsito
+canvas.request.cgi.id.Trânsito=1
+canvas.request.cgi.url.Trânsito=http://map.be-mobile.be/customer/corriocityview/br/speed/
+canvas.request.cgi.description.Trânsito=Requisição Tile de Transito.
+
+#URL FOR GOOGLE REQUEST, GETTING A MAP IMAGE.
+canvas.request.google.map=http://mt1.google.com/vt/lyrs=m@110&hl=pl&x=
+
+#URL FOR GOOGLE REQUEST, GETTING A SATELLITE IMAGE.
+canvas.request.google.satellite=http://mt1.google.com/vt/lyrs=y&x=
+
+#URL for google request, getting a terrain image.
+canvas.request.google.terrain=http://mt1.google.com/vt/lyrs=t@126,r@126&hl=pt-BR&x=
+
+#URL for google request, getting a streets image.
+canvas.request.google.street=http://mt1.google.com/vt/lyrs=h@110&hl=pt-BR&x=
+
+#URL for google user terms.
+google.doc.terms=http://www.google.com/intl/pt-BR_ALL/help/terms_maps.html
+
+#Para o InfoTool: Define se a prioridade do tipo de representacao está habilitada (ponto, linha, poligono).
+infoTool.enable.priority=true
+
+#GeneralTileSchema parameters.
+google.parameter.extent=40075016.6856
+tile.size=256
+
+#CanvasState parameters.
+canvas.width=800
+canvas.height=600
+canvas.expanded.width=1020
+canvas.expanded.height=502
+canvas.bound.expanded.x0=0
+canvas.bound.expanded.y0=70
+canvas.bound.x0=150
+canvas.bound.y0=70
+
+box.predefined.enabled=true
+#-49.1477341652,-22.3612489558,-49.0092163086,-22.2794055103  bauru
+#-46.1096711159,-23.3978866497,-45.5615692139,-22.9832574362  sjc
+#Predefined box settings (Its projection must be LatLong)
+box.predefined.x1= -49.1477341652
+box.predefined.y1= -22.3612489558
+box.predefined.x2= -49.0092163086
+box.predefined.y2= -22.2794055103
+
+#valinhos
+#box.predefined.x1=-47.16
+#box.predefined.y1=-22.93
+#box.predefined.x2=-46.89
+#box.predefined.y2=-23.02
+
+#São Gonçalo
+#box.predefined.enabled=true
+#box.predefined.x1=-43.17007425716806
+#box.predefined.y1=-22.91218795708801
+#box.predefined.x2=-42.81752689623345
+#box.predefined.y2=-22.731930690621443
+
+#Jacareí
+#box.predefined.enabled=false
+#box.predefined.x1=-46.1067918385
+#box.predefined.y1=-23.3867000653 
+#box.predefined.x2=-45.7604502117 
+#box.predefined.y2=-23.1985791671
+
+#Unidade de medida padrão para a escala. M para metros e CM para centímetros. Se alguma outra coisa for inserida, o padrão será metros.
+unidade.padrao.medida.escala=CM
+
+#Define o tamanho mínimo para a applet atualizar todos os componentes. (Tamanho mínimo do viewPort)
+applet.min.height=500
+applet.min.width=500
+
+#Surf application directory based on appname defined in index.html file on SurfServer
+surf.server.appname.dir=surf_glue
+
+#default name of plugins configuration file
+plugins.config.file=glue-plugins.txt
+
+terrajava.tiles.threaded=true
+
+#Visual default para destacar objetos
+visual.highlight.red=0
+visual.highlight.green=204
+visual.highlight.blue=0
+visual.highlight.style=0
+visual.highlight.stylePolygon=1
+visual.highlight.lineWidth=3
+visual.highlight.font=Verdana
+visual.highlight.countourColorRed=0
+visual.highlight.countourColorGreen=0
+visual.highlight.countourColorBlue=0
+visual.highlight.countourStyle=0
+visual.highlight.countourWidth=1
+visual.resource.fonts.package=br/org/funcate/glue/resource/font/
+#Usar pool de conexões (Para Multi-Threaded Tiling é necessário)
+terrajava.connection.usePool=true
+#Número máximo de conexões no pool
+terrajava.connection.pool.max.connections=300
+#Tempo de espera máximo por uma conexão
+terrajava.connection.pool.max.wait=10
+#Número máximo de conexões ociosas no servidor
+terrajava.connection.pool.max.idle=0
+terrajava.scale.control.enabled=false

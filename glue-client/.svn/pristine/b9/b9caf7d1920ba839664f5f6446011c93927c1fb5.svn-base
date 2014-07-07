@@ -1,0 +1,196 @@
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
+Invalid connection on POOL.
+java.lang.RuntimeException: Invalid connection on POOL.
+	at br.org.funcate.terrajava.persistencia.TerraJava.drawThemes(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.drawThemes(TerraJavaJNI.java:1211)
+	at br.org.funcate.glue.service.TerraJavaClient.plotViewThreadSafe(TerraJavaClient.java:2084)
+	at br.org.funcate.glue.model.request.BDRequest.plotView(BDRequest.java:81)
+	at br.org.funcate.glue.model.request.TileRequest.run(TileRequest.java:85)
