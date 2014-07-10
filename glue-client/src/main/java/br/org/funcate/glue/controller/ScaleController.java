@@ -26,13 +26,10 @@ public class ScaleController implements EventDispatcher, EventListener {
 
 	private ComboBoxScale comboBox;
 	private boolean validateComboBoxEvent = true;
-
 	private ListenersHandler listeners;
 	private EventHandler eventHandler;
 	private EventTransmitter transmitter;
-
 	private List<String> eventsToListen;
-
 	private ScaleView scaleView;
 
 	public ScaleController(ComboBoxScale comboBox) {

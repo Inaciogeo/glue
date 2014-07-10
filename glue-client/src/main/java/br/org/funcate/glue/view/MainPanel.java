@@ -29,8 +29,6 @@ import br.org.funcate.glue.controller.listener.LabelCanvasExpanderAdapter;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.CalculatorService;
 import br.org.funcate.glue.model.LookAndFeelService;
-import br.org.funcate.glue.model.canvas.CanvasGraphicsBuffer;
-import br.org.funcate.glue.model.canvas.CanvasState;
 import br.org.funcate.glue.utilities.PropertiesReader;
 import br.org.funcate.plugin.GluePlugin;
 
@@ -252,7 +250,7 @@ public class MainPanel extends JPanel{
 	
 	public void createMark(int x,int y){
 		
-		double[] pixel =  CalculatorService.convertFromWorldToPixel(-23.566505,-46.645632);
+		//double[] pixel =  CalculatorService.convertFromWorldToPixel(-23.566505,-46.645632);
 		
 		markeImage = new JLabel("");
 		markeImage.setIcon(new ImageIcon(MainPanel.class.getResource("/br/org/funcate/glue/image/Hand-Point-270.png")));

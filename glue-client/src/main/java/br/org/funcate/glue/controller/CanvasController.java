@@ -521,7 +521,7 @@ public class CanvasController implements EventDispatcher, EventListener, Runnabl
 			e.printStackTrace();
 		}
 	}
-
+//pesquisa de endereço 
 	@Override
 	public void run() {
 		DrawFeatureEvent drawFeatureEvent = new DrawFeatureEvent(this);

@@ -25,8 +25,7 @@ public class ZoomInTool implements Tool {
 
 	private ListenersHandler listeners;
 	private EventHandler eventHandler;
-	private EventTransmitter transmitter;
-
+	private EventTransmitter transmitter;	
 	private List<String> eventsToListen;
 
 	private Cursor cursor;

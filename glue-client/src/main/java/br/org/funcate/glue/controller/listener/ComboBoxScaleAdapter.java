@@ -16,11 +16,11 @@ public class ComboBoxScaleAdapter implements ActionListener {
 
 	public ComboBoxScaleAdapter(ComboBoxScale comboBox) {
 		controller = new ScaleController(comboBox);
-
 		Mediator mediator = AppSingleton.getInstance().getMediator();
 		mediator.setScaleController(controller);
 	}
 
+	
 	public ComboBoxModel getModel() {
 		return controller.getModel();
 	}

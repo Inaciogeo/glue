@@ -27,7 +27,6 @@ import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.Box;
 import br.org.funcate.glue.model.CalculatorService;
 import br.org.funcate.glue.model.ComboBoxScaleService;
-import br.org.funcate.glue.model.canvas.CanvasService;
 import br.org.funcate.glue.model.canvas.ZoomToolService;
 import br.org.funcate.glue.model.exception.GlueServerException;
 import br.org.funcate.glue.service.TerraJavaClient;
@@ -50,7 +49,7 @@ public class SearchPanel extends JPanel {
 	private static String markId;
 	private JLabel lbl_inf;
 	private static ArrayList<String> lotIds;
-	private static boolean isLote = false;
+	private JLabel lbl_numbers;
 
 	public static String getMarkId() {
 		return markId;
@@ -146,27 +145,24 @@ public class SearchPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() > 1) {
 					execGeolocation();
-					if(isLote)
-						CanvasService.createMark();
-					else
-						CanvasService.deleteMark();
+					lbl_numbers.setText("");
 				}		
 			}
 		});
-		list.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 13));
+		list.setFont(new Font("Arial", Font.PLAIN, 13));
 		list.setBorder(null);
 		scrollPane.setColumnHeaderView(list);
 		lblShowResults = new JLabel("carregando...");
-		lblShowResults.setForeground(new Color(112, 128, 144));
-		lblShowResults.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
-		lblShowResults.setBounds(10, 40, 422, 23);
+		lblShowResults.setForeground(new Color(128, 128, 128));
+		lblShowResults.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblShowResults.setBounds(10, 42, 422, 14);
 		add(lblShowResults);
 		
 		JLabel lblNewLabel = new JLabel("Pesquisa geogr\u00E1fica: ");
 		lblNewLabel.setToolTipText("");
 		lblNewLabel.setBackground(new Color(65, 105, 225));
 		lblNewLabel.setForeground(new Color(95, 158, 160));
-		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 12));
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
 		lblNewLabel.setBounds(32, 2, 137, 16);
 		add(lblNewLabel);
 		
@@ -176,6 +172,13 @@ public class SearchPanel extends JPanel {
 		lbl_inf.setBounds(10, 2, 16, 16);
 	
 		add(lbl_inf);
+		
+		lbl_numbers = new JLabel("");
+		lbl_numbers.setForeground(new Color(128, 128, 128));
+		lbl_numbers.setBackground(new Color(192, 192, 192));
+		lbl_numbers.setFont(new Font("Arial", Font.PLAIN, 12));
+		lbl_numbers.setBounds(10, 56, 424, 16);
+		add(lbl_numbers);
 
 	}
 
@@ -220,7 +223,7 @@ public class SearchPanel extends JPanel {
 
 			if (searchText != null && searchText != "" && !searchText.isEmpty()) {
 				if (!searchText.matches("[0-9]+")){
-					isLote = false;
+					
 				if (exp.length <= 1) {
 					ResultSet rs = SQLService
 							.buildSelect("select object_id from log_lin where nome_logradouro ='"
@@ -252,18 +255,18 @@ public class SearchPanel extends JPanel {
 				int size = streetIds.size();
 				int idx = Math.abs(size / 2);
 					try {
-						ComboBoxScaleService.changeScaleValue(400);
+						ComboBoxScaleService.changeScaleValue(200);
 						Box box;
 						box = services.getCurrentThemeBox("Arruamentos","geom_id=" + streetIds.get(idx) + "");
 						double[] coordIn = CalculatorService.convertFromWorldToPixel(box.getX1(), box.getY1());
-						ZoomToolService.pressZoomIn((int) (coordIn[0]+40),(int) coordIn[1]-40);
-						ComboBoxScaleService.changeScaleValue(200);
-						//mediator.setToolBarSource(ScreenRequetServices.getMapId());
+						ZoomToolService.pressZoomIn((int) (coordIn[0]+20),(int) coordIn[1]-20);
+						ComboBoxScaleService.changeScaleValue(100);
+						
 					} catch (GlueServerException e) {
 						e.printStackTrace();
 					}	
 				}else{
-					isLote = true;
+				
 					lotIds = new ArrayList<String>();
 					ResultSet rs = SQLService.buildSelect("select object_id from lotes_bauru where sql ='"+searchText+"'");
 					try {
@@ -275,12 +278,12 @@ public class SearchPanel extends JPanel {
 					}
 					
 					try {
-						ComboBoxScaleService.changeScaleValue(12);
+						ComboBoxScaleService.changeScaleValue(24);
 						Box box = services.getCurrentThemeBox("Lotes","geom_id=" + lotIds.get(0) + "");
 						double[] coordIn = CalculatorService.convertFromWorldToPixel(box.getX1(), box.getY1());
 						ZoomToolService.pressZoomIn((int) (coordIn[0]+40), (int) (coordIn[1]-40));
-						ComboBoxScaleService.changeScaleValue(6);
-						//mediator.setToolBarSource(ScreenRequetServices.getMapId());
+						ComboBoxScaleService.changeScaleValue(12);
+						
 					} catch (GlueServerException e) {
 						e.printStackTrace();
 					}	
@@ -304,6 +307,7 @@ public class SearchPanel extends JPanel {
 	public void execAlphaNumericLocation(){
 		int size=0;
 		String streetName = "";
+		String streetNumber = "";
 		String street = "";
 		String number = "";
 		
@@ -343,29 +347,26 @@ public class SearchPanel extends JPanel {
 					SQLService.connect();
 					setBounds(200, 80, 440, 180);
 					ResultSet rs = SQLService
-							.buildSelect("select distinct nomelogradouro,sql from lotes_bauru where nomelogradouro LIKE '%"
-									+ street.trim()
-									+ "%' and sql LIKE '%"
-									+ ""+number.trim()+"%'"+" order by nomelogradouro");
+							.buildSelect("select distinct nomelogradouro,sql,imo_numero from lotes_bauru where nomelogradouro LIKE '%"
+									+ street.trim()+ "%'" 
+									+ " and imo_numero LIKE '%"
+									+ ""+number.trim()+"%'"+" order by imo_numero");
 
 					try {
 						listModel.clear();
 						while (rs.next()) {
 							listModel.addElement(rs.getString(2));
 							streetName = rs.getString(1);
+							streetNumber += rs.getString(3)+",";
 							size++;
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 					list.setModel(listModel);
-					if (size > 4)
-						lblShowResults.setText("A pesquisa retornou " + size
-								+ " lote(s) para "+streetName+", exibidos: 4");
-					else
-						lblShowResults.setText("A pesquisa retornou " + size
-								+ " lote(s) para "+streetName+", exibidos: " + size);
-
+					
+					lblShowResults.setText( size + " lote(s) para "+streetName+",");
+					lbl_numbers.setText(streetNumber);
 				}
 
 				list.setModel(listModel);

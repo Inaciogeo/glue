@@ -79,6 +79,7 @@ public class ZoomAreaTool implements Tool {
 	}
 
 	public void handle(MouseReleasedEvent e) throws Exception {
+		new TileThreadTimer().start();  
 		double[] point = CalculatorService.convertFromWorldToPixel(e.getX(), e.getY());
 		ZoomToolService.releaseZoomArea((int) point[0], (int) point[1]);
 		dispatch(transmitter, new BoxChangedEvent(this));

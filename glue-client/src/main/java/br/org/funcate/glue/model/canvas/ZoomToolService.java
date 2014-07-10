@@ -5,14 +5,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-import com.sun.org.glassfish.external.statistics.annotations.Reset;
-
 import br.org.funcate.glue.controller.Mediator;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.Box;
 import br.org.funcate.glue.model.CalculatorService;
 import br.org.funcate.glue.model.toolbar.ToolEnum;
-import br.org.funcate.glue.view.LocalOptionPane;
 
 public abstract class ZoomToolService {
 
