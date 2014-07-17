@@ -173,9 +173,9 @@ public class CanvasGraphicsBuffer implements GraphicsPainter, CanvasSubject {
 	}
 
 	public void drawTileImage(BufferedImage bufferedImage, int dx1, int dy1,
-			int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
+			int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {	
 		tilesBufferGraph.drawImage(bufferedImage, dx1, dy1, dx2, dy2, sx1, sy1,
-				sx2, sy2, null);
+				sx2, sy2, null);		
 	}
 
 	public void repaintTilesBufferOnCanvas() {

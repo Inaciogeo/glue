@@ -5,7 +5,7 @@ package br.org.funcate.glue.model.cache;
  */
 public enum TileType {
 
-	GOOGLE, WMS, TERRALIB, OPENSTREET , CGI;
+	GOOGLE, WMS, TERRALIB, OPENSTREET , CGI , INSTITUTO;
 
 	public String toString() {
 		if (this == GOOGLE) {
@@ -16,6 +16,8 @@ public enum TileType {
 			return "OpenStreet";
 		} else if (this == CGI){
 			return "CGI";
+		} else if (this == INSTITUTO){
+			return "INSTITUTO";
 		}
 
 		return "TerraLib";

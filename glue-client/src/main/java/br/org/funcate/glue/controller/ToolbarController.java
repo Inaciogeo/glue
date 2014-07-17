@@ -152,31 +152,31 @@ public class ToolbarController implements EventDispatcher, EventListener {
 //		this.updateToolbar();
 	}
 
-	/**
-	 * This method controls the state of Toolbar's WMS button
-	 */
-	public void setWMS() {
-		Mediator mediator = AppSingleton.getInstance().getMediator();
-		ToolWMS wms = null;
-		ToolState wmsTool = ToolService.getTool(ToolEnum.WMS);
-
-		if (wmsTool.isSelected() == false) {
-			try {
-				wms = ToolWMS.getInstance();
-				wms.setVisible(true);
-				ToolService.setSelectedTool(ToolEnum.WMS);
-				this.toolbar.setWmsSelected(true);
-			} catch (NullPointerException e) {
-				ToolService.setSelectedTool(ToolEnum.WMS);
-				this.toolbar.setWmsSelected(true);
-			}
-		} else {
-			ToolService.setSelectedTool(ToolEnum.WMS);
-			this.toolbar.setWmsSelected(false);
-			mediator.setToolBarSource(null);
-		}
-		this.updateToolbar();
-	}
+//	/**
+//	 * This method controls the state of Toolbar's WMS button
+//	 */
+//	public void setWMS() {
+//		Mediator mediator = AppSingleton.getInstance().getMediator();
+//		ToolWMS wms = null;
+//		ToolState wmsTool = ToolService.getTool(ToolEnum.WMS);
+//
+//		if (wmsTool.isSelected() == false) {
+//			try {
+//				wms = ToolWMS.getInstance();
+//				wms.setVisible(true);
+//				ToolService.setSelectedTool(ToolEnum.WMS);
+//				this.toolbar.setWmsSelected(true);
+//			} catch (NullPointerException e) {
+//				ToolService.setSelectedTool(ToolEnum.WMS);
+//				this.toolbar.setWmsSelected(true);
+//			}
+//		} else {
+//			ToolService.setSelectedTool(ToolEnum.WMS);
+//			this.toolbar.setWmsSelected(false);
+//			mediator.setToolBarSource(null);
+//		}
+//		this.updateToolbar();
+//	}
 
 	/**
 	 * This method gets toolbar.
@@ -363,7 +363,7 @@ public class ToolbarController implements EventDispatcher, EventListener {
 				break;
 
 			case GOOGLE:
-				JButton google = toolbar.getBtnTileRequest();
+				JButton google = Toolbar.getBtnTileRequest();
 				google.setEnabled(currentTool.isEnabled());
 				if (currentTool.isSelected()) {
 					google.setIcon(toolbar.getiGoogleNs());
@@ -373,7 +373,7 @@ public class ToolbarController implements EventDispatcher, EventListener {
 				break;
 
 			case WMS:
-				JButton wms = toolbar.getWms();
+				JButton wms = Toolbar.getWms();
 				wms.setEnabled(currentTool.isEnabled());
 				if (currentTool.isSelected()) {
 					wms.setIcon(toolbar.getiWmsNs());

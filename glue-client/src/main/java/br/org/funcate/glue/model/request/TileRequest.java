@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import br.org.funcate.glue.model.Box;
+import br.org.funcate.glue.model.ESRILatLongTile;
 import br.org.funcate.glue.model.LoadingStatusService;
 import br.org.funcate.glue.model.View;
 import br.org.funcate.glue.model.cache.Tile;
@@ -71,15 +72,21 @@ public class TileRequest extends Thread {
 				e.printStackTrace();
 			}
 			break;
+		case INSTITUTO:
+			try {
+				threadTileImage = InstitutoCartograficoRequest.getImage(zoomLevel,tile.getIndexX(), tile.getIndexY(),box);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		case WMS:
 			try {//bira
-				threadTileImage = ImageIO.read(new URL((String) source
+				if(source instanceof String){
+					threadTileImage = ImageIO.read(new URL((String) source
 						+ box.getX1() + "," + box.getY1() + "," + box.getX2()
 						+ "," + box.getY2() + "&WIDTH=" + tileSize + "&HEIGHT="
 						+ tileSize));
-//				String Y =  String.valueOf((int)(ESRILatLongTile.originLocation.y/ESRILatLongTile.getResolution()[zoomLevel])-tile.getIndexY());
-//				String X =  String.valueOf((int)(-ESRILatLongTile.originLocation.x/ESRILatLongTile.getResolution()[zoomLevel])+tile.getIndexX());			
-//				threadTileImage = ImageIO.read(new URL((String)"http://geoportal.igc.sp.gov.br:6080/arcgis/rest/services/IGC/GeoPortal_Ortofotos_Mapeamento2010_ImgSrv/ImageServer/tile/"+String.valueOf(zoomLevel)+"/"+Y+"/"+X)); 
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -90,8 +97,7 @@ public class TileRequest extends Thread {
 				byte[] imgByteArray = BDRequest.plotView((View) source, box);
 
 				if (imgByteArray == null) {
-					threadTileImage = new BufferedImage(tileSize, tileSize,
-							BufferedImage.BITMASK);
+					threadTileImage = new BufferedImage(tileSize, tileSize,BufferedImage.BITMASK);
 					Graphics graph = threadTileImage.getGraphics();
 					graph.fillRect(-10, -10, tileSize + 10, tileSize + 10);
 					break;
@@ -110,7 +116,7 @@ public class TileRequest extends Thread {
 			} catch (Exception e) {
 				BufferedImage errorImage = new BufferedImage(256, 256, 1);
 				Graphics errorTile = errorImage.getGraphics();
-				errorTile.setColor(Color.lightGray);
+				errorTile.setColor(Color.WHITE);
 				errorTile.fillRect(0, 0, 256, 256);
 				errorTile.setColor(Color.black);
 				errorTile.drawString("TerraLib:", 3, 20);
@@ -122,16 +128,15 @@ public class TileRequest extends Thread {
 			}
 			break;
 		}
+		
 		if(threadTileImage != null){
 			Tile newTileDefinition = new Tile(threadTileImage, tile.getIndexX(), tile.getIndexY(), tile.getResolution(), tileType);
 			tileCache.insertCandidate(newTileDefinition);
-
+			
 			if (!CanvasService.isEmptyBox()) {
 				GeneralTileSchema.plotTiles();
 			}
 			LoadingStatusService.removeThreadCount();
-			
 		}
-		
 	}
 }

@@ -248,6 +248,8 @@ public abstract class GeneralTileSchema {
 				tile = tileCache.getTile(indexX, indexY, res, TileType.OPENSTREET);
 			else if (background.getType() == TileType.CGI)
 				tile = tileCache.getTile(indexX, indexY, res, TileType.CGI);
+			else if (background.getType() == TileType.INSTITUTO)
+				tile = tileCache.getTile(indexX, indexY, res, TileType.INSTITUTO);
 			else
 				tile = tileCache.getTile(indexX, indexY, res, TileType.TERRALIB);
 			if (tile.imageIsLoaded() == TileStatus.LOADED) {
@@ -287,7 +289,6 @@ public abstract class GeneralTileSchema {
 					TileRequest tileRequest = new TileRequest(tile, background,
 							box, state.getZoomLevel(), TILE_SIZE,
 							CanvasService.isForegroundEnabled(), tileCache);
-
 					tileRequest.start();
 
 				}
@@ -327,6 +328,9 @@ public abstract class GeneralTileSchema {
 						double[] arrayBox = getTile(indexX, indexY);
 						Box box = new Box(arrayBox[0], arrayBox[1],
 								arrayBox[2], arrayBox[3]);
+						
+						
+						
 
 						TileRequest tileRequest = new TileRequest(tile,
 								foregroundImageDefinition, box,

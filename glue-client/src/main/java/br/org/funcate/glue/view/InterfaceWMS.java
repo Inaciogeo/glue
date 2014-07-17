@@ -24,19 +24,19 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-
 import br.org.funcate.glue.controller.Mediator;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.LookAndFeelService;
 import br.org.funcate.glue.model.cache.TileType;
 import br.org.funcate.glue.model.canvas.ImageSourceDefinition;
 import br.org.funcate.glue.model.toolbar.ToolEnum;
+
 import br.org.funcate.glue.model.xml.XMLReader;
 import br.org.funcate.glue.utilities.Utils;
 import br.org.funcate.glue.utilities.patterns.Observer;
 import br.org.funcate.glue.utilities.patterns.Subject;
 import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
+
 
 /**
  * \class InterfaceWMS Creates One screen to use WMS. \brief InterfaceWMS
@@ -78,6 +78,7 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 	 * ComboBox to use in interface
 	 */
 	// @{
+	@SuppressWarnings("rawtypes")
 	private JComboBox _cbImageFormat;
 
 	// @}
@@ -104,6 +105,7 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 	 * List to use in interface
 	 */
 	// @{
+	@SuppressWarnings("rawtypes")
 	private JList _jlLayers, _jlSelectedLayers;
 	// @}
 
@@ -141,7 +143,9 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 	 */
 
 	// @{
+	@SuppressWarnings("rawtypes")
 	private DefaultListModel _dlmTitles, _dlmSelectedTitles, _dlmNames;
+	@SuppressWarnings("rawtypes")
 	private DefaultListModel _dlmSelectedNames;
 	// @}
 
@@ -392,9 +396,11 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 	}
 
 	// ! Constructor
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private InterfaceWMS() {
 		setBorder(null);
-
+		
+		
 		/*
 		 * ! Declare the components of screen
 		 */
@@ -546,10 +552,10 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 		add(_pnlFinalizar);
 		add(_pnlCancel);
 		
-				_lblCancel = new JLabel(createLinkText("Cancelar", "000080"));
-				_lblCancel.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
-				_pnlCancel.add(_lblCancel);
-				_lblCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		_lblCancel = new JLabel(createLinkText("Cancelar", "000080"));
+		_lblCancel.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
+		_pnlCancel.add(_lblCancel);
+		_lblCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setBounds(2, 2, 520, 360);
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
@@ -646,6 +652,7 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 	 * 
 	 */
 
+	@SuppressWarnings("rawtypes")
 	public void labelReset() {
 		remove(_canv);
 		_dlmTitles.clear();
@@ -708,6 +715,7 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 					set_okStatus(false);
 					_lblFinalizar.setText(createLinkText("Finalizar", "CFCFCF"));
 					this.labelReset();
+				
 					/*
 					 * LocalOptionPane
 					 * .getInstance("Clique em Adicionar para finalizar.");
@@ -745,6 +753,8 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 					notifyObserver();
 					_lblFinalizar.setText(createLinkText("Finalizar", "CFCFCF"));
 					this.labelReset();
+					
+					
 					/*
 					 * LocalOptionPane.getInstance(
 					 * "Clique em Adicionar para finalizar." ,
@@ -848,6 +858,7 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doSearch() {
 		if (_jtfSearch.getText().equals("") || _jtfSearch.getText().equals(" ")) {
 			LocalOptionPane.getInstance("Insira um servidor WMS.", "Glue - Serviço");
@@ -900,6 +911,7 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void layerAdd() {
 		if (_lblAdd.isEnabled()) {
 			if (get_wmsSearched()) {
@@ -944,6 +956,7 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void layerRemove() {
 		if (_lblRemove.isEnabled()) {
 			if (get_wmsSearched()) {
@@ -981,6 +994,7 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void layerUp() {
 		if (_lblUp.isEnabled()) {
 			if (get_wmsSearched()) {
@@ -1006,6 +1020,7 @@ public class InterfaceWMS extends JPanel implements MouseListener, KeyListener, 
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void layerDown() {
 		if (_lblDown.isEnabled()) {
 			if (get_wmsSearched()) {

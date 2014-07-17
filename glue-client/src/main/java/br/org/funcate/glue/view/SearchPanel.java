@@ -31,11 +31,17 @@ import br.org.funcate.glue.model.canvas.ZoomToolService;
 import br.org.funcate.glue.model.exception.GlueServerException;
 import br.org.funcate.glue.service.TerraJavaClient;
 import br.org.funcate.glue.service.utils.SQLService;
+import br.org.funcate.glue.utilities.PropertiesReader;
+
 import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
+/**
+ * Brief: 
+ */
 
 public class SearchPanel extends JPanel {
 	
@@ -50,6 +56,14 @@ public class SearchPanel extends JPanel {
 	private JLabel lbl_inf;
 	private static ArrayList<String> lotIds;
 	private JLabel lbl_numbers;
+	private String streetTable;
+	private String streetColumn;
+	private String lotTable;
+	private String lotColumn1;
+	private String lotColumn2;
+	private String lotThemeName;
+	private String streetThemeName;
+	private String lotColumn3;
 
 	public static String getMarkId() {
 		return markId;
@@ -79,6 +93,16 @@ public class SearchPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public SearchPanel() {
+		
+		streetTable = PropertiesReader.getProperty("search.street.table.name");
+		streetColumn = PropertiesReader.getProperty("search.street.table.column1");
+		lotTable = PropertiesReader.getProperty("search.lot.table.name");
+		lotColumn1 = PropertiesReader.getProperty("search.lot.table.column1");
+		lotColumn2 = PropertiesReader.getProperty("search.lot.table.column2");
+		lotColumn3 = PropertiesReader.getProperty("search.lot.table.column3");
+		lotThemeName = PropertiesReader.getProperty("search.lot.themeName");
+		streetThemeName = PropertiesReader.getProperty("search.street.themeName");
+		
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent arg0) {
@@ -167,7 +191,7 @@ public class SearchPanel extends JPanel {
 		add(lblNewLabel);
 		
 		lbl_inf = new JLabel("");
-		lbl_inf.setToolTipText("pesquisa de arruamentos ex: \"rua brasil\" ou \"rua brasil, 254\" ou ainda a pequisa de lotes por inscri\u00E7\u00E3o ex:\"20032630034234\"");
+		//lbl_inf.setToolTipText("pesquisa de arruamentos ex: \"rua brasil\" ou \"rua brasil, 254\" ou ainda a pequisa de lotes por inscri\u00E7\u00E3o ex:\"20032630034234\"");
 		lbl_inf.setIcon(new ImageIcon(SearchPanel.class.getResource("/br/org/funcate/glue/image/iconInfo.png")));
 		lbl_inf.setBounds(10, 2, 16, 16);
 	
@@ -196,10 +220,10 @@ public class SearchPanel extends JPanel {
 	public void setTextSearch(JTextField textSearch) {
 		this.textSearch = textSearch;
 	}
-	
-	/**
-	 * Brief: executes geographical search on database and populate  
-	 * 
+
+	/** 
+	 * Brief: run geographical search of lots and streets, returned the box to the world map, 
+	 * and still loads geometries for the highlight on the map. 
 	 */
 	public void execGeolocation(){
 			String street = "";
@@ -225,8 +249,9 @@ public class SearchPanel extends JPanel {
 				if (!searchText.matches("[0-9]+")){
 					
 				if (exp.length <= 1) {
+					
 					ResultSet rs = SQLService
-							.buildSelect("select object_id from log_lin where nome_logradouro ='"
+						.buildSelect("select object_id from "+streetTable+" where "+streetColumn+" ='"
 									+ street.trim() + "'");
 					try {
 						while (rs.next()) {
@@ -239,9 +264,9 @@ public class SearchPanel extends JPanel {
 				} else {
 					number = exp[1];
 					ResultSet rs = SQLService
-							.buildSelect("select distinct object_id from lotes_bauru where nome_logradouro ='"
+							.buildSelect("select distinct object_id from "+lotTable+" where "+lotColumn1+" ='"
 									+ street.trim()
-									+ "' and sql = "
+									+ "' and "+lotColumn2+" = "
 									+ number.trim());
 					try {
 						while (rs.next()) {
@@ -257,7 +282,7 @@ public class SearchPanel extends JPanel {
 					try {
 						ComboBoxScaleService.changeScaleValue(200);
 						Box box;
-						box = services.getCurrentThemeBox("Arruamentos","geom_id=" + streetIds.get(idx) + "");
+						box = services.getCurrentThemeBox(streetThemeName,"geom_id=" + streetIds.get(idx) + "");
 						double[] coordIn = CalculatorService.convertFromWorldToPixel(box.getX1(), box.getY1());
 						ZoomToolService.pressZoomIn((int) (coordIn[0]+20),(int) coordIn[1]-20);
 						ComboBoxScaleService.changeScaleValue(100);
@@ -268,7 +293,7 @@ public class SearchPanel extends JPanel {
 				}else{
 				
 					lotIds = new ArrayList<String>();
-					ResultSet rs = SQLService.buildSelect("select object_id from lotes_bauru where sql ='"+searchText+"'");
+					ResultSet rs = SQLService.buildSelect("select object_id from "+lotTable+" where "+lotColumn2+" ='"+searchText+"'");
 					try {
 						while (rs.next()) {
 							lotIds.add(rs.getString(1));
@@ -279,7 +304,7 @@ public class SearchPanel extends JPanel {
 					
 					try {
 						ComboBoxScaleService.changeScaleValue(24);
-						Box box = services.getCurrentThemeBox("Lotes","geom_id=" + lotIds.get(0) + "");
+						Box box = services.getCurrentThemeBox(lotThemeName,"geom_id=" + lotIds.get(0) + "");
 						double[] coordIn = CalculatorService.convertFromWorldToPixel(box.getX1(), box.getY1());
 						ZoomToolService.pressZoomIn((int) (coordIn[0]+40), (int) (coordIn[1]-40));
 						ComboBoxScaleService.changeScaleValue(12);
@@ -299,7 +324,7 @@ public class SearchPanel extends JPanel {
 						null, 2);
 			}
 	}
-	/**
+	/** 
 	 *	Brief: executes search in the database of registration batches and streets by street names,
 	 * and may return batches or streets depending on the type of input: numeric or textual 
 	 * or both when separated by commas.
@@ -324,8 +349,8 @@ public class SearchPanel extends JPanel {
 					SQLService.connect();
 					setBounds(200, 80, 440, 180);
 					ResultSet rs = SQLService
-							.buildSelect("select distinct nome_logradouro from log_lin where nome_logradouro LIKE '%"
-									+ street.trim() + "%' order by nome_logradouro ");
+							.buildSelect("select distinct "+streetColumn+" from "+streetTable+" where "+streetColumn+" LIKE '%"
+									+ street.trim() + "%' order by "+streetColumn);
 
 					try {
 						listModel.clear();
@@ -347,10 +372,10 @@ public class SearchPanel extends JPanel {
 					SQLService.connect();
 					setBounds(200, 80, 440, 180);
 					ResultSet rs = SQLService
-							.buildSelect("select distinct nomelogradouro,sql,imo_numero from lotes_bauru where nomelogradouro LIKE '%"
+							.buildSelect("select distinct "+lotColumn1+","+lotColumn2+","+lotColumn3+" from "+lotTable+" where "+lotColumn1+" LIKE '%"
 									+ street.trim()+ "%'" 
-									+ " and imo_numero LIKE '%"
-									+ ""+number.trim()+"%'"+" order by imo_numero");
+									+ " and "+lotColumn3+" LIKE '%"
+									+ ""+number.trim()+"%'"+" order by "+lotColumn3);
 
 					try {
 						listModel.clear();
@@ -377,7 +402,7 @@ public class SearchPanel extends JPanel {
 				SQLService.connect();
 				setBounds(200, 80, 440, 180);
 				ResultSet rs = SQLService
-						.buildSelect("select distinct sql from lotes_bauru where sql like '"+searchText.trim()+"%'");
+						.buildSelect("select distinct "+lotColumn2+" from "+lotTable+" where "+lotColumn2+" like '"+searchText.trim()+"%'");
 
 				try {
 					listModel.clear();

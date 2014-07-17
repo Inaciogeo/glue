@@ -8,14 +8,19 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 import org.jdom2.JDOMException;
+
+import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.Box;
+import br.org.funcate.glue.model.ESRILatLongTile;
+import br.org.funcate.glue.model.canvas.CanvasState;
 import br.org.funcate.glue.utilities.PropertiesReader;
 
 
 /**
  * \class OpenStreetMapRequest This class provides an inflow to solicit tiles
  */
-abstract class IGCRequest {
+abstract class InstitutoCartograficoRequest {
+
 
 	// ! This is called when a specific tile needs to be requested from Google
 	// Server.
@@ -25,19 +30,17 @@ abstract class IGCRequest {
 	 * tileIndexX horizontal tile index of the Canvas box in the world \param
 	 * tileIndexY vertical tile index of the Canvas box in the world
 	 */
-	static BufferedImage getImage(int zoomLevel, int tileIndexX, int tileIndexY, Box box) throws JDOMException {
+	static BufferedImage getImage(int zoomLevel, int tileIndexX, int tileIndexY , Box box) throws JDOMException {
 		String url = null;
 		String finalUrl = null;
 
 		try {
-
-			url = PropertiesReader.getProperty("canvas.request.openstreetmap.default");			
-			finalUrl = url + zoomLevel +"/"+  (int) (Math.pow(2, zoomLevel) / 2 + tileIndexX)
-					+ "/"
-					+ ((int) (Math.pow(2, zoomLevel) / 2 - tileIndexY) - 1)+".png";
-			
-	
-			return ImageIO.read(new URL(finalUrl));
+			String Y =  String.valueOf((int)Math.floor((ESRILatLongTile.originLocation.y/ESRILatLongTile.getResolution()[zoomLevel])-tileIndexY));
+			String X =  String.valueOf((int)Math.ceil((-ESRILatLongTile.originLocation.x/ESRILatLongTile.getResolution()[zoomLevel])+tileIndexX));
+			url = PropertiesReader.getProperty("canvas.request.cgi.url.Instituto");
+			finalUrl = url + String.valueOf(zoomLevel)+"/"+Y+"/"+X;
+			BufferedImage img = ImageIO.read(new URL(finalUrl));
+			return img;
 			
 		} catch (IOException e) {
 			BufferedImage errorImage = new BufferedImage(256, 256, 1);
@@ -57,7 +60,7 @@ abstract class IGCRequest {
 			System.out.println("Deu erro na URL:");
 			System.out.println(finalUrl);
 
-			g.setColor(Color.lightGray);
+			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, 256, 256);
 			g.setColor(Color.black);
 			g.drawString("A imagem não pode", 14, 20);

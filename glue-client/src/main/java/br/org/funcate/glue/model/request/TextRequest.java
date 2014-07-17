@@ -32,7 +32,7 @@ public class TextRequest extends Thread {
 		CanvasService.cleanBuffer(BufferEnum.TEXT);
 		BufferedImage textBuffer = bufferManager.getBuffer(BufferEnum.TEXT);
 		Graphics textGraphics = textBuffer.createGraphics();
-		plotText();
+		//plotText();
 		if (imgByteArray != null) {
 			ImageIcon image = new ImageIcon(imgByteArray);
 			textGraphics.drawImage(image.getImage(), 0, 0, null);
@@ -95,8 +95,8 @@ public class TextRequest extends Thread {
 		labelConfig.setDescTextPriorityOrder(true);
 		labelConfig.setDetectConflict(true);
 		labelConfig.setMinCollisionTol(0);
-		labelConfig.setField("logradouro");
-		labelConfig.setPriorityField("classe");
+		labelConfig.setField("nome");
+		labelConfig.setPriorityField("");
 		labelConfig.setUrbanMode(false);
 		ThemeVisual visual = new ThemeVisual();
 		visual.setBlue(0);

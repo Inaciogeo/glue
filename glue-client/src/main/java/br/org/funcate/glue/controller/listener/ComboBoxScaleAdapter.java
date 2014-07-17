@@ -21,6 +21,7 @@ public class ComboBoxScaleAdapter implements ActionListener {
 	}
 
 	
+	@SuppressWarnings("rawtypes")
 	public ComboBoxModel getModel() {
 		return controller.getModel();
 	}

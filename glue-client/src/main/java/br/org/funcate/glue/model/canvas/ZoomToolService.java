@@ -9,6 +9,8 @@ import br.org.funcate.glue.controller.Mediator;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.Box;
 import br.org.funcate.glue.model.CalculatorService;
+import br.org.funcate.glue.model.ESRILatLongTile;
+import br.org.funcate.glue.model.Projection;
 import br.org.funcate.glue.model.toolbar.ToolEnum;
 
 public abstract class ZoomToolService {
@@ -248,9 +250,9 @@ public abstract class ZoomToolService {
 		ZoomAreaGraphics zoomArea = getZoomAreaGraphicsFromSingleton();
 		AppSingleton singleton = AppSingleton.getInstance();
 		CanvasState state = singleton.getCanvasState();
-		if (CanvasService.isGoogleActive()) {
-			zoomLevel = state.getZoomLevel();
-		}
+		//if (CanvasService.isGoogleActive()) {
+			zoomLevel = state.getZoomLevel(); 
+		//}
 
 		int xFastZoom = zoomArea.getX1();
 		int yFastZoom = zoomArea.getY1();
@@ -293,25 +295,39 @@ public abstract class ZoomToolService {
 		int yFastZoom = yClick;
 
 		AppSingleton singleton = AppSingleton.getInstance();
-
 		UndoRedoService.addUndoValue();
-
+		
 		CanvasState state = singleton.getCanvasState();
+		int zoomLevel = state.getZoomLevel();
 		Box box = state.getBox();
 		int canvasWidth = state.getCanvasWidth();
 		int canvasHeight = state.getCanvasHeight();
 		double canvasResolution = state.getResolution();
-		double xDistance = canvasWidth * (canvasResolution * 2);
-		double yDistance = canvasHeight * (canvasResolution * 2);
 		double xClickPosition = box.getX1() + (canvasResolution * xClick);
-		double yClickPosition = box.getY1()
-				+ (canvasResolution * (canvasHeight - yClick));
+		double yClickPosition = box.getY1() + (canvasResolution * (canvasHeight - yClick));
+		
+		if("Instituto Geográfico e Cartográfico".equals(state.getDataSource())){
+			if( zoomLevel>0){
+				canvasResolution = (ESRILatLongTile.getResolution()[--zoomLevel]/CanvasService.TILE_SIZE)*(180/Math.PI);
+			}else{
+				canvasResolution = (ESRILatLongTile.getResolution()[zoomLevel]/CanvasService.TILE_SIZE)*(180/Math.PI);
+			}
+		}else{
+			canvasResolution = canvasResolution*2;
+		}
+		
+		double xDistance = canvasWidth * (canvasResolution);
+		double yDistance = canvasHeight * (canvasResolution);
+		
 		double x1ZoomBox = xClickPosition - (xDistance / 2);
 		double y1ZoomBox = yClickPosition - (yDistance / 2);
 
-		CanvasService.setCanvasResolution(state.getResolution() * 2);
+		CanvasService.setCanvasResolution(canvasResolution);
 		CanvasService.configureCanvasBoxX(x1ZoomBox);
 		CanvasService.configureCanvasBoxY(y1ZoomBox);
+		
+		
+		
 		if (paintFastZoom) {
 			paintFastZoom(ZOOM_OUT, xFastZoom, yFastZoom, 0, 0, 0);
 		}
@@ -331,16 +347,29 @@ public abstract class ZoomToolService {
 		int canvasWidth = state.getCanvasWidth();
 		int canvasHeight = state.getCanvasHeight();
 		double canvasResolution = state.getResolution();
-		double xDistance = canvasWidth * (canvasResolution / 2);
-		double yDistance = canvasHeight * (canvasResolution / 2);
+		int zoomLevel = state.getZoomLevel();
 		double xClickPosition = box.getX1() + (canvasResolution * xClick);
-		double yClickPosition = (box.getY1())
-				+ (canvasResolution * (canvasHeight - yClick));
+		double yClickPosition = (box.getY1())+ (canvasResolution * (canvasHeight - yClick));
+		
+		if("Instituto Geográfico e Cartográfico".equals(state.getDataSource())){
+			if( ESRILatLongTile.getResolution().length>zoomLevel){
+				canvasResolution = (ESRILatLongTile.getResolution()[++zoomLevel]/CanvasService.TILE_SIZE)*(180/Math.PI);
+			}else{
+				canvasResolution = (ESRILatLongTile.getResolution()[zoomLevel]/CanvasService.TILE_SIZE)*(180/Math.PI);
+			}		
+		}else{
+			canvasResolution = canvasResolution/2;
+		}
+		
+		double xDistance = canvasWidth * (canvasResolution);
+		double yDistance = canvasHeight * (canvasResolution);
+		
 		double x1ZoomBox = xClickPosition - (xDistance / 2);
 		double y1ZoomBox = yClickPosition - (yDistance / 2);
-		CanvasService.setCanvasResolution(state.getResolution() / 2);
+		CanvasService.setCanvasResolution(canvasResolution);
 		CanvasService.configureCanvasBoxX(x1ZoomBox);
 		CanvasService.configureCanvasBoxY(y1ZoomBox);
+	
 		paintFastZoom(ZOOM_IN, xFastZoom, yFastZoom, 0, 0, 0);
 	}
 }

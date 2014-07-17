@@ -33,6 +33,7 @@ public class Login extends JDesktopPane {
 	private JTextField jTextField11 = null;
 	private JLabel jLabel111 = null;
 	private JLabel jLabel1111 = null;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jComboBox = null;
 	private JPanel jPanel = null;
 	private JTextField jTextField111 = null;
@@ -40,13 +41,17 @@ public class Login extends JDesktopPane {
 	private JTextField jTextField1111 = null;
 	private JTextField jTextField2 = null;
 	private JTextField jTextField112 = null;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jComboBox1 = null;
 	private JLabel jLabel1113 = null;
 	private JLabel jLabel1311 = null;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jComboBox11 = null;
 	private JLabel jLabel1312 = null;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jComboBox12 = null;
 	private JLabel jLabel11131 = null;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jComboBox121 = null;
 	private JLabel jLabel111311 = null;
 	private JLabel jLabel13121 = null;
@@ -281,6 +286,7 @@ public class Login extends JDesktopPane {
 	 * 
 	 * @return javax.swing.JComboBox
 	 */
+	@SuppressWarnings("rawtypes")
 	private JComboBox getJComboBox() {
 		if (jComboBox == null) {
 			jComboBox = new JComboBox();
@@ -373,6 +379,7 @@ public class Login extends JDesktopPane {
 	 * 
 	 * @return javax.swing.JComboBox
 	 */
+	@SuppressWarnings("rawtypes")
 	private JComboBox getJComboBox1() {
 		if (jComboBox1 == null) {
 			jComboBox1 = new JComboBox();
@@ -387,6 +394,7 @@ public class Login extends JDesktopPane {
 	 * 
 	 * @return javax.swing.JComboBox
 	 */
+	@SuppressWarnings("rawtypes")
 	private JComboBox getJComboBox11() {
 		if (jComboBox11 == null) {
 			jComboBox11 = new JComboBox();
@@ -401,6 +409,7 @@ public class Login extends JDesktopPane {
 	 * 
 	 * @return javax.swing.JComboBox
 	 */
+	@SuppressWarnings("rawtypes")
 	private JComboBox getJComboBox12() {
 		if (jComboBox12 == null) {
 			jComboBox12 = new JComboBox();
@@ -415,6 +424,7 @@ public class Login extends JDesktopPane {
 	 * 
 	 * @return javax.swing.JComboBox
 	 */
+	@SuppressWarnings("rawtypes")
 	private JComboBox getJComboBox121() {
 		if (jComboBox121 == null) {
 			jComboBox121 = new JComboBox();

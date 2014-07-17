@@ -25,15 +25,18 @@ import br.org.funcate.glue.model.LookAndFeelService;
 public class InterfaceTree extends JPanel implements ActionListener, MouseListener {
 
 	/** < Attribute type JLabel > */
+	@SuppressWarnings("unused")
 	private JLabel _lblLayer;
 
 	/** < Attribute type JPanel > */
 	private JPanel _pnlFinalizar, _pnlCancelar;
 
 	/** < Attribute type JComboBox > */
+	@SuppressWarnings("rawtypes")
 	public JComboBox _cmbLayer;
 
 	/** < Attribute type String[] > */
+	@SuppressWarnings("unused")
 	private String[] _layers;
 
 	/** < Single instance of the class > */

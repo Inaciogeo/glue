@@ -64,8 +64,10 @@ public class TableControllerTriggerReflection {
 
 	}
 
+	@SuppressWarnings("rawtypes")
 	private final List<Class> cla;
 	/** List of classes with methods added to events */
+	@SuppressWarnings("rawtypes")
 	private final List object;
 	/** Lista de instâncias de classes com métodos adicionados aos eventos */
 	private final TableEventComparator tableComparator;
@@ -154,6 +156,7 @@ public class TableControllerTriggerReflection {
 
 				if (parametro.getName().equals(name)) {
 
+					@SuppressWarnings("rawtypes")
 					Class[] param = parametro.getParameterTypes();
 
 					if (parametrosMetodo.length != param.length) {
@@ -237,7 +240,7 @@ public class TableControllerTriggerReflection {
 	 * @return The instance of the class
 	 */
 
-	private Object getInstanceOfClass(Class cl) {
+	private Object getInstanceOfClass(@SuppressWarnings("rawtypes") Class cl) {
 
 		if (object.isEmpty() == false) {
 
@@ -261,6 +264,7 @@ public class TableControllerTriggerReflection {
 	 * @return
 	 */
 
+	@SuppressWarnings("rawtypes")
 	private boolean isClass(Class aux) {
 
 		if (cla.isEmpty() == false) {
@@ -290,6 +294,7 @@ public class TableControllerTriggerReflection {
 	 *         is not an instance of the class
 	 */
 
+	@SuppressWarnings("rawtypes")
 	private boolean isInstance(Object aux, Class c) {
 
 		String a = aux.getClass().getName();
@@ -318,6 +323,7 @@ public class TableControllerTriggerReflection {
 	 * @throws GlueClientException
 	 */
 
+	@SuppressWarnings("rawtypes")
 	private Object[] methodReflection(String nameMethodClass, Object instance,
 			String nameMethod, String caminhoNomeClasse,
 			Object... parametrosMetodo) throws GlueClientException {
@@ -511,6 +517,7 @@ public class TableControllerTriggerReflection {
 	 * @throws GlueClientException
 	 */
 
+	@SuppressWarnings("rawtypes")
 	public boolean removeListener(String nameMethodClass, Object instance,
 			String nameMethod, String pathNameClass, Object... paramsMethod)
 			throws GlueClientException {

@@ -116,6 +116,7 @@ public class ScaleController implements EventDispatcher, EventListener {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public ComboBoxModel getModel() {
 		return ComboBoxScaleService.generateComboBoxModel();
 	}
@@ -140,6 +141,7 @@ public class ScaleController implements EventDispatcher, EventListener {
 		comboBox.setSelectedItem(element);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	void rebuildScaleCombo() {
 		ComboBoxModel model = ComboBoxScaleService
 				.getRebuildedScaleComboModel();

@@ -54,6 +54,8 @@ public class CanvasState {
 	private List<HighlightObjects> highlightObjects;
 
 	private RgbColor backgroundColor;
+	
+	private String dataSource;
 
 	public CanvasState() {
 		this.canvasWidth = Integer.parseInt(PropertiesReader.getProperty("canvas.width"));
@@ -66,7 +68,7 @@ public class CanvasState {
 		this.backgroundTiles = new ArrayList<Tile>();
 		this.foregroundTiles = new ArrayList<Tile>();
 		this.foregroundAux = new ArrayList<Tile>();
-		this.tileCache = new TileCache(512);
+		this.tileCache = new TileCache(1024);
 		this.canvasExpanded = false;
 		this.transparencyFactor = 0.5f;
 	}
@@ -226,4 +228,12 @@ public class CanvasState {
 		this.backgroundColor = backgroundColor;
 	}
 
+	public String getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(String dataSource) {
+		this.dataSource = dataSource;
+	}
+	
 }

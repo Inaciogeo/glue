@@ -28,9 +28,45 @@ public class Toolbar extends JToolBar {
 	 */
 	// @{
 
-	private static JButton paint, rebuild, zoomIn, zoomOut, selectArea, pan, distance,
-			unDo, reDo, photoLocation, info, links, atribs, clean, pdf, export,
-			helpOnline, openTileRequest, wms, terraLib;
+	private static JButton paint;
+
+	private JButton rebuild;
+
+	private JButton zoomIn;
+
+	private JButton zoomOut;
+
+	private JButton selectArea;
+
+	private static JButton pan;
+
+	private static JButton distance;
+
+	private static JButton unDo;
+
+	private static JButton reDo;
+
+	private static JButton photoLocation;
+
+	private static JButton info;
+
+	private static JButton links;
+
+	private static JButton atribs;
+
+	private static JButton clean;
+
+	private static JButton pdf;
+
+	private static JButton export;
+
+	private static JButton helpOnline;
+
+	private static JButton openTileRequest;
+
+	private static JButton wms;
+
+	private static JButton terraLib;
 
 	// @}
 
@@ -283,6 +319,7 @@ public class Toolbar extends JToolBar {
 
 		wms = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/iconeToolWMS.gif", Toolbar.class));
+		wms.setVisible(false);
 		wms.setToolTipText("Criar uma vizualização wms");
 
 		ToolbarListener listener = new ToolbarListener(this);
@@ -471,7 +508,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setPaint(JButton paint) {
-		this.paint = paint;
+		Toolbar.paint = paint;
 	}
 
 	public JButton getRebuild() {
@@ -511,7 +548,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setPan(JButton pan) {
-		this.pan = pan;
+		Toolbar.pan = pan;
 	}
 
 	public JButton getDistance() {
@@ -519,7 +556,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setDistance(JButton distance) {
-		this.distance = distance;
+		Toolbar.distance = distance;
 	}
 
 	public JButton getUnDo() {
@@ -527,7 +564,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setUnDo(JButton unDo) {
-		this.unDo = unDo;
+		Toolbar.unDo = unDo;
 	}
 
 	public JButton getReDo() {
@@ -535,7 +572,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setReDo(JButton reDo) {
-		this.reDo = reDo;
+		Toolbar.reDo = reDo;
 	}
 
 	public JButton getPhotoLocation() {
@@ -543,7 +580,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setPhotoLocation(JButton photoLocation) {
-		this.photoLocation = photoLocation;
+		Toolbar.photoLocation = photoLocation;
 	}
 
 	public JButton getInfo() {
@@ -551,7 +588,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setInfo(JButton info) {
-		this.info = info;
+		Toolbar.info = info;
 	}
 
 	public JButton getLinks() {
@@ -559,7 +596,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setLinks(JButton links) {
-		this.links = links;
+		Toolbar.links = links;
 	}
 
 	public JButton getAtribs() {
@@ -567,7 +604,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setAtribs(JButton atribs) {
-		this.atribs = atribs;
+		Toolbar.atribs = atribs;
 	}
 
 	public JButton getClean() {
@@ -575,7 +612,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setClean(JButton clean) {
-		this.clean = clean;
+		Toolbar.clean = clean;
 	}
 
 	public JButton getPdf() {
@@ -583,7 +620,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setPdf(JButton pdf) {
-		this.pdf = pdf;
+		Toolbar.pdf = pdf;
 	}
 
 	public JButton getExport() {
@@ -591,7 +628,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setExport(JButton export) {
-		this.export = export;
+		Toolbar.export = export;
 	}
 
 	public JButton getHelpOnline() {
@@ -599,7 +636,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setHelpOnline(JButton helpOnline) {
-		this.helpOnline = helpOnline;
+		Toolbar.helpOnline = helpOnline;
 	}
 
 	public static JButton getBtnTileRequest() {
@@ -607,7 +644,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setBtnTileRequest(JButton btnTile) {
-		this.openTileRequest = btnTile;
+		Toolbar.openTileRequest = btnTile;
 	}
 
 	public static JButton getWms() {
@@ -615,7 +652,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setWms(JButton wms) {
-		this.wms = wms;
+		Toolbar.wms = wms;
 	}
 
 	public JButton getTerraLib() {
@@ -623,7 +660,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	public void setTerraLib(JButton terraLib) {
-		this.terraLib = terraLib;
+		Toolbar.terraLib = terraLib;
 	}
 	
 	public ImageIcon getiPaint() {

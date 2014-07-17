@@ -12,7 +12,6 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 
 import javax.swing.AbstractListModel;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -25,9 +24,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import br.org.funcate.glue.controller.Mediator;
 import br.org.funcate.glue.main.AppSingleton;
+import br.org.funcate.glue.model.canvas.CanvasState;
+import br.org.funcate.glue.model.toolbar.ToolEnum;
+import br.org.funcate.glue.model.toolbar.ToolService;
 import br.org.funcate.glue.utilities.Utils;
 
 public class ScreenRequetServices extends JDialog {
@@ -65,7 +66,7 @@ public class ScreenRequetServices extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JList<String> list;
-	private DefaultListModel<String> listModel;
+	//private DefaultListModel<String> listModel;
 	private HashMap<String, String> requestMap;
 	private HashMap<String, String> descMap;
 	
@@ -85,55 +86,23 @@ public class ScreenRequetServices extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings({ "serial", "rawtypes" })
+	@SuppressWarnings({ "serial", "rawtypes", "unchecked" })
 	public ScreenRequetServices() {
 		setModal(false);
 		addWindowListener(new WindowAdapter() {
 
 			@Override
-			public void windowClosed(WindowEvent arg0) {
-				Toolbar.getWms().setEnabled(true);
-				Toolbar.getBtnTileRequest().setEnabled(true);
-			}
-
-			@Override
 			public void windowOpened(WindowEvent arg0) {
-				Toolbar.getWms().setEnabled(true);
-				// try {
-				listModel = new DefaultListModel<String>();
 				requestMap = new HashMap<String, String>();
 				descMap = new HashMap<String, String>();
 				idMap = new HashMap<String, String>();
-
-				// rootNode =
-				// XMLJDomReader.JDomRead("../glue-client/src/main/java/br/org/funcate/glue/utilities/TilePropertyRequest.xml");
-				// List nodeList = rootNode.getChildren("content");
-
 				Toolbar.getBtnTileRequest().setEnabled(false);
 
-				// for (int i = 0; i < nodeList.size(); i++) {
-				//
-				// Element node = (Element) nodeList.get(i);
-				// name = node.getChildText("name");
-				// listModel.addElement(name);
-				// list.setModel(listModel);
-				// requestMap.put(node.getChildText("name"),node.getChildText("url"));
-				// descMap.put(node.getChildText("name"),node.getChildText("desc"));
-				// idMap.put(node.getChildText("name"),node.getChildText("id"));
-
-				// }
-
-				// } catch (IOException io) {
-				// io.printStackTrace();
-				// } catch (JDOMException jdomex) {
-				// jdomex.printStackTrace();
-				// }
 				idMap.put("OpenStreetMap", "0");
 				idMap.put("GoogleMaps", "2");
+				idMap.put("WMS", "3");
 				idMap.put("Bauru", "1");
-				idMap.put("Tr\u00E2nsito", "1");
-				idMap.put("IGC", "1");
-
+				idMap.put("Instituto Geográfico e Cartográfico", "4");
 			}
 		});
 
@@ -152,12 +121,18 @@ public class ScreenRequetServices extends JDialog {
 				String value = list.getSelectedValue();
 				if (value != null && value != "") {
 					// if(!requestMap.get(list.getSelectedValue()).isEmpty())
-					 mapId = idMap.get(list.getSelectedValue());
+					mapId = idMap.get(list.getSelectedValue());
 					mediator.setToolBarSource(mapId);
 				} else {
 					GlueMessageDialog.show("selecione um opção de mapa", null,2);
 				}
-			}
+				ToolService.setSelectedTool(ToolEnum.GOOGLE);
+				ToolService.setToolEnabled(ToolEnum.GOOGLE, true);
+				AppSingleton singleton = AppSingleton.getInstance();
+				CanvasState state = singleton.getCanvasState();
+				state.setDataSource(getValue());	
+			}	
+			
 		});
 		btnApply.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnApply.setBackground(new Color(255, 255, 255));
@@ -183,7 +158,7 @@ public class ScreenRequetServices extends JDialog {
 
 		list = new JList<String>();
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"OpenStreetMap", "GoogleMaps", "Bauru", "IGC"};
+			String[] values = new String[] {"OpenStreetMap","GoogleMaps","WMS","Bauru","Instituto Geográfico e Cartográfico"};
 			public int getSize() {
 				return values.length;
 			}
@@ -213,7 +188,8 @@ public class ScreenRequetServices extends JDialog {
 									.getResource("/br/org/funcate/glue/image/rioHybrid.gif")));
 
 					GlueMessageDialog.show(
-							"Mapa de direitos autorais da Google", "", 3);
+							"Mapa de direitos autorais do Google.\nLeia os termos de serviço adicionais do Google:" +
+							"\nhttp://www.google.com/intl/pt-BR_ALL/help/terms_maps.html", "", 3);
 
 				} else { // set image cgi
 					lblImage.setIcon(new ImageIcon(
@@ -275,6 +251,8 @@ public class ScreenRequetServices extends JDialog {
 				Mediator mediator = AppSingleton.getInstance().getMediator();
 				mediator.setToolBarSource(null);
 				setMapId(null);
+				Toolbar.getWms().setEnabled(true);
+				ToolService.setToolEnabled(ToolEnum.WMS, true);
 			}
 		});
 		btnCleanMap.setFont(new Font("SansSerif", Font.BOLD, 12));

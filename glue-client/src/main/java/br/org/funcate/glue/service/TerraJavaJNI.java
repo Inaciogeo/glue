@@ -419,6 +419,10 @@ public class TerraJavaJNI {
 
 	public Boolean setWorkProjection(HashMap<String, Object> projection,
 			String sessionId) throws RuntimeException {
+		//{projOffy=0.0, projOffx=0.0, projUnits=DecimalDegrees, projDatum=SAD69, projName=LatLong, projNorthHemisphere=false, projStLat2=0.0, projLon0=0.0, projStLat1=0.0, projScale=1.0, projLat0=0.0}
+		//inacio
+		if(projection.get("projName").equals("ESRI"))
+			projection.put("projName", "LatLong");
 
 		try {
 			terraJava.setWorkProjection(projection, sessionId);
@@ -904,6 +908,9 @@ public class TerraJavaJNI {
 			HashMap<String, Object> dataProjectionMap,
 			HashMap<String, Object> destinationProjectionMap, String sessionId)
 			throws RuntimeException {
+		//inacio
+		if(destinationProjectionMap.get("projName").equals("ESRI"))
+			destinationProjectionMap.put("projName", "LatLong");
 
 		try {
 			return terraJava.remapCoordinates(coordsList, dataProjectionMap,

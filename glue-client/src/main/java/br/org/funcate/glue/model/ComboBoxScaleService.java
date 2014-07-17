@@ -11,6 +11,7 @@ import br.org.funcate.glue.model.canvas.CanvasState;
 
 public abstract class ComboBoxScaleService {
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static ComboBoxModel generateComboBoxModel() {
 		ScaleElement[] scaleElements = getScaleElementValues();
 		return new DefaultComboBoxModel(scaleElements);
@@ -51,6 +52,7 @@ public abstract class ComboBoxScaleService {
 		return scale;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static ComboBoxModel getRebuildedScaleComboModel() {
 		ScaleElement[] scaleElements = getScaleElementValues();
 

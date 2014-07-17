@@ -190,8 +190,7 @@ public class TerraJavaClient {
 
 			// Changing the current TerraManager Canvas Projection
 
-			terraJava.setWorkProjection(getHashMapFromProjection(projection),
-					sessionId);
+			terraJava.setWorkProjection(getHashMapFromProjection(projection),sessionId);
 
 		} catch (RuntimeException e) {
 			DailyExceptionLogger.logging(e.getMessage(), e);
@@ -571,6 +570,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Box convertBox(Box box, String currentProjName,
 			String destinationProjName) throws GlueServerException {
 
@@ -600,11 +600,14 @@ public class TerraJavaClient {
 		} else if ((currentProjName.equals("LatLong")||(currentProjName.equals("ESRI"))&& destinationProjName.equals("Google"))) {
 			getLatLongProj();
 			getGoogleProj();
+			getESRIProj();
 		} else if (currentProjName.equals("Google") && (destinationProjName.equals("ESRI")|| destinationProjName.equals("LatLong"))) {
 			getGoogleProj();
 			getLatLongProj();
+			getESRIProj();
 		}
-
+		
+		
 		Vector<Object> vectorCoordListResult = null;
 		// Converting the box coordinates
 		try {
@@ -631,6 +634,26 @@ public class TerraJavaClient {
 		return convertedBox;
 	}
 
+	private HashMap<String, Object> getESRIProj() {
+		HashMap<String, Object> ESRIlatLongProj = new HashMap<String, Object>();
+
+		ESRIlatLongProj.put("projDatum", "SAD69");
+//		ESRIlatLongProj.put("projDatum", "WGS84");//BIRA	
+		ESRIlatLongProj.put("projUnits", "DecimalDegrees");
+//		ESRIlatLongProj.put("projName", "LatLong");
+		ESRIlatLongProj.put("projName", "ESRI");//BIRA
+		ESRIlatLongProj.put("projLat0", 0);
+		ESRIlatLongProj.put("projLon0", 0);
+		ESRIlatLongProj.put("projStLat1", 0);
+		ESRIlatLongProj.put("projStLat2", 0);
+		ESRIlatLongProj.put("projScale", 0);
+		ESRIlatLongProj.put("projOffx", 0);
+		ESRIlatLongProj.put("projOffy", 0);
+		ESRIlatLongProj.put("projNorthHemisphere", false);
+
+		return ESRIlatLongProj;
+	}
+	
 	/**
 	 * @author Ribeiro, Stephen M.
 	 * 
@@ -738,7 +761,7 @@ public class TerraJavaClient {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private HashMap<String, Object> createThematicMapThreadSafe(
 			ContextToGroupMap contextToGroupMap, String sessionId) {
 
@@ -957,6 +980,7 @@ public class TerraJavaClient {
 	 *         \brief Method that returns an image of the current View
 	 */
 
+	@SuppressWarnings("rawtypes")
 	public byte[] drawThemeText(ViewToPlot view, Box plotBox, Integer width,
 			Integer height, Integer imageType, Boolean canvasOpaque,
 			Integer quality) throws GlueServerException {// Attribute name for
@@ -1393,6 +1417,7 @@ public class TerraJavaClient {
 	 *         Vector<HashMap>
 	 */
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Vector<HashMap> getHashMapFromThemesVisibility(View updatedView,
 			View newView) {
 
@@ -1503,7 +1528,7 @@ public class TerraJavaClient {
 		HashMap<String, Object> latLongProj = new HashMap<String, Object>();
 
 		latLongProj.put("projDatum", "SAD69");
-//		latLongProj.put("projDatum", "WGS84");//BIRA
+//		latLongProj.put("projDatum", "WGS84");//BIRA	
 		latLongProj.put("projUnits", "DecimalDegrees");
 		latLongProj.put("projName", "LatLong");
 //		latLongProj.put("projName", "ESRI");//BIRA
@@ -1568,6 +1593,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Layer> getLayerSet(Boolean forceReload)
 			throws GlueServerException {
 
@@ -1786,6 +1812,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings("rawtypes")
 	private Theme getThemesFromHashMap(String viewName, Boolean pForceReload,
 			String pDBUserName, String sessionId, HashMap themeMap,
 			List<Layer> layers) throws GlueServerException {
@@ -2007,6 +2034,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private View getViewFromHashMap(Boolean pForceReload, String pDBUserName,
 			String sessionId, HashMap viewMap, List<Layer> layers)
 			throws GlueServerException {
@@ -2053,6 +2081,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings("rawtypes")
 	public ViewSet getViewSet(
 
 	Boolean pForceReload) throws GlueServerException {
@@ -2460,6 +2489,7 @@ public class TerraJavaClient {
 	 *         \brief Method that returns an image of the current View
 	 */
 
+	@SuppressWarnings("rawtypes")
 	public byte[] plotViewThreadSafe(ViewToPlot view, Box plotBox,
 			Integer width, Integer height, Integer imageType,
 			Boolean canvasOpaque, Integer quality,
@@ -2568,6 +2598,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Box recompose(String currentView, Integer[] ids)
 			throws GlueServerException {
 
@@ -2768,6 +2799,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings("rawtypes")
 	private View searchView(Long viewId, String viewName, String pDBUserName,
 			Boolean pForceReload, String sessionId) throws GlueServerException {
 		try {
@@ -3074,6 +3106,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings("rawtypes")
 	public View updateView(View newView, Boolean isReload, Boolean isMemView)
 			throws GlueServerException {
 

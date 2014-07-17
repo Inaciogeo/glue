@@ -439,6 +439,7 @@ public class XMLReader {
 	 * @param format
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public String generatePreviewMap(DefaultListModel layers, String format) {
 
 		StringBuffer _selectedLayers = new StringBuffer(layers.size());
@@ -486,6 +487,7 @@ public class XMLReader {
 	 * @param format
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public String generateURL(DefaultListModel layers, String format) {
 
 		StringBuffer _selectedLayers = new StringBuffer(layers.size());

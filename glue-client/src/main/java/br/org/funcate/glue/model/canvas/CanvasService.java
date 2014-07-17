@@ -31,19 +31,23 @@ import br.org.funcate.glue.model.exception.GlueServerException;
 import br.org.funcate.glue.model.request.GoogleEnum;
 import br.org.funcate.glue.model.request.TextRequest;
 import br.org.funcate.glue.model.toolbar.ToolEnum;
+import br.org.funcate.glue.model.toolbar.ToolService;
+import br.org.funcate.glue.model.toolbar.ToolState;
 import br.org.funcate.glue.model.tree.CustomNode;
 import br.org.funcate.glue.model.tree.TreeService;
 import br.org.funcate.glue.model.tree.TreeState;
 import br.org.funcate.glue.service.TerraJavaClient;
 import br.org.funcate.glue.utilities.PropertiesReader;
 import br.org.funcate.glue.view.LocalOptionPane;
+import br.org.funcate.glue.view.ToolWMS;
 
 public abstract class CanvasService {
 
 	private static final double EXTENT = Double.parseDouble(PropertiesReader
 			.getProperty("google.parameter.extent"));
-	private static final int TILE_SIZE = Integer.parseInt(PropertiesReader
+	public static final int TILE_SIZE = Integer.parseInt(PropertiesReader
 			.getProperty("tile.size"));
+	private static int zoom;
 
 	public static boolean isEmptyBox() {
 		AppSingleton singleton = AppSingleton.getInstance();
@@ -57,8 +61,9 @@ public abstract class CanvasService {
 	}
 
 	/**
-	 * Sets the canvas box, according to canvas size and its resolution.
-	 * 
+	 * Sets the canvas box, according to canvas size and its resolution,
+	 * ajusting the resolution to a possible zoom level,if necessary and
+	 * ajusting the box to the canvas aspect relation. 
 	 * @param box
 	 */
 	static void setBox(Box box) {
@@ -71,22 +76,22 @@ public abstract class CanvasService {
 		double resX = largura / canvasWidth;
 		double resY = altura / canvasHeight;
 		Projection currentProjection = state.getProjection();
-		if (resX > resY) {
-			if ("VirtualEarthMercator".equals(currentProjection.getName())) {
-				setCanvasResolution(resX);
-			} else {
-				state.setResolution(resX);
-			}
+		if (resX > resY) {//
+//			if ("VirtualEarthMercator".equals(currentProjection.getName())) {
+				setCanvasResolution(resX);//ajusta o zoom level
+//			} else {
+//				state.setResolution(resX);
+//			}
 			configureCanvasBoxX(box.getX1());
 			box.setY1(box.getY1() + altura / 2 - canvasHeight / 2
 					* state.getResolution());
 			configureCanvasBoxY(box.getY1());
 		} else {
-			if ("VirtualEarthMercator".equals(currentProjection.getName())) {
+//			if ("VirtualEarthMercator".equals(currentProjection.getName())) {
 				setCanvasResolution(resY);
-			} else {
-				state.setResolution(resY);
-			}
+//			} else {
+//				state.setResolution(resY);
+//			}
 			configureCanvasBoxY(box.getY1());
 			box.setX1(box.getX1() + largura / 2 - canvasWidth / 2
 					* state.getResolution());
@@ -114,20 +119,24 @@ public abstract class CanvasService {
 					/ ((Math.pow(2, state.getZoomLevel())) * TILE_SIZE);
 			state.setResolution(newResolution);
 		}
-		//if ("ESRI".equals(currentProjection.getName())) {//BIRA RESOLUTION
-//		if("LatLong".equals(currentProjection.getName())) {
-//			int zoom = 0;
-//			r = r*TILE_SIZE;
-//			setZoomLevel();
-//			for (int i = 0; i < ESRILatLongTile.getResolution().length; i++) {
-//				if(r>ESRILatLongTile.getResolution()[i]){
-//					zoom = i;
-//					break;
-//				}
-//			}
-//			double newResolution = ESRILatLongTile.getResolution()[zoom]/TILE_SIZE;
-//			state.setResolution(newResolution);
-//		}
+		
+	if ("Instituto Geográfico e Cartográfico".equals(state.getDataSource())) {//BIRA RESOLUTION
+		//if("LatLong".equals(currentProjection.getName())) {
+			
+			r = r*(Math.PI/180)*TILE_SIZE;
+			
+			for (int i = 0; i < ESRILatLongTile.getResolution().length; i++) {
+				zoom = i;
+				if(r>=ESRILatLongTile.getResolution()[i]){
+					//zoom = i;
+					break;
+				}	
+			}
+			double newResolution = ESRILatLongTile.getResolution()[zoom]/TILE_SIZE*(180/Math.PI);
+			state.setResolution(newResolution);
+			state.setZoomLevel(zoom);
+			
+		}
 	}
 
 	/**
@@ -185,8 +194,7 @@ public abstract class CanvasService {
 		boolean hasSomethingToPaint = manageImageSource();
 
 		if (enablePanTool) {
-			AppSingleton.getInstance().getMediator()
-					.setSelectedTool(ToolEnum.PAN);
+			AppSingleton.getInstance().getMediator().setSelectedTool(ToolEnum.PAN);
 		}
 
 		if (!hasSomethingToPaint) {
@@ -266,7 +274,7 @@ public abstract class CanvasService {
 
 		canvasGraphicsBuffer.createImgGoogleCopyright(color);
 	}
-	
+	//inacio - poc, somente para apresetacao
 	public static void createMark(){
 		AppSingleton singleton = AppSingleton.getInstance();
 		CanvasState state = singleton.getCanvasState();
@@ -274,6 +282,7 @@ public abstract class CanvasService {
 		canvasGraphicsBuffer.createMarker();
 		
 	}
+	//inacio - poc, somente para apresetacao
 	public static void deleteMark(){
 		AppSingleton singleton = AppSingleton.getInstance();
 		CanvasState state = singleton.getCanvasState();
@@ -319,8 +328,7 @@ public abstract class CanvasService {
 					state.setBackground(background);
 					state.setForeground(null);
 					terraLibView.setForegroundProjection(null);
-					services.configCanvas(background.getSourceName(),
-							background.getProjection(), Color.white);
+					services.configCanvas(background.getSourceName(),background.getProjection(), Color.white);
 
 					RgbColor backgroundColor = new RgbColor();
 					backgroundColor.setRed(Color.white.getRed());
@@ -343,8 +351,7 @@ public abstract class CanvasService {
 			background = toolBarSource;
 			View terraLibView = mediator.getCurrentView().getView();
 			terraLibView.setForegroundProjection(toolBarSource.getProjection());
-			services.configCanvas(foreground.getSourceName(),
-					background.getProjection(), Color.white);
+			services.configCanvas(foreground.getSourceName(),background.getProjection(), Color.white);
 		} else if (toolBarSource != null && !isTreeEnabled) {
 			background = toolBarSource;
 		}
@@ -683,8 +690,26 @@ public abstract class CanvasService {
 				imageSource = createGoogleSourceDefinition(GoogleEnum.MAP);
 				imageSource.setType(TileType.OPENSTREET);
 			}
-
+			if (source.equals("3")) {
+				
+				ToolWMS wms = null;
+				wms = ToolWMS.getInstance();
+				wms.setVisible(true);
+				AppSingleton singleton = AppSingleton.getInstance();
+				CanvasState state = singleton.getCanvasState();
+				imageSource = state.getBackground();
+				imageSource.setProjection(createLatLongProjection());
+				imageSource.setType(TileType.WMS);
+			}
+			if (source.equals("4")) {
+				AppSingleton singleton = AppSingleton.getInstance();
+				CanvasState state = singleton.getCanvasState();
+				imageSource = state.getBackground();
+				imageSource.setProjection(createLatLongProjection());
+				imageSource.setType(TileType.INSTITUTO);
+			}
 		}
+		
 		if (source instanceof ImageSourceDefinition) {
 			imageSource = (ImageSourceDefinition) source;
 			imageSource.setProjection(createLatLongProjection());
@@ -693,6 +718,33 @@ public abstract class CanvasService {
 		CanvasState state = AppSingleton.getInstance().getCanvasState();
 		state.setToolbarSource(imageSource);
 	}
+	
+	/**
+	 * This method controls the state of Toolbar's WMS button
+	 * TODO:apagar, metodo antigo usado no toobarController 
+	 */
+//	public void setWMS() {
+//		Mediator mediator = AppSingleton.getInstance().getMediator();
+//		ToolWMS wms = null;
+//		ToolState wmsTool = ToolService.getTool(ToolEnum.WMS);
+//
+//		if (wmsTool.isSelected() == false) {
+//			try {
+//				wms = ToolWMS.getInstance();
+//				wms.setVisible(true);
+//				ToolService.setSelectedTool(ToolEnum.WMS);
+//				//this.toolbar.setWmsSelected(true);
+//			} catch (NullPointerException e) {
+//				ToolService.setSelectedTool(ToolEnum.WMS);
+//				//this.toolbar.setWmsSelected(true);
+//			}
+//		} else {
+//			ToolService.setSelectedTool(ToolEnum.WMS);
+//			//this.toolbar.setWmsSelected(false);
+//			mediator.setToolBarSource(null);
+//		}
+//		
+//	}
 		
 
 	private static Projection createGoogleProjection() {
@@ -731,6 +783,29 @@ public abstract class CanvasService {
 		wmsProjection.setZone(-2147483648);
 		wmsProjection.setSelected(false);
 		return wmsProjection;
+	}
+	/**
+	 * creates the projection to request tiles from the ESRI server, 
+	 * used by the cartographic and geographical instituted of São Paulo
+	 * @return
+	 */
+	private static Projection createESRIProjection() {
+		Projection ESRIProjection = new Projection();
+		ESRIProjection.setDatum("SAD69");
+		//wmsProjection.setDatum("WGS84");//bira
+		ESRIProjection.setUnits("DecimalDegrees");
+		ESRIProjection.setName("LatLong");//bira
+		ESRIProjection.setLat0(0.0);
+		ESRIProjection.setLon0(0.0);
+		ESRIProjection.setStlat1(0.0);
+		ESRIProjection.setStlat2(0.0);
+		ESRIProjection.setScale(1.0);
+		ESRIProjection.setOffx("0.0");
+		ESRIProjection.setOffy("0.0");
+		ESRIProjection.setHemNorth(false);
+		ESRIProjection.setZone(-2147483648);
+		ESRIProjection.setSelected(false);
+		return ESRIProjection;
 	}
 
 	private static ImageSourceDefinition createGoogleSourceDefinition(
@@ -974,7 +1049,7 @@ public abstract class CanvasService {
 		g2d.fill(rect);
 		GeneralTileSchema.generateTilesLists(false);
 	}
-
+	
 	static void drawText() {
 		new TextRequest().start();
 	}

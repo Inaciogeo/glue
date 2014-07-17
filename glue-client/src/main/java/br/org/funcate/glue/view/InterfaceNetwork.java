@@ -41,6 +41,7 @@ public class InterfaceNetwork extends JPanel implements ActionListener,
 	private JPanel _pnlFinalizar, _pnlCancelar;
 
 	/** < Attribute type JComboBox > */
+	@SuppressWarnings("rawtypes")
 	public JComboBox _cmbLayerLines, _cmbLayerPoints;
 
 	/** < Single instance of the class > */
@@ -89,6 +90,7 @@ public class InterfaceNetwork extends JPanel implements ActionListener,
 	 * @author OLIVEIRA, Paulo Renato M.
 	 */
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private InterfaceNetwork() {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);

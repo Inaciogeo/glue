@@ -82,7 +82,7 @@ public class AppTeste {
 		/* Valores de resolução extraidos do si-tehttp://geoportal.igc.sp.gov.br:6080/arcgis/rest/services/IGC/GeoPortal_Ortofotos_Mapeamento2010_ImgSrv/ImageServer*/
 		double[]resolution = {9.5178440233E-003, 8.3281135204E-003, 7.1383830175E-003, 4.7589220117E-003, 2.3794610058E-003, 1.1897305029E-003, 5.9486525146E-004, 2.3794610058E-004, 1.1897305029E-004, 5.9486525146E-005, 2.3794610058E-005, 1.1897305029E-005,5.948652514575701E-6, 2.37946100583028E-06};
 		AppTeste tiles = new AppTeste();
-		tiles.setZoomLevel(11);
+		tiles.setZoomLevel(10);
 		tiles.ESRILatLongTile(originLocation, 256, resolution);
 		tiles.tileIndex(new PointF(-45.88783968*CDR, -23.18024310*CDR));
 		System.out.println(tiles.getTileIndexX());

@@ -34,6 +34,7 @@ public class InterfaceDefault extends JPanel implements ActionListener, MouseLis
 	private JPanel _pnlFinalizar, _pnlCancelar;
 
 	/** < Attribute type JComboBox > */
+	@SuppressWarnings("rawtypes")
 	public JComboBox _cmbLayer;
 
 	/** < Single instance of the class > */
@@ -75,6 +76,7 @@ public class InterfaceDefault extends JPanel implements ActionListener, MouseLis
 	 * @author OLIVEIRA, Paulo Renato M.
 	 */
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private InterfaceDefault() {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);

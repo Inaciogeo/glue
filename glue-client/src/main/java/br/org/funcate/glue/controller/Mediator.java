@@ -176,7 +176,7 @@ public class Mediator {
 			toolbarController.setTile();
 			break;
 		case WMS:
-			toolbarController.setWMS();
+	//		toolbarController.setWMS();
 			break;
 
 		case PAINT:

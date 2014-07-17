@@ -112,12 +112,12 @@ public class ToolbarListener implements ActionListener {
 			toolController.setHelpOnline();
 		}
 
-		if (e.getSource() == toolbar.getBtnTileRequest()) {
+		if (e.getSource() == Toolbar.getBtnTileRequest()) {
 			toolController.setTile();			
 		}
 
-		if (e.getSource() == toolbar.getWms()) {
-			toolController.setWMS();
+		if (e.getSource() == Toolbar.getWms()) {
+			//toolController.setWMS();
 		}
 		
 	}
