@@ -15,6 +15,7 @@ import br.org.funcate.glue.utilities.PropertiesReader;
 
 public abstract class InfoToolService {
 
+	@SuppressWarnings("unchecked")
 	public static List<ThemeAttributesInfoTool> getInfoByClick(
 			double xPosition, double yPosition) throws GlueServerException {
 

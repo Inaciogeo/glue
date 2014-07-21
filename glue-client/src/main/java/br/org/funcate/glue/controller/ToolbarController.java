@@ -23,7 +23,6 @@ import br.org.funcate.glue.event.ScaleChangedEvent;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.canvas.CanvasService;
 import br.org.funcate.glue.model.exception.GlueServerException;
-import br.org.funcate.glue.model.request.GoogleEnum;
 import br.org.funcate.glue.model.thread.PlotterController;
 import br.org.funcate.glue.model.toolbar.ToolEnum;
 import br.org.funcate.glue.model.toolbar.ToolService;
@@ -41,9 +40,7 @@ import br.org.funcate.glue.tool.UnDoTool;
 import br.org.funcate.glue.tool.ZoomAreaTool;
 import br.org.funcate.glue.tool.ZoomInTool;
 import br.org.funcate.glue.tool.ZoomOutTool;
-import br.org.funcate.glue.utilities.XMLJDomReader;
 import br.org.funcate.glue.view.ScreenRequetServices;
-import br.org.funcate.glue.view.ToolWMS;
 import br.org.funcate.glue.view.Toolbar;
 
 /**
@@ -64,7 +61,9 @@ public class ToolbarController implements EventDispatcher, EventListener {
 	 * Toolbar attribute.
 	 */
 	private Toolbar toolbar;
+	@SuppressWarnings("unused")
 	private Element rootNode;
+	@SuppressWarnings("unused")
 	private String name;
 
 	/**
@@ -128,7 +127,7 @@ public class ToolbarController implements EventDispatcher, EventListener {
 	 */
 	public void setTile() {
 		
-		Mediator mediator = AppSingleton.getInstance().getMediator();
+		//Mediator mediator = AppSingleton.getInstance().getMediator();
 		//if (toolbar.isGoogleSelected() == false) {
 			
 			ToolService.setSelectedTool(ToolEnum.GOOGLE);

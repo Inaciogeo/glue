@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import br.org.funcate.glue.model.Box;
-import br.org.funcate.glue.model.ESRILatLongTile;
 import br.org.funcate.glue.model.LoadingStatusService;
 import br.org.funcate.glue.model.View;
 import br.org.funcate.glue.model.cache.Tile;

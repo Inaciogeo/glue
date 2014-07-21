@@ -23,7 +23,9 @@ public class ScaleView extends JFrame {
 	private JPanel mainPanel;
 	private JLabel lblTitle;
 	private static JLabel lblTema;
+	@SuppressWarnings("rawtypes")
 	private static JComboBox cmbMinima;
+	@SuppressWarnings("rawtypes")
 	private static JComboBox cmbMaxima;
 	private JButton btConfirm;
 	private JButton btCancel;
@@ -60,6 +62,7 @@ public class ScaleView extends JFrame {
 		return instance;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private ScaleView() {
 		// CustomNode currentTheme =
 		// AppSingleton.getInstance().getMediator().getCurrentTheme();
@@ -184,6 +187,7 @@ public class ScaleView extends JFrame {
 	/**
 	 * @return the cmbMinima
 	 */
+	@SuppressWarnings("rawtypes")
 	public JComboBox getCmbMinima() {
 		return cmbMinima;
 	}
@@ -191,6 +195,7 @@ public class ScaleView extends JFrame {
 	/**
 	 * @return the cmbMaxima
 	 */
+	@SuppressWarnings("rawtypes")
 	public JComboBox getCmbMaxima() {
 		return cmbMaxima;
 	}

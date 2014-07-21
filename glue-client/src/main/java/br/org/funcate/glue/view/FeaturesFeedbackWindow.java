@@ -1,14 +1,10 @@
 package br.org.funcate.glue.view;
 
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.EventQueue;
 
 import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JButton;

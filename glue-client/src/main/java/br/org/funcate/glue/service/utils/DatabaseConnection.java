@@ -115,7 +115,6 @@ public class DatabaseConnection {
 	}
 
 
-	@SuppressWarnings("unused")
 	public static void createXMLDatabaseConfig(String host, String password, String user, String database, String port, int dbType) throws IOException{
 		
 		 OutputStream os = new FileOutputStream("databaseConfig.xml");

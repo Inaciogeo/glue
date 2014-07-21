@@ -1,30 +1,22 @@
 package br.org.funcate.glue.service.utils;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-
 import br.org.funcate.glue.model.Database;
 import br.org.funcate.glue.model.UserType;
-import br.org.funcate.glue.utilities.XMLJDomReader;
 
 public class SQLService {
 	
-	private static Element rootNode;
+	
 	private static String host;
 	private static String user;
 	private static String password;
 	private static String database;
 	private static Database db;
-	private static String port;
+	//private static String port;
 	private static Connection conn;
 	private static String dbType;
 	private static Statement stm;
@@ -38,7 +30,7 @@ public class SQLService {
 		user = db.getUser();
 		password = db.getPassword();
 		database = db.getDatabase();
-		port = db.getPort().toString();
+		//port = db.getPort().toString();
 		dbType = db.getDbType().toString();
 
 		try {

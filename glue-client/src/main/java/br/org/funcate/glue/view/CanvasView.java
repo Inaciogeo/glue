@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import br.org.funcate.glue.controller.listener.CanvasAdapter;
-import javax.swing.JLabel;
 
 /**
  * @brief Class that creates the system canvas.

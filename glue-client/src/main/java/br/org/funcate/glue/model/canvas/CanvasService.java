@@ -31,8 +31,6 @@ import br.org.funcate.glue.model.exception.GlueServerException;
 import br.org.funcate.glue.model.request.GoogleEnum;
 import br.org.funcate.glue.model.request.TextRequest;
 import br.org.funcate.glue.model.toolbar.ToolEnum;
-import br.org.funcate.glue.model.toolbar.ToolService;
-import br.org.funcate.glue.model.toolbar.ToolState;
 import br.org.funcate.glue.model.tree.CustomNode;
 import br.org.funcate.glue.model.tree.TreeService;
 import br.org.funcate.glue.model.tree.TreeState;
@@ -75,7 +73,7 @@ public abstract class CanvasService {
 		int canvasHeight = state.getCanvasHeight();
 		double resX = largura / canvasWidth;
 		double resY = altura / canvasHeight;
-		Projection currentProjection = state.getProjection();
+		
 		if (resX > resY) {//
 //			if ("VirtualEarthMercator".equals(currentProjection.getName())) {
 				setCanvasResolution(resX);//ajusta o zoom level
@@ -123,8 +121,6 @@ public abstract class CanvasService {
 	if ("Instituto Geográfico e Cartográfico".equals(state.getDataSource())) {//BIRA RESOLUTION
 		//if("LatLong".equals(currentProjection.getName())) {
 			
-			r = r*(Math.PI/180)*TILE_SIZE;
-			
 			for (int i = 0; i < ESRILatLongTile.getResolution().length; i++) {
 				zoom = i;
 				if(r>=ESRILatLongTile.getResolution()[i]){
@@ -132,7 +128,7 @@ public abstract class CanvasService {
 					break;
 				}	
 			}
-			double newResolution = ESRILatLongTile.getResolution()[zoom]/TILE_SIZE*(180/Math.PI);
+			double newResolution = ESRILatLongTile.getResolution()[zoom];
 			state.setResolution(newResolution);
 			state.setZoomLevel(zoom);
 			
@@ -189,7 +185,7 @@ public abstract class CanvasService {
 		canvasBox.setY2(canvasBoxY2);
 	}
 
-	public synchronized static void draw(boolean clearCache,
+	public static void draw(boolean clearCache,
 			boolean enablePanTool) throws GlueServerException {
 		boolean hasSomethingToPaint = manageImageSource();
 
@@ -251,6 +247,7 @@ public abstract class CanvasService {
 		GeneralTileSchema.generateTilesLists(true);
 	}
 
+	@SuppressWarnings("unused")
 	private static void createTerraLibTecnologyText() {
 		AppSingleton singleton = AppSingleton.getInstance();
 		CanvasState state = singleton.getCanvasState();
@@ -592,7 +589,7 @@ public abstract class CanvasService {
 			ImageSourceDefinition foreground) throws GlueServerException {
 		AppSingleton singleton = AppSingleton.getInstance();
 		TerraJavaClient services = singleton.getServices();
-
+		
 		double x1 = Double.parseDouble(PropertiesReader
 				.getProperty("box.predefined.x1"));
 		double y1 = Double.parseDouble(PropertiesReader
@@ -789,10 +786,11 @@ public abstract class CanvasService {
 	 * used by the cartographic and geographical instituted of São Paulo
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private static Projection createESRIProjection() {
 		Projection ESRIProjection = new Projection();
-		ESRIProjection.setDatum("SAD69");
-		//wmsProjection.setDatum("WGS84");//bira
+		//ESRIProjection.setDatum("SAD69");
+		ESRIProjection.setDatum("WGS84");//bira
 		ESRIProjection.setUnits("DecimalDegrees");
 		ESRIProjection.setName("LatLong");//bira
 		ESRIProjection.setLat0(0.0);

@@ -1,26 +1,15 @@
 package br.org.funcate.glue.model.canvas;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-
 import javax.imageio.ImageIO;
-import javax.swing.text.GapContent;
-
 import br.org.funcate.glue.main.AppSingleton;
-import br.org.funcate.glue.model.CalculatorService;
-import br.org.funcate.glue.model.Coord;
 import br.org.funcate.glue.utilities.patterns.CanvasObserver;
 import br.org.funcate.glue.utilities.patterns.CanvasSubject;
 
@@ -46,8 +35,13 @@ public class CanvasGraphicsBuffer implements GraphicsPainter, CanvasSubject {
 
 	private int xImagePosition = 0, yImagePosition = 0;
 
+	@SuppressWarnings("unused")
+	private BufferedImage geopxIcon;
+
+	@SuppressWarnings("unused")
 	private static BufferedImage marker;
 
+	@SuppressWarnings("unused")
 	private static BufferedImage imgMark;
 
 	CanvasGraphicsBuffer(int canvasWidth, int canvasHeight) {
@@ -115,6 +109,7 @@ public class CanvasGraphicsBuffer implements GraphicsPainter, CanvasSubject {
 		}
 
 		if (CanvasService.hasBDImageSource() && !CanvasService.isEmptyBox()) {
+			@SuppressWarnings("unused")
 			int yTextPosition = 22;
 
 			if (CanvasService.isGoogleActive()) {
@@ -122,8 +117,6 @@ public class CanvasGraphicsBuffer implements GraphicsPainter, CanvasSubject {
 			}
 		}
 	
-		//canvasBufferGraph.drawImage(imgMark,(state.getCanvasWidth()/2)-50, (state.getCanvasHeight()/2)+50, null);
-		
 		g.drawImage(canvasBuffer, 0, 0, null);
 
 		if (toolGraphics != null) {
@@ -171,6 +164,7 @@ public class CanvasGraphicsBuffer implements GraphicsPainter, CanvasSubject {
 			e.printStackTrace();
 		}
 	}
+	
 
 	public void drawTileImage(BufferedImage bufferedImage, int dx1, int dy1,
 			int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {	
@@ -221,7 +215,7 @@ public class CanvasGraphicsBuffer implements GraphicsPainter, CanvasSubject {
 	}
 
 	public void setToolGraphics(ToolGraphics toolGraphics) {
-		this.toolGraphics = toolGraphics;
+		CanvasGraphicsBuffer.toolGraphics = toolGraphics;
 	}
 
 	public BufferedImage getCanvasBuffer() {

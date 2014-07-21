@@ -1230,6 +1230,7 @@ public class CustomNode extends DefaultMutableTreeNode {
 	 * contains with the latest changes performed by the user
 	 */
 
+	@SuppressWarnings("unused")
 	public void rearrangeThemes() {
 
 		if (getNodeType() == NodeType.VIEW) {

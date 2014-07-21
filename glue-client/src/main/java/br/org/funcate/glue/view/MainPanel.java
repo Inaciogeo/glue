@@ -27,10 +27,12 @@ import br.org.funcate.glue.controller.TabbedToolBarsController;
 import br.org.funcate.glue.controller.listener.DragOutlookBarAdapter;
 import br.org.funcate.glue.controller.listener.LabelCanvasExpanderAdapter;
 import br.org.funcate.glue.main.AppSingleton;
-import br.org.funcate.glue.model.CalculatorService;
 import br.org.funcate.glue.model.LookAndFeelService;
+import br.org.funcate.glue.utilities.BrowserLauncher;
 import br.org.funcate.glue.utilities.PropertiesReader;
 import br.org.funcate.plugin.GluePlugin;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * @brief Main system's panel. This class have all other GUI components of the
@@ -138,6 +140,17 @@ public class MainPanel extends JPanel{
 	private JLabel lblDragCanvas;
 	private JLabel lblStaticBar;
 	private JLabel markeImage;
+	private static JLabel lblGeopx;
+	
+	public JLabel getLblGeopx() {
+		return lblGeopx;
+	}
+
+
+	public void setLblGeopx(JLabel lblGeopx) {
+		MainPanel.lblGeopx = lblGeopx;
+	}
+
 
 	public JLabel getLblDragCanvas() {
 		return lblDragCanvas;
@@ -184,6 +197,7 @@ public class MainPanel extends JPanel{
 		System.out.println("The application has loaded in "
 				+ (System.currentTimeMillis() - loadingTime) / 1000.f
 				+ " seconds.");
+		
 		new MainPanelController(this, terraLibText, loadingStatusLabel);
 		
 		GluePluginsStarter.startPlugins(withPlugins, loader);
@@ -226,6 +240,20 @@ public class MainPanel extends JPanel{
 		lblDragCanvas.setBounds(147, 70, 4, 1100);
 		lblDragCanvas.addMouseListener(new DragOutlookBarAdapter(this));
 		lblDragCanvas.addMouseMotionListener(new DragOutlookBarAdapter(this));
+		
+		lblGeopx = new JLabel("");
+		lblGeopx.setToolTipText("Visite o site!");
+		lblGeopx.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String URL = "http://www.geopx.com.br/";
+				BrowserLauncher.getInstance().launchBrowser(URL);
+			}
+		});
+		lblGeopx.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblGeopx.setIcon(new ImageIcon(MainPanel.class.getResource("/br/org/funcate/glue/image/geopx_Icon.png")));
+		lblGeopx.setBounds(245, 158, 90, 55);
+		add(lblGeopx);
 		this.add(lblDragCanvas);
 	}
 	
@@ -284,6 +312,7 @@ public class MainPanel extends JPanel{
 		this.add(tabbedToolBars);
 	}
 
+	@SuppressWarnings("unused")
 	private PanelViewThemeAddButton createViewThemeAddButton() {
 		viewThemeAddButtonView = new PanelViewThemeAddButton();
 		viewThemeAddButtonView.setBackground(Color.white);

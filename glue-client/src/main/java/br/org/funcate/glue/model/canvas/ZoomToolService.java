@@ -10,7 +10,6 @@ import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.Box;
 import br.org.funcate.glue.model.CalculatorService;
 import br.org.funcate.glue.model.ESRILatLongTile;
-import br.org.funcate.glue.model.Projection;
 import br.org.funcate.glue.model.toolbar.ToolEnum;
 
 public abstract class ZoomToolService {
@@ -308,9 +307,9 @@ public abstract class ZoomToolService {
 		
 		if("Instituto Geográfico e Cartográfico".equals(state.getDataSource())){
 			if( zoomLevel>0){
-				canvasResolution = (ESRILatLongTile.getResolution()[--zoomLevel]/CanvasService.TILE_SIZE)*(180/Math.PI);
+				canvasResolution = (ESRILatLongTile.getResolution()[--zoomLevel]);
 			}else{
-				canvasResolution = (ESRILatLongTile.getResolution()[zoomLevel]/CanvasService.TILE_SIZE)*(180/Math.PI);
+				canvasResolution = (ESRILatLongTile.getResolution()[zoomLevel]);
 			}
 		}else{
 			canvasResolution = canvasResolution*2;
@@ -352,10 +351,10 @@ public abstract class ZoomToolService {
 		double yClickPosition = (box.getY1())+ (canvasResolution * (canvasHeight - yClick));
 		
 		if("Instituto Geográfico e Cartográfico".equals(state.getDataSource())){
-			if( ESRILatLongTile.getResolution().length>zoomLevel){
-				canvasResolution = (ESRILatLongTile.getResolution()[++zoomLevel]/CanvasService.TILE_SIZE)*(180/Math.PI);
+			if( ESRILatLongTile.getResolution().length > zoomLevel){
+				canvasResolution = (ESRILatLongTile.getResolution()[++zoomLevel]);
 			}else{
-				canvasResolution = (ESRILatLongTile.getResolution()[zoomLevel]/CanvasService.TILE_SIZE)*(180/Math.PI);
+				canvasResolution = (ESRILatLongTile.getResolution()[zoomLevel]);
 			}		
 		}else{
 			canvasResolution = canvasResolution/2;

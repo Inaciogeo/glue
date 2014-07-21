@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Vector;
 
 import br.org.funcate.glue.utilities.PropertiesReader;
-import br.org.funcate.glue.view.FeaturesFeedbackWindow;
-import br.org.funcate.glue.view.MainPanel;
 import br.org.funcate.terrajava.persistencia.TerraJava;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })

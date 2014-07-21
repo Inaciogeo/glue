@@ -5,15 +5,14 @@ import javax.swing.ImageIcon;
 import br.org.funcate.glue.controller.Mediator;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.canvas.GeneralTileSchema;
-import br.org.funcate.glue.view.FeaturesFeedbackWindow;
 import br.org.funcate.glue.view.ImageIconLoader;
-import br.org.funcate.glue.view.MainPanel;
 
 public abstract class LoadingStatusService {
 
 	private static int tileRequestThreadCount = 0;
 	private static boolean loading = false;
 
+	@SuppressWarnings("unused")
 	private static boolean themeChanged = true;
 
 	public static void setThemeChanged(boolean themeChanged) {
@@ -21,6 +20,7 @@ public abstract class LoadingStatusService {
 	}
 
 	public static synchronized void addThreadCount() {
+		
 		tileRequestThreadCount++;
 		if (!loading) {
 			startLoading();
@@ -29,7 +29,7 @@ public abstract class LoadingStatusService {
 
 	public static synchronized void removeThreadCount() {
 		tileRequestThreadCount--;
-		if (tileRequestThreadCount == 0) {
+		if (tileRequestThreadCount == 0 ) {
 //			if (themeChanged) {
 //				themeChanged = false;
 				LegendService.updateLegend();

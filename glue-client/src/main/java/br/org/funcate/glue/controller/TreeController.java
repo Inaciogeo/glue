@@ -34,7 +34,6 @@ import br.org.funcate.glue.model.exception.GlueServerException;
 import br.org.funcate.glue.model.request.TextRequest;
 import br.org.funcate.glue.model.tree.CustomNode;
 import br.org.funcate.glue.model.tree.TreeService;
-import br.org.funcate.glue.view.SearchPanel;
 import br.org.funcate.glue.view.TreeView;
 
 public class TreeController implements EventDispatcher, EventListener {

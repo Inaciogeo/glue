@@ -93,9 +93,7 @@ public class TerraJavaClient {
 	public TerraJavaClient() {
 		sessionId = "1";
 		userType = UserType.ADMIN;
-
-		database = /* dbControll.getDatabase(); */DatabaseConnection
-				.getDatabase(userType.toString());
+		database = /* dbControll.getDatabase(); */DatabaseConnection.getDatabase(userType.toString());
 		userName = database.getUser();
 		try {
 			connect(database);
@@ -637,8 +635,8 @@ public class TerraJavaClient {
 	private HashMap<String, Object> getESRIProj() {
 		HashMap<String, Object> ESRIlatLongProj = new HashMap<String, Object>();
 
-		ESRIlatLongProj.put("projDatum", "SAD69");
-//		ESRIlatLongProj.put("projDatum", "WGS84");//BIRA	
+//		ESRIlatLongProj.put("projDatum", "SAD69");
+		ESRIlatLongProj.put("projDatum", "WGS84");//BIRA	
 		ESRIlatLongProj.put("projUnits", "DecimalDegrees");
 //		ESRIlatLongProj.put("projName", "LatLong");
 		ESRIlatLongProj.put("projName", "ESRI");//BIRA
@@ -709,7 +707,7 @@ public class TerraJavaClient {
 				box.getY1(), box.getX2(), box.getY2(), reps, sessionId);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "rawtypes" })
 	private boolean createThematicMap(ContextToGroupMap contextToGroupMap)
 			throws GlueServerException {
 
@@ -761,7 +759,7 @@ public class TerraJavaClient {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	private HashMap<String, Object> createThematicMapThreadSafe(
 			ContextToGroupMap contextToGroupMap, String sessionId) {
 
@@ -862,6 +860,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings("unused")
 	private Boolean createTheme(String newThemeName, String layerName,
 			Integer parentID, String restriction, String sessionId)
 			throws GlueServerException {
@@ -1083,6 +1082,7 @@ public class TerraJavaClient {
 		return finish;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Vector fetchAttributes(String objectid, String theme, Long themeId)
 			throws GlueServerException {
 		try {
@@ -1175,6 +1175,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings("rawtypes")
 	private Box getBoxFromView(View view) throws GlueServerException {
 		try {
 			terraJava.setCurrentView(view.getName(), userName, sessionId);
@@ -1212,6 +1213,7 @@ public class TerraJavaClient {
 
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Box getCurrentThemeBox(String themeName, String restrictions)
 			throws GlueServerException {
 		try {
@@ -1241,6 +1243,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings({ "unused", "rawtypes" })
 	private ThemeVisual getDefaultVisual(Integer rep, String sessionId)
 			throws GlueServerException {
 
@@ -1681,6 +1684,7 @@ public class TerraJavaClient {
 	 *         \brief Method that retrieves a set of Layers names
 	 * @throws GlueServerException
 	 */
+	@SuppressWarnings({ "unused", "rawtypes" })
 	private String[] getLayersName() throws GlueServerException {
 		try {
 			Vector layersNames = terraJava.getLayersName(sessionId);
@@ -1812,7 +1816,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Theme getThemesFromHashMap(String viewName, Boolean pForceReload,
 			String pDBUserName, String sessionId, HashMap themeMap,
 			List<Layer> layers) throws GlueServerException {
@@ -1844,8 +1848,7 @@ public class TerraJavaClient {
 				&& theme.getType() != 1) {
 			theme.setLayer(getLayerFromHashMap((HashMap) themeMap.get("layer"),
 					layers));
-			theme.setReps(getRepresentationsFromVector((Vector<String>) themeMap
-					.get("themeReps")));
+			theme.setReps(getRepresentationsFromVector((Vector<String>) themeMap.get("themeReps")));
 			theme.setThemeVisuals(getVisualsFromTheme(viewName, pDBUserName,
 					sessionId, theme));
 			theme.setScaleLimit(new ScaleLimit((Double) themeMap
@@ -1853,8 +1856,7 @@ public class TerraJavaClient {
 		}
 		// Getting themes from themeGroup
 		else {
-			Vector<HashMap> themesVecMap = (Vector<HashMap>) themeMap
-					.get("themes");
+			Vector<HashMap> themesVecMap = (Vector<HashMap>) themeMap.get("themes");
 			List<Theme> childThemes = new ArrayList<Theme>(themesVecMap.size());
 			for (int i = 0; i < themesVecMap.size(); i++) {
 				childThemes.set(
@@ -1885,6 +1887,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings("rawtypes")
 	private ThemeVisual getThemeVisual(String currentView, String currentTheme,
 			Integer themeType, Integer rep) throws GlueServerException {
 
@@ -1943,6 +1946,7 @@ public class TerraJavaClient {
 	 *         utm projection
 	 */
 
+	@SuppressWarnings("unused")
 	private HashMap<String, Object> getUTMProj() {
 
 		HashMap<String, Object> googleProj = new HashMap<String, Object>();
@@ -2265,6 +2269,7 @@ public class TerraJavaClient {
 	 * @return The legend image in byte array format.
 	 */
 
+	@SuppressWarnings("rawtypes")
 	public byte[] plotLegendViewThreadSafe(ViewToPlot view,
 			ThemeVisual visualText, Integer width, Integer imageType,
 			Boolean canvasOpaque, Integer quality,
@@ -2360,6 +2365,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public byte[] plotView(ViewToPlot view, Box plotBox, Integer width,
 			Integer height, Integer imageType, Boolean canvasOpaque,
 			Integer quality, ContextToGroupMap contextToGroupMap)
@@ -2430,6 +2436,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public byte[] plotView2(ViewToPlot view, Box plotBox, Integer width,
 			Integer height, Integer imageType, Boolean canvasOpaque,
 			Integer quality) throws GlueServerException {
@@ -2634,6 +2641,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings("unchecked")
 	public Box remapCoordinates(Box box, Projection projFrom, Projection projTo)
 			throws GlueServerException {
 
@@ -2656,8 +2664,7 @@ public class TerraJavaClient {
 
 				coordsListResult[i] = new Coord();
 
-				HashMap<String, Double> coord = (HashMap<String, Double>) result
-						.elementAt(i);
+				HashMap<String, Double> coord = (HashMap<String, Double>) result.elementAt(i);
 
 				coordsListResult[i].setX(coord.get("x"));
 				coordsListResult[i].setY(coord.get("y"));
@@ -2867,6 +2874,7 @@ public class TerraJavaClient {
 	 * @throws GlueServerException
 	 */
 
+	@SuppressWarnings("unused")
 	private Boolean setDefaultVisual(ThemeVisual themeVisual, String sessionId)
 			throws GlueServerException {
 

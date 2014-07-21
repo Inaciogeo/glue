@@ -9,10 +9,9 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import org.jdom2.JDOMException;
 
-import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.Box;
 import br.org.funcate.glue.model.ESRILatLongTile;
-import br.org.funcate.glue.model.canvas.CanvasState;
+import br.org.funcate.glue.model.canvas.CanvasService;
 import br.org.funcate.glue.utilities.PropertiesReader;
 
 
@@ -35,8 +34,8 @@ abstract class InstitutoCartograficoRequest {
 		String finalUrl = null;
 
 		try {
-			String Y =  String.valueOf((int)Math.floor((ESRILatLongTile.originLocation.y/ESRILatLongTile.getResolution()[zoomLevel])-tileIndexY));
-			String X =  String.valueOf((int)Math.ceil((-ESRILatLongTile.originLocation.x/ESRILatLongTile.getResolution()[zoomLevel])+tileIndexX));
+			String Y =  String.valueOf((int)Math.floor((ESRILatLongTile.originLocation.y/(ESRILatLongTile.getResolution()[zoomLevel]*CanvasService.TILE_SIZE))-tileIndexY));
+			String X =  String.valueOf((int)Math.ceil((-ESRILatLongTile.originLocation.x/(ESRILatLongTile.getResolution()[zoomLevel]*CanvasService.TILE_SIZE))+tileIndexX));
 			url = PropertiesReader.getProperty("canvas.request.cgi.url.Instituto");
 			finalUrl = url + String.valueOf(zoomLevel)+"/"+Y+"/"+X;
 			BufferedImage img = ImageIO.read(new URL(finalUrl));

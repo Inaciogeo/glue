@@ -4,30 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-
 import javax.imageio.ImageIO;
-import javax.xml.bind.DatatypeConverter;
-
-import org.jdom2.Element;
 import org.jdom2.JDOMException;
 
 import br.org.funcate.glue.model.Box;
-import br.org.funcate.glue.model.CalculatorService;
-import br.org.funcate.glue.model.Coord;
-import br.org.funcate.glue.model.ESRILatLongTile;
-import br.org.funcate.glue.model.PointF;
 import br.org.funcate.glue.utilities.PropertiesReader;
-import br.org.funcate.glue.utilities.XMLJDomReader;
 import br.org.funcate.glue.view.ScreenRequetServices;
 
 public class CGIRequest {
-	private static Element rootNode;
-	private static String id;
-	private static String name;
 
 	// ! This is called when a specific tile needs to be requested from Google
 	// Server.

@@ -24,6 +24,8 @@ public class Main extends JFrame {
 		add(panel);
 		addComponentListener(new ResizeAdapter(this));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setTitle("Geographical Lightweight Universal Engine (GLUE)");
+		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setVisible(true);
 		MainPanel.setInstance(panel);
 	}

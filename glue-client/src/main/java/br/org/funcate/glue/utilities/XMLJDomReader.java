@@ -2,19 +2,11 @@ package br.org.funcate.glue.utilities;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import javax.swing.plaf.RootPaneUI;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-
-import br.org.funcate.glue.model.Database;
-import br.org.funcate.glue.model.request.TileRequest;
 
 public class XMLJDomReader {
 

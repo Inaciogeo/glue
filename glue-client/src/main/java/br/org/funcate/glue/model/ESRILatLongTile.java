@@ -1,9 +1,7 @@
 package br.org.funcate.glue.model;
 
 public class ESRILatLongTile {
-	//private PointF originLocation; /* radians */
 	private int tileSize;
-	//private double[] resolution;
 	private int zoomLevel;
 	private Box tileBox;
 	private int tileIndexX;
@@ -12,26 +10,26 @@ public class ESRILatLongTile {
 	private Projection tileProjection;
 	private static double[]resolution = {9.5178440233E-003, 8.3281135204E-003, 7.1383830175E-003, 4.7589220117E-003, 2.3794610058E-003, 1.1897305029E-003, 5.9486525146E-004, 2.3794610058E-004, 1.1897305029E-004, 5.9486525146E-005, 2.3794610058E-005, 1.1897305029E-005,5.948652514575701E-6}; //2.37946100583028E-06
 	static double CDR = Math.PI/180;
-	static double originLatitude = 71.5323878134;
-	static double originLongitude = -125.1420042616;
-	public static PointF originLocation = new PointF(originLongitude*CDR,originLatitude*CDR);	
+	static double originLatitude = 400.0;
+	static double originLongitude = -400.0;
+	public static PointF originLocation = new PointF(originLongitude,originLatitude);	
 	/* Constructor*/
 	public ESRILatLongTile (PointF originLocation, int tileSize, double[] resolution){
-		this.originLocation = originLocation;
+		ESRILatLongTile.originLocation = originLocation;
+		ESRILatLongTile.resolution = resolution; 
 		this.tileSize = tileSize;
-		this.resolution = resolution; 
 	}
 	
 	/* calculates the tile index given a planar coordinates of a location */
 	public void tileIndex(PointF location){ 	
-		setTileIndexX((int) Math.ceil(((-this.originLocation.x + location.x)/this.resolution[this.zoomLevel])));
-		setTileIndexY((int) Math.ceil(((this.originLocation.y - location.y)/this.resolution[this.zoomLevel])));
+		setTileIndexX((int) Math.ceil(((-ESRILatLongTile.originLocation.x + location.x)/ESRILatLongTile.resolution[this.zoomLevel])));
+		setTileIndexY((int) Math.ceil(((ESRILatLongTile.originLocation.y - location.y)/ESRILatLongTile.resolution[this.zoomLevel])));
 	}
 	
 	/*calculates the tileBox()*/
 	public Box tileBox(double tileIndexX, double tileIndexY){
-		PointF ll = new PointF((double)(originLocation.x + tileIndexX*this.resolution[this.zoomLevel]),(double)((originLocation.y)-(tileIndexY+1)*this.resolution[this.zoomLevel]));
-		PointF ur = new PointF((double)(originLocation.x + (tileIndexX+1)*this.resolution[this.zoomLevel]),this.originLocation.y-tileIndexY*this.resolution[this.zoomLevel]);
+		PointF ll = new PointF((double)(originLocation.x + tileIndexX*ESRILatLongTile.resolution[this.zoomLevel]),(double)((originLocation.y)-(tileIndexY+1)*ESRILatLongTile.resolution[this.zoomLevel]));
+		PointF ur = new PointF((double)(originLocation.x + (tileIndexX+1)*ESRILatLongTile.resolution[this.zoomLevel]),ESRILatLongTile.originLocation.y-tileIndexY*ESRILatLongTile.resolution[this.zoomLevel]);
 		return new Box(ll.getX(),ll.getX(),ur.getX(),ur.getY());
 	}
 	
@@ -71,7 +69,7 @@ public class ESRILatLongTile {
 	}
 
 	public void setOriginLocation(PointF originLocation) {
-		this.originLocation = originLocation;
+		ESRILatLongTile.originLocation = originLocation;
 	}
 
 	public int getTileSize() {

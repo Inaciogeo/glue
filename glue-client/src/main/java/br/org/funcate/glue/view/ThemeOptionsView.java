@@ -64,6 +64,7 @@ public class ThemeOptionsView extends JFrame implements MouseMotionListener {
 	/** < String attribute > */
 	static ThemeOptionsView _tov;
 	/** < ThemeOptionsView attribute > */
+	@SuppressWarnings("rawtypes")
 	static JComboBox jcbTypeTheme;
 	/** < JComboBox attribute > */
 
@@ -244,6 +245,7 @@ public class ThemeOptionsView extends JFrame implements MouseMotionListener {
 	 * ! \param mainPanel is the panel to be populated
 	 */
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void populateTreeThemeAdd(JPanel mainPanel) {
 
 		JLabel lblSelectedView;

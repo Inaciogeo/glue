@@ -52,6 +52,7 @@ public class TextRequest extends Thread {
 		TextRequest.contextToLabelConfig = contextToLabelConfig;
 	}
 
+	@SuppressWarnings("unused")
 	private void plotText() {
 		CanvasState canvasState = AppSingleton.getInstance().getCanvasState();
 		int width = canvasState.getCanvasWidth();

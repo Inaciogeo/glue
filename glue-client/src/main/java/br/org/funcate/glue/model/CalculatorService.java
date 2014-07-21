@@ -47,6 +47,7 @@ public class CalculatorService {
 		return positionInWorld;
 	}
 	
+	@SuppressWarnings("unused")
 	public static double[] convertFromWorldToPixel2(double x1, double y1) {
 		AppSingleton singleton = AppSingleton.getInstance();
 		CanvasState state = singleton.getCanvasState();

@@ -34,6 +34,7 @@ public class ExpansionListener implements TreeExpansionListener {
 	 * collapsed
 	 */
 
+	@SuppressWarnings("unused")
 	public void treeCollapsed(TreeExpansionEvent evt) {
 		TreePath path = evt.getPath();
 		CustomNode _node = (CustomNode) path.getLastPathComponent();

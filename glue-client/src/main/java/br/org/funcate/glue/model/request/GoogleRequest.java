@@ -5,17 +5,13 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
-import org.jdom2.Element;
 import org.jdom2.JDOMException;
 
 import br.org.funcate.glue.model.Box;
 import br.org.funcate.glue.utilities.PropertiesReader;
-import br.org.funcate.glue.utilities.XMLJDomReader;
 
 /**
  * \class GoogleRequest This class provides an inflow to solicit tiles from
@@ -25,8 +21,8 @@ import br.org.funcate.glue.utilities.XMLJDomReader;
  */
 abstract class GoogleRequest {
 
-	private static Element rootNode;
-	private static String id;
+//	private static Element rootNode;
+//	private static String id;
 
 	// ! This is called when a specific tile needs to be requested from Google
 	// Server.

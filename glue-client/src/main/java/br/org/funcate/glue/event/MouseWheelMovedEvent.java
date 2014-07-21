@@ -5,7 +5,9 @@ import java.util.EventObject;
 @SuppressWarnings("serial")
 public class MouseWheelMovedEvent extends EventObject {
 
+	@SuppressWarnings("unused")
 	private double x, y;
+	@SuppressWarnings("unused")
 	private int wheelRotation;
 
 	public MouseWheelMovedEvent(Object source, double x, double y, int clicksWheelRotated) {

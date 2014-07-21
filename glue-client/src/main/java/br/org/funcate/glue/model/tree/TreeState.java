@@ -109,6 +109,7 @@ public class TreeState {
 	 * @return A list containing the selected nodes
 	 */
 
+	@SuppressWarnings("unchecked")
 	public List<CustomNode> getSelectedThemes() {
 		List<CustomNode> selectedThemes = new ArrayList<CustomNode>();
 		CustomNode node = getCurrentView();
@@ -306,6 +307,7 @@ public class TreeState {
 	 *            the currentView to set
 	 */
 
+	@SuppressWarnings("unchecked")
 	public void setCurrentView(CustomNode currentView) {
 
 		if (currentView != null && currentView.getNodeType() != NodeType.VIEW) {
@@ -339,6 +341,7 @@ public class TreeState {
 	 * 
 	 */
 
+	@SuppressWarnings("unchecked")
 	public void applyView() {
 
 		selectedNode = AppSingleton.getInstance().getMediator().getLastSelectedPathComponent();
@@ -428,6 +431,7 @@ public class TreeState {
 	 *            The view that is sending the node
 	 */
 
+	@SuppressWarnings("unchecked")
 	public void moveNode(CustomNode targetView, CustomNode sourceView) {
 		this.nodeTarget = targetView;
 		CustomNode verifyNode;
@@ -512,6 +516,7 @@ public class TreeState {
 	 *            The node that will be unselected (along with it's children)
 	 */
 
+	@SuppressWarnings("unchecked")
 	public void deselectAllNodes(CustomNode node) {
 		if (node.getChildCount() >= 0) {
 			for (Enumeration<CustomNode> e = node.children(); e.hasMoreElements();) {
@@ -530,6 +535,7 @@ public class TreeState {
 	 *            The node that will be selected (along with it's children)
 	 */
 
+	@SuppressWarnings("unchecked")
 	public void selectAllNodes(CustomNode node) {
 		if (node.getChildCount() >= 0) {
 			for (Enumeration<CustomNode> e = node.children(); e.hasMoreElements();) {
@@ -552,6 +558,7 @@ public class TreeState {
 	 *         node already exists in the selectedNode
 	 */
 
+	@SuppressWarnings("unchecked")
 	public boolean checkAllNodes(CustomNode parent, CustomNode node) {
 
 		if (parent.getChildCount() >= 0) {
@@ -654,6 +661,7 @@ public class TreeState {
 	 *            The value that indicates the current scale of visualization
 	 */
 
+	@SuppressWarnings("unchecked")
 	public void checkNodesVisibility(CustomNode node, Double scale) {
 
 		if (node.getChildCount() >= 0) {
@@ -727,6 +735,7 @@ public class TreeState {
 	 * the selected selectedNode)
 	 */
 
+	@SuppressWarnings("unchecked")
 	public void pasteNode() {
 		CustomNode targetView;
 		CustomNode sourceView;
@@ -908,6 +917,7 @@ public class TreeState {
 	 * @return newNode The node that was copied
 	 */
 
+	@SuppressWarnings("unchecked")
 	public CustomNode copyAllNodes(CustomNode node, CustomNode newNode) {
 		if (node.getChildCount() >= 0) {
 			for (Enumeration<CustomNode> e = node.children(); e.hasMoreElements();) {

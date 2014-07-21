@@ -218,7 +218,7 @@ public abstract class GeneralTileSchema {
 	/**
 	 * Starts painting the tiles on canvas buffer.
 	 */
-	public static synchronized void plotTiles() {
+	public synchronized static void plotTiles() {
 
 		Tile tile;
 		BufferedImage tileImageBuffer;

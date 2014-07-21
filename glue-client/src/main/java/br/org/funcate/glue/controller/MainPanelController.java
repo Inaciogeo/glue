@@ -9,7 +9,6 @@ import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.utilities.PropertiesReader;
 import br.org.funcate.glue.view.AbstractCanvas;
 import br.org.funcate.glue.view.MainPanel;
-
 public class MainPanelController {
 
 	private MainPanel mainPanel;
@@ -42,6 +41,8 @@ public class MainPanelController {
 		this.loadingStatusLabel.setBounds(size[0] - 44, loadingStatusLabel.getY(),
 				44, 44);
 		this.terraLibText.setBounds(size[0] - 167, size[1] -38, 166, 19);
+		this.mainPanel.getLblGeopx().setBounds(size[0]-120, size[1]-100, 90, 55);
+		
 	}
 
 	public void setImageLoadingStatus(ImageIcon img) {

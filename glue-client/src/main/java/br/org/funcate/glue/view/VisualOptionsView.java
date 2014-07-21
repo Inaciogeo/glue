@@ -691,6 +691,7 @@ class PolygonsPanel extends JPanel implements MouseListener, ActionListener, Cha
 	JLabel lblContourStye;
 	JLabel lblResult;
 	JLabel lblResultImage;
+	@SuppressWarnings("rawtypes")
 	JComboBox cboContourStyle;
 	VisualPreview vpPolygonPane;
 
@@ -698,6 +699,7 @@ class PolygonsPanel extends JPanel implements MouseListener, ActionListener, Cha
 	JSlider sldTransparency;
 	JTextField txtTransp;
 	MyAlpha myAlpha;
+	@SuppressWarnings("rawtypes")
 	JComboBox cboAreaStyle;
 	ColorChooser cchColorChooser = null;
 	JLabel lblApplyColor;
@@ -870,6 +872,7 @@ class PolygonsPanel extends JPanel implements MouseListener, ActionListener, Cha
 	 *         \brief Method populate this component
 	 * 
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void populatePanel() {
 
 		String[] _areaStyleOptions = new String[] { "Transparente", "Sólido", "Horizontal", "Vertical", "FDiagonal", "BDiagonal", "Cruz",
@@ -1198,8 +1201,10 @@ class LinesPanel extends JPanel implements MouseListener, ActionListener {
 	/** < Label type attribute */
 	JLabel lblStyle;
 	/** < Label type attribute */
+	@SuppressWarnings("rawtypes")
 	JComboBox cboStyle;
 	/** < ComboBox type attribute */
+	@SuppressWarnings("rawtypes")
 	JComboBox cboWidth;
 	/** < ComboBox type attribute */
 	JLabel lblResult;
@@ -1400,6 +1405,7 @@ class LinesPanel extends JPanel implements MouseListener, ActionListener {
 	 *         \brief Method populate this component
 	 * 
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void populatePanel() {
 
 		String[] _contourStyleOptions = new String[] { "Linha Solida", "Linha Tracejada", "Linha Pontilhada", "Linha Traço-Ponto",
@@ -1562,7 +1568,9 @@ class PointsPanel extends JPanel implements MouseListener, ActionListener {
 	JLabel lblResult;
 	// JLabel lblResultImage;
 	JPanel lblResultImage;
+	@SuppressWarnings("rawtypes")
 	JComboBox cboType;
+	@SuppressWarnings("rawtypes")
 	JComboBox cboSize;
 	JLabel lblApplyColor = null;
 	JLabel lblCancelColorChooser = null;
@@ -1720,6 +1728,7 @@ class PointsPanel extends JPanel implements MouseListener, ActionListener {
 	 *         \brief Method populate this component
 	 * 
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void populatePanel() {
 
 		String[] _sizeValues = new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
@@ -1899,6 +1908,7 @@ class TextsPanel extends JPanel implements MouseListener, ActionListener {
 	/** < Label type attribute */
 	JLabel lblResultImage;
 	/** < Label type attribute */
+	@SuppressWarnings("rawtypes")
 	JComboBox cbbFont;
 	ColorChooser cchColorChooser = null;
 	/** < Color chooser atribute */
@@ -2081,6 +2091,7 @@ class TextsPanel extends JPanel implements MouseListener, ActionListener {
 	 *         \brief Method populate this component
 	 * 
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void populatePanel() {
 
 		lblInf = new JLabel("Visual dos textos");

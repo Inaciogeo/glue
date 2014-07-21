@@ -11,7 +11,6 @@ import br.org.funcate.glue.model.toolbar.ToolEnum;
 import br.org.funcate.glue.utilities.BrowserLauncher;
 import br.org.funcate.glue.view.InterfaceGoogle;
 import br.org.funcate.glue.view.LocalOptionPane;
-import br.org.funcate.glue.view.Toolbar;
 
 public class InterfaceGoogleController {
 

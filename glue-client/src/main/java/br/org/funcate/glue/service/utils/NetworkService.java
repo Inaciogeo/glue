@@ -18,7 +18,6 @@ import br.org.funcate.glue.view.NodeType;
 public class NetworkService {
 	private JSONObject viewConfiguration;
 
-	@SuppressWarnings("unchecked")
 	public NetworkService() {
 
 		JSONParser parser = new JSONParser();

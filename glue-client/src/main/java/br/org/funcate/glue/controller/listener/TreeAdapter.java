@@ -57,6 +57,7 @@ import br.org.funcate.glue.view.VisualOptionsView;
  * @author OLIVEIRA, Paulo Renato M.
  */
 
+@SuppressWarnings("unused")
 public class TreeAdapter implements MouseListener, MouseMotionListener,
 		KeyListener, ActionListener {
 

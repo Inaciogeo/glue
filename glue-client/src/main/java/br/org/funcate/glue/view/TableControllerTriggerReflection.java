@@ -323,7 +323,7 @@ public class TableControllerTriggerReflection {
 	 * @throws GlueClientException
 	 */
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Object[] methodReflection(String nameMethodClass, Object instance,
 			String nameMethod, String caminhoNomeClasse,
 			Object... parametrosMetodo) throws GlueClientException {

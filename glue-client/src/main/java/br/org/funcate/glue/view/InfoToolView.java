@@ -24,7 +24,9 @@ public class InfoToolView extends JFrame {
 	private JButton btMap;
 	private JButton btClose;
 	private JTabbedPane themesTabbedPane;
+	@SuppressWarnings("unused")
 	private static int width = 500;
+	@SuppressWarnings("unused")
 	private static int height = 500;
 	private JPanel panel_1;
 

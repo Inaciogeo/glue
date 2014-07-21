@@ -13,13 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
 
 import br.org.funcate.glue.model.LookAndFeelService;
 import br.org.funcate.glue.utilities.Utils;
 
-
-import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
 public class GlueMessageDialog extends JFrame {
@@ -32,7 +29,6 @@ public class GlueMessageDialog extends JFrame {
 	private String message;
 	private int iconType;
 	private JPanel buttonPane;
-	private String details;
 	private static boolean isOK;
 	private JButton btnCancelar;
 	private static GlueMessageDialog instance;
@@ -79,7 +75,7 @@ public class GlueMessageDialog extends JFrame {
 		setResizable(false);
 		this.message = message;
 		this.iconType = iconType;
-		this.details = showDetails;
+		//this.details = showDetails;
 		
 		//setModal(true);
 		//setUndecorated(true);
