@@ -27,22 +27,24 @@ import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.Box;
 import br.org.funcate.glue.model.CalculatorService;
 import br.org.funcate.glue.model.ComboBoxScaleService;
+import br.org.funcate.glue.model.canvas.CanvasState;
 import br.org.funcate.glue.model.canvas.ZoomToolService;
 import br.org.funcate.glue.model.exception.GlueServerException;
 import br.org.funcate.glue.service.TerraJavaClient;
-import br.org.funcate.glue.service.utils.SQLService;
+import br.org.funcate.glue.service.utils.GeographicalSearchService;
 import br.org.funcate.glue.utilities.PropertiesReader;
 
 import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 import java.awt.Cursor;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 /**
- * Brief: 
+ * Brief:This class is responsible for initializing 
+ * the graphics components of geographical research
+ * and the implementation of methods of alphanumeric 
+ * and geographic search. 
  */
-
+//TODO: MVC
 public class SearchPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -53,7 +55,6 @@ public class SearchPanel extends JPanel {
 	private final JScrollPane scrollPane;
 	private static ArrayList<String> streetIds;
 	private static String markId;
-	private JLabel lbl_inf;
 	private static ArrayList<String> lotIds;
 	private JLabel lbl_numbers;
 	private String streetTable;
@@ -64,7 +65,7 @@ public class SearchPanel extends JPanel {
 	private String lotThemeName;
 	private String streetThemeName;
 	private String lotColumn3;
-
+	
 	public static String getMarkId() {
 		return markId;
 	}
@@ -89,6 +90,10 @@ public class SearchPanel extends JPanel {
 		SearchPanel.lotIds = lotIds;
 	}
 
+	public JList<String> getList() {
+		return list;
+	}
+
 	/**
 	 * Create the panel.
 	 */
@@ -103,13 +108,7 @@ public class SearchPanel extends JPanel {
 		lotThemeName = PropertiesReader.getProperty("search.lot.themeName");
 		streetThemeName = PropertiesReader.getProperty("search.street.themeName");
 		
-		addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentShown(ComponentEvent arg0) {
-				setBounds(200, 80, 475, 45);
-			}
-		});
-		setBorder(new LineBorder(new Color(192, 192, 192), 2));
+		setBorder(new LineBorder(new Color(192, 192, 192)));
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
@@ -123,7 +122,7 @@ public class SearchPanel extends JPanel {
 		textSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				setBounds(200, 80, 440, 45);
+				setSize(440, 45);
 			}
 		});
 		
@@ -144,14 +143,14 @@ public class SearchPanel extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) { 
-					execGeolocation();
+					//execGeolocation();
 				}
 			}
 		} );
 		textSearch.setForeground(new Color(128, 128, 128));
 		textSearch.setBorder(new LineBorder(new Color(192, 192, 192)));
 		textSearch.setFont(new Font("Arial", Font.PLAIN, 14));
-		textSearch.setBounds(10, 19, 424, 23);
+		textSearch.setBounds(10, 18, 424, 22);
 		add(textSearch);
 		textSearch.setColumns(10);
 
@@ -163,20 +162,19 @@ public class SearchPanel extends JPanel {
 		list = new JList<String>();
 		list.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setForeground(new Color(100, 149, 237));
+		list.setForeground(new Color(0, 0, 128));
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() > 1) {
 					execGeolocation();
-					lbl_numbers.setText("");
-				}		
+				}	
 			}
 		});
-		list.setFont(new Font("Arial", Font.PLAIN, 13));
+		list.setFont(new Font("Arial", Font.BOLD, 12));
 		list.setBorder(null);
 		scrollPane.setColumnHeaderView(list);
-		lblShowResults = new JLabel("carregando...");
+		lblShowResults = new JLabel("Base de dados invalida..!");
 		lblShowResults.setForeground(new Color(128, 128, 128));
 		lblShowResults.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblShowResults.setBounds(10, 42, 422, 14);
@@ -185,17 +183,10 @@ public class SearchPanel extends JPanel {
 		JLabel lblNewLabel = new JLabel("Pesquisa geogr\u00E1fica: ");
 		lblNewLabel.setToolTipText("");
 		lblNewLabel.setBackground(new Color(65, 105, 225));
-		lblNewLabel.setForeground(new Color(95, 158, 160));
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
-		lblNewLabel.setBounds(32, 2, 137, 16);
+		lblNewLabel.setForeground(new Color(128, 128, 128));
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel.setBounds(9, 3, 137, 16);
 		add(lblNewLabel);
-		
-		lbl_inf = new JLabel("");
-		//lbl_inf.setToolTipText("pesquisa de arruamentos ex: \"rua brasil\" ou \"rua brasil, 254\" ou ainda a pequisa de lotes por inscri\u00E7\u00E3o ex:\"20032630034234\"");
-		lbl_inf.setIcon(new ImageIcon(SearchPanel.class.getResource("/br/org/funcate/glue/image/iconInfo.png")));
-		lbl_inf.setBounds(10, 2, 16, 16);
-	
-		add(lbl_inf);
 		
 		lbl_numbers = new JLabel("");
 		lbl_numbers.setForeground(new Color(128, 128, 128));
@@ -203,6 +194,7 @@ public class SearchPanel extends JPanel {
 		lbl_numbers.setFont(new Font("Arial", Font.PLAIN, 12));
 		lbl_numbers.setBounds(10, 56, 424, 16);
 		add(lbl_numbers);
+		
 
 	}
 
@@ -216,6 +208,15 @@ public class SearchPanel extends JPanel {
 	public JTextField getTextSearch() {
 		return textSearch;
 	}
+	
+	public void cleanDataSource(){
+		AppSingleton singleton = AppSingleton.getInstance();
+		Mediator mediator = singleton.getMediator();
+//		CanvasState state = singleton.getCanvasState();
+//		state.setDataSource("OpenStreetMap");
+//		ScreenRequetServices.setValue("OpenStreetMap");
+		mediator.setToolBarSource(null);	
+	}
 
 	public void setTextSearch(JTextField textSearch) {
 		this.textSearch = textSearch;
@@ -226,31 +227,31 @@ public class SearchPanel extends JPanel {
 	 * and still loads geometries for the highlight on the map. 
 	 */
 	public void execGeolocation(){
-			String street = "";
-			String number = "";
-			if(list.getSelectedValue()!= null && !list.getSelectedValue().isEmpty())
-				textSearch.setText(list.getSelectedValue().toLowerCase());
-			String searchText = textSearch.getText().toUpperCase();
-			
-			setBounds(200, 80, 440, 120);
-			scrollPane.setBounds(11, 74, 420, 26);
-
-			AppSingleton singleton = AppSingleton.getInstance();
-			TerraJavaClient services = singleton.getServices();
-			Mediator mediator = singleton.getMediator();
+		cleanDataSource();
+		String street = "";
+		//String number = "";
+		if (list.getSelectedValue() != null&& !list.getSelectedValue().isEmpty())
+			textSearch.setText(list.getSelectedValue().toLowerCase());
 		
-			streetIds = new ArrayList<String>();
-			SQLService.connect();
+		String searchText = textSearch.getText().toUpperCase();
+		
+		scrollPane.setBounds(11, 74, 420, 26);
 
-			String[] exp = searchText.split(",");
-			street = exp[0];
+		AppSingleton singleton = AppSingleton.getInstance();
+		TerraJavaClient services = singleton.getServices();
+		Mediator mediator = singleton.getMediator();
+		CanvasState state = singleton.getCanvasState();
+		streetIds = new ArrayList<String>();
+		String[] lot = searchText.split("LOTE:"); 
+		String[] exp = lot[0].split(",");
+		street = exp[0];
 
 			if (searchText != null && searchText != "" && !searchText.isEmpty()) {
-				if (!searchText.matches("[0-9]+")){
+				if (!searchText.matches("[0-9]+") && lot.length<=1){
 					
-				if (exp.length <= 1) {
+				//if (exp.length <= 1) {
 					
-					ResultSet rs = SQLService
+					ResultSet rs = GeographicalSearchService
 						.buildSelect("select object_id from "+streetTable+" where "+streetColumn+" ='"
 									+ street.trim() + "'");
 					try {
@@ -261,22 +262,22 @@ public class SearchPanel extends JPanel {
 					} catch (SQLException ex) {
 						ex.printStackTrace();
 					}
-				} else {
-					number = exp[1];
-					ResultSet rs = SQLService
-							.buildSelect("select distinct object_id from "+lotTable+" where "+lotColumn1+" ='"
-									+ street.trim()
-									+ "' and "+lotColumn2+" = "
-									+ number.trim());
-					try {
-						while (rs.next()) {
-							if(rs.getString(1)!=null)
-								streetIds.add(rs.getString(1));
-						}
-					} catch (SQLException ex) {
-						ex.printStackTrace();
-					}
-				}
+//				} else { usado anteriormente para peaquisar rua pelo endereço
+//					number = exp[1];
+//					ResultSet rs = GeographicalSearchService
+//							.buildSelect("select distinct object_id from "+lotTable+" where "+lotColumn1+" ='"
+//									+ street.trim()
+//									+ "' and "+lotColumn2+" = "
+//									+ "'"+number.trim()+"'");
+//					try {
+//						while (rs.next()) {
+//							if(rs.getString(1)!=null)
+//								streetIds.add(rs.getString(1));
+//						}
+//					} catch (SQLException ex) {
+//						ex.printStackTrace();
+//					}
+//				}
 				int size = streetIds.size();
 				int idx = Math.abs(size / 2);
 					try {
@@ -291,9 +292,14 @@ public class SearchPanel extends JPanel {
 						e.printStackTrace();
 					}	
 				}else{
-				
+					ResultSet rs;
 					lotIds = new ArrayList<String>();
-					ResultSet rs = SQLService.buildSelect("select object_id from "+lotTable+" where "+lotColumn2+" ='"+searchText+"'");
+					if(lot.length<=1){
+						rs = GeographicalSearchService.buildSelect("select object_id from "+lotTable+" where "+lotColumn2+" ='"+lot[0]+"'");
+					}else{
+						rs = GeographicalSearchService.buildSelect("select object_id from "+lotTable+" where "+lotColumn2+" ='"+lot[1]+"'");
+					}
+						
 					try {
 						while (rs.next()) {
 							lotIds.add(rs.getString(1));
@@ -316,22 +322,26 @@ public class SearchPanel extends JPanel {
 	
 			CanvasController canvasController = mediator.getCanvasController();
 			// thread que executa dispatch do evento de drawFeature.
+			state.setGvSource("DrawFeatureEvent");
 			Thread drawStreet = new Thread(canvasController);
 			drawStreet.start();
-				
+		
 			} else {
 				GlueMessageDialog.show("Campo de pequisa deve ser preenchido!",
 						null, 2);
 			}
+			lbl_numbers.setText("");
 	}
 	/** 
-	 *	Brief: executes search in the database of registration batches and streets by street names,
+	 * Brief: executes search in the database of registration batches and streets by street names,
 	 * and may return batches or streets depending on the type of input: numeric or textual 
 	 * or both when separated by commas.
 	 */
 	public void execAlphaNumericLocation(){
 		int size=0;
+		@SuppressWarnings("unused")
 		String streetName = "";
+		@SuppressWarnings("unused")
 		String streetNumber = "";
 		String street = "";
 		String number = "";
@@ -346,9 +356,8 @@ public class SearchPanel extends JPanel {
 
 			if (searchText != null && searchText != "" && !searchText.isEmpty()) {
 				if (exp.length <= 1) {
-					SQLService.connect();
-					setBounds(200, 80, 440, 180);
-					ResultSet rs = SQLService
+					setSize(440, 180);
+					ResultSet rs = GeographicalSearchService
 							.buildSelect("select distinct "+streetColumn+" from "+streetTable+" where "+streetColumn+" LIKE '%"
 									+ street.trim() + "%' order by "+streetColumn);
 
@@ -369,9 +378,8 @@ public class SearchPanel extends JPanel {
 								+ " ARRUAMENTO(S), exibidos: " + size);
 				} else {
 					number = exp[1];
-					SQLService.connect();
-					setBounds(200, 80, 440, 180);
-					ResultSet rs = SQLService
+					setSize(440, 180);
+					ResultSet rs = GeographicalSearchService
 							.buildSelect("select distinct "+lotColumn1+","+lotColumn2+","+lotColumn3+" from "+lotTable+" where "+lotColumn1+" LIKE '%"
 									+ street.trim()+ "%'" 
 									+ " and "+lotColumn3+" LIKE '%"
@@ -380,7 +388,7 @@ public class SearchPanel extends JPanel {
 					try {
 						listModel.clear();
 						while (rs.next()) {
-							listModel.addElement(rs.getString(2));
+							listModel.addElement(rs.getString(1)+","+rs.getString(3)+"   lote:"+rs.getString(2));
 							streetName = rs.getString(1);
 							streetNumber += rs.getString(3)+",";
 							size++;
@@ -390,18 +398,16 @@ public class SearchPanel extends JPanel {
 					}
 					list.setModel(listModel);
 					
-					lblShowResults.setText( size + " lote(s) para "+streetName+",");
-					lbl_numbers.setText(streetNumber);
+					lblShowResults.setText("Encontrado(s) "+ size +" resultado(s)");
+					//lbl_numbers.setText(streetNumber);
 				}
 
 				list.setModel(listModel);
 			}
 		}else{
 			if (searchText != null && searchText != "" && !searchText.isEmpty()) {
-				
-				SQLService.connect();
-				setBounds(200, 80, 440, 180);
-				ResultSet rs = SQLService
+				setSize(440, 180);
+				ResultSet rs = GeographicalSearchService
 						.buildSelect("select distinct "+lotColumn2+" from "+lotTable+" where "+lotColumn2+" like '"+searchText.trim()+"%'");
 
 				try {

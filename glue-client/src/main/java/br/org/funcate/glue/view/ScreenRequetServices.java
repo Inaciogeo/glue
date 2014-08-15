@@ -103,6 +103,7 @@ public class ScreenRequetServices extends JDialog {
 				idMap.put("WMS", "3");
 				idMap.put("Bauru", "1");
 				idMap.put("Instituto Geográfico e Cartográfico", "4");
+				
 			}
 		});
 
@@ -130,9 +131,9 @@ public class ScreenRequetServices extends JDialog {
 				ToolService.setToolEnabled(ToolEnum.GOOGLE, true);
 				AppSingleton singleton = AppSingleton.getInstance();
 				CanvasState state = singleton.getCanvasState();
-				state.setDataSource(getValue());	
+				state.setDataSource(getValue());
+				
 			}	
-			
 		});
 		btnApply.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnApply.setBackground(new Color(255, 255, 255));
@@ -158,7 +159,7 @@ public class ScreenRequetServices extends JDialog {
 
 		list = new JList<String>();
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"OpenStreetMap","GoogleMaps","WMS","Bauru","Instituto Geográfico e Cartográfico"};
+			String[] values = new String[] {"OpenStreetMap","GoogleMaps","WMS","Bauru"};
 			public int getSize() {
 				return values.length;
 			}
@@ -189,7 +190,7 @@ public class ScreenRequetServices extends JDialog {
 
 					GlueMessageDialog.show(
 							"Mapa de direitos autorais do Google.\nLeia os termos de serviço adicionais do Google:" +
-							"\nhttp://www.google.com/intl/pt-BR_ALL/help/terms_maps.html", "", 3);
+							"\nhttp://www.google.com/intl/pt-BR_ALL/help/terms_maps.html", "", 2);
 
 				} else { // set image cgi
 					lblImage.setIcon(new ImageIcon(

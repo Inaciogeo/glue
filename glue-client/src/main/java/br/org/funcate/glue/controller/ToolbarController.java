@@ -28,6 +28,9 @@ import br.org.funcate.glue.model.toolbar.ToolEnum;
 import br.org.funcate.glue.model.toolbar.ToolService;
 import br.org.funcate.glue.model.toolbar.ToolState;
 import br.org.funcate.glue.model.tree.TreeService;
+import br.org.funcate.glue.os.model.OSState;
+import br.org.funcate.glue.os.view.AuthenticationScreen;
+import br.org.funcate.glue.os.view.ServiceOrderCreatorScreen;
 import br.org.funcate.glue.tool.CleanTool;
 import br.org.funcate.glue.tool.DistanceTool;
 import br.org.funcate.glue.tool.ExportTool;
@@ -626,5 +629,15 @@ public class ToolbarController implements EventDispatcher, EventListener {
 
 	public List<String> getEventsToListen() {
 		return this.eventsToListen;
+	}
+
+	public void setOS() {
+		if(OSState.isAuth()){
+			ServiceOrderCreatorScreen screenOs = ServiceOrderCreatorScreen.getInstance();
+			screenOs.setVisible(true);
+		}else{
+			AuthenticationScreen screen = new AuthenticationScreen();
+			screen.setVisible(true);
+		}
 	}
 }

@@ -13,9 +13,9 @@ import br.org.funcate.terrajava.persistencia.TerraJava;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class TerraJavaJNI {
-
+	
 	TerraJava terraJava = new TerraJava();
-
+	
 	public HashMap<String, Double> getCentroidForBiggestGeometry(
 			String objectId, String sessionId) throws RuntimeException {
 		HashMap<String, Double> result;

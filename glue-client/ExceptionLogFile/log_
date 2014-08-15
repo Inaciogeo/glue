@@ -1,0 +1,16 @@
+Could not load view: 
+java.lang.RuntimeException: Could not load view: 
+	at br.org.funcate.terrajava.persistencia.TerraJava.setCurrentView(Native Method)
+	at br.org.funcate.glue.service.TerraJavaJNI.setCurrentView(TerraJavaJNI.java:366)
+	at br.org.funcate.glue.service.TerraJavaClient.getViewFromHashMap(TerraJavaClient.java:2063)
+	at br.org.funcate.glue.service.TerraJavaClient.getViewSet(TerraJavaClient.java:2111)
+	at br.org.funcate.glue.model.tree.TreeState.createRoot(TreeState.java:194)
+	at br.org.funcate.glue.model.tree.TreeService.createRoot(TreeService.java:79)
+	at br.org.funcate.glue.controller.TreeController.createRoot(TreeController.java:74)
+	at br.org.funcate.glue.controller.Mediator.createRoot(Mediator.java:413)
+	at br.org.funcate.glue.view.TreeView.<init>(TreeView.java:82)
+	at br.org.funcate.glue.view.MainPanel.createTree(MainPanel.java:379)
+	at br.org.funcate.glue.view.MainPanel.createOutlookBar(MainPanel.java:371)
+	at br.org.funcate.glue.view.MainPanel.<init>(MainPanel.java:178)
+	at br.org.funcate.glue.main.Main.init(Main.java:22)
+	at br.org.funcate.glue.main.Main.main(Main.java:34)

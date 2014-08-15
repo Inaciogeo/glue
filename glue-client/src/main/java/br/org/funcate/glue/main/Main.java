@@ -19,7 +19,6 @@ public class Main extends JFrame {
 	}
 
 	public void init() {
-		
 		MainPanel panel = new MainPanel(false, null);
 		add(panel);
 		addComponentListener(new ResizeAdapter(this));
@@ -34,5 +33,4 @@ public class Main extends JFrame {
 		Main main = new Main();
 		main.init();
 	}
-	
 }

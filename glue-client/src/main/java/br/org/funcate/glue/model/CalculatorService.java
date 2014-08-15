@@ -143,10 +143,7 @@ public class CalculatorService {
 		ptllx = ptllx + GPoffx;
 		ptlly = ptlly + GPoffy;
 		
-		GoogleMapsProjection2 g = new GoogleMapsProjection2();
-		PointF p = g.fromLatLngToPoint(ptlly,ptllx, 16);
-		
-		double[] positionInWorld ={p.x,p.y};
+		double[] positionInWorld ={ptllx,ptlly};
 		return positionInWorld;
 	}
 

@@ -20,10 +20,9 @@ public class PanelToolbar extends JPanel {
 		setLayout(null);
 		bar = new Toolbar();
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
+		//setLayout(null);
 		setBackground(Color.white);
 		setVisible(true);
-
 		add(bar);
 	}
 

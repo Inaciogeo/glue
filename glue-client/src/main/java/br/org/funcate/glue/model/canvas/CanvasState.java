@@ -56,6 +56,8 @@ public class CanvasState {
 	private RgbColor backgroundColor;
 	
 	private String dataSource;
+	
+	private String gvSource;
 
 	public CanvasState() {
 		this.canvasWidth = Integer.parseInt(PropertiesReader.getProperty("canvas.width"));
@@ -234,6 +236,14 @@ public class CanvasState {
 
 	public void setDataSource(String dataSource) {
 		this.dataSource = dataSource;
+	}
+
+	public String getGvSource() {
+		return gvSource;
+	}
+
+	public void setGvSource(String gvSource) {
+		this.gvSource = gvSource;
 	}
 	
 }

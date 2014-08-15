@@ -28,6 +28,7 @@ import br.org.funcate.glue.controller.listener.DragOutlookBarAdapter;
 import br.org.funcate.glue.controller.listener.LabelCanvasExpanderAdapter;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.LookAndFeelService;
+import br.org.funcate.glue.model.canvas.CanvasState;
 import br.org.funcate.glue.utilities.BrowserLauncher;
 import br.org.funcate.glue.utilities.PropertiesReader;
 import br.org.funcate.plugin.GluePlugin;
@@ -168,6 +169,7 @@ public class MainPanel extends JPanel{
 	 * 
 	 */
 	public MainPanel(boolean withPlugins, ClassLoader loader) {
+		
 		long loadingTime = System.currentTimeMillis();
 		LookAndFeelService.initializeNimbusLookAndFeel();
 		this.setBounds(0, 0, 1020, 570);
@@ -190,10 +192,9 @@ public class MainPanel extends JPanel{
 		createDragLabel();
 		createScaleCombo();
 		createTabbedToolBars();
+		//createNavegationBar();
 		createCanvas();
 		createTransparencySlider();
-		//loadOSM();
-		
 		System.out.println("The application has loaded in "
 				+ (System.currentTimeMillis() - loadingTime) / 1000.f
 				+ " seconds.");
@@ -201,6 +202,7 @@ public class MainPanel extends JPanel{
 		new MainPanelController(this, terraLibText, loadingStatusLabel);
 		
 		GluePluginsStarter.startPlugins(withPlugins, loader);
+		//loadOSM();
 	}
 	private void createSeach(){
 //		AppSingleton singleton = AppSingleton.getInstance();
@@ -214,7 +216,10 @@ public class MainPanel extends JPanel{
 	public void loadOSM(){
 		AppSingleton singleton = AppSingleton.getInstance();
 		Mediator mediator = singleton.getMediator();
-		mediator.setToolBarSource("0");
+		CanvasState state = singleton.getCanvasState();
+		state.setDataSource("OpenStreetMap");
+		ScreenRequetServices.setValue("OpenStreetMap");
+		mediator.setToolBarSource("0");	
 	}
 	
 	private void createTerraLibText() {
@@ -252,7 +257,7 @@ public class MainPanel extends JPanel{
 		});
 		lblGeopx.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblGeopx.setIcon(new ImageIcon(MainPanel.class.getResource("/br/org/funcate/glue/image/geopx_Icon.png")));
-		lblGeopx.setBounds(245, 158, 90, 55);
+		lblGeopx.setBounds(895, 98, 90, 55);
 		add(lblGeopx);
 		this.add(lblDragCanvas);
 	}
@@ -308,8 +313,18 @@ public class MainPanel extends JPanel{
 		tabbedToolBars.insertTab("Navegação", null, createToolBar(),"Ferramentas para manipular a área de visualização", 0);
 		//tabbedToolBars.setSelectedIndex(1);
 		tabbedToolBars.setBounds(150, 0, 802, 68);
+		
 		new TabbedToolBarsController(tabbedToolBars);
+		
 		this.add(tabbedToolBars);
+	}
+	
+	@SuppressWarnings("unused")
+	private void createNavegationBar(){
+		JPanel toobar = createToolBar();
+		toobar.setLocation(208, 0);
+		toobar.setSize(330, 60);
+		this.add(toobar);
 	}
 
 	@SuppressWarnings("unused")

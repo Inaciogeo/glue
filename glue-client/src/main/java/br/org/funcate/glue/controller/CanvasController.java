@@ -35,6 +35,7 @@ import br.org.funcate.glue.event.MouseMovedEvent;
 import br.org.funcate.glue.event.MousePressedEvent;
 import br.org.funcate.glue.event.MouseReleasedEvent;
 import br.org.funcate.glue.event.ScaleChangedEvent;
+import br.org.funcate.glue.event.SelectFeatureEvent;
 import br.org.funcate.glue.event.SelectedThemeEvent;
 import br.org.funcate.glue.event.UnselectedThemeEvent;
 import br.org.funcate.glue.event.UpdateCursorEvent;
@@ -524,11 +525,30 @@ public class CanvasController implements EventDispatcher, EventListener, Runnabl
 //pesquisa de endereço 
 	@Override
 	public void run() {
+		AppSingleton singleton = AppSingleton.getInstance();
+		CanvasState state = singleton.getCanvasState();
+		
+		if(state.getGvSource()=="DrawFeatureEvent"){
+			doDrawFeatureEvent();
+		}else if(state.getGvSource()=="SelectFeatureEvent"){
+			doSelectFeatureEvent();
+		}
+	}
+	
+	public void doDrawFeatureEvent(){
 		DrawFeatureEvent drawFeatureEvent = new DrawFeatureEvent(this);
 		drawFeatureEvent.setLineIds(SearchPanel.getStreetIds());
 		drawFeatureEvent.setPolygonIds(SearchPanel.getLotIds());
 		try {
 			this.dispatch(transmitter,drawFeatureEvent);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void doSelectFeatureEvent(){
+		SelectFeatureEvent selectFeatureEvent = new SelectFeatureEvent(this);
+		try {
+			this.dispatch(transmitter,selectFeatureEvent);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

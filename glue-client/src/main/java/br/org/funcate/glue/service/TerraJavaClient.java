@@ -99,6 +99,7 @@ public class TerraJavaClient {
 			connect(database);
 		} catch (GlueServerException e) {
 			e.printStackTrace();
+			DailyExceptionLogger.logging(e.getMessage(), e);
 		}
 	}
 
@@ -591,10 +592,10 @@ public class TerraJavaClient {
 		// Populating the projections
 		// Another projections cases will be implemented in the future
 		if ((!currentProjName.equals("LatLong")||!currentProjName.equals("ESRI"))&&!currentProjName.equals("Google")) {
-			System.err.println("Proje��o inv�lida");
+			System.err.println("Projecao invalida");
 		}
 		if ((!destinationProjName.equals("LatLong")||!destinationProjName.equals("ESRI")) && !destinationProjName.equals("Google")) {
-			System.err.println("Proje��o inv�lida");
+			System.err.println("Projecao invalida");
 		} else if ((currentProjName.equals("LatLong")||(currentProjName.equals("ESRI"))&& destinationProjName.equals("Google"))) {
 			getLatLongProj();
 			getGoogleProj();
@@ -1078,6 +1079,7 @@ public class TerraJavaClient {
 			finish = "finish";
 		} catch (Exception e) {
 			finish = null;
+			DailyExceptionLogger.logging(e.getMessage(), e);
 		}
 		return finish;
 	}

@@ -21,9 +21,8 @@ public class DailyExceptionLogger {
 	@SuppressWarnings("deprecation")
 	public static void logging(String textError, Exception e) {
 
-		// CUIDADO: a alteração do diretório abaixo (FileTest) pode acarretar
-		// na
-		// exclusão de arquivos importantes do sistema
+		// CUIDADO: a alteracao do diretorio abaixo (FileTest) pode acarretar
+		// na exclusao de arquivos importantes do sistema
 		File file = new File("ExceptionLogFile");
 
 		if (!file.exists())
@@ -45,9 +44,7 @@ public class DailyExceptionLogger {
 			if ((testDate.getDate() + 1) >= 7
 					&& !fl[i].getName().equals("log_")) {
 				fl[i].delete();
-
 			}
-
 		}
 
 		try {

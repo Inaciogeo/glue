@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -17,7 +18,7 @@ import br.org.funcate.eagles.kernel.listener.ListenersHandlerImpl;
 import br.org.funcate.eagles.kernel.transmitter.DirectedEventTransmitter;
 import br.org.funcate.eagles.kernel.transmitter.EventTransmitter;
 import br.org.funcate.glue.event.CleanThematicEvent;
-import br.org.funcate.glue.event.DrawFeatureEvent;
+import br.org.funcate.glue.event.GetSelectFeatureEvent;
 import br.org.funcate.glue.event.GetThemeAttributesEvent;
 import br.org.funcate.glue.event.GetViewsEvent;
 import br.org.funcate.glue.event.TreeThemeChangeEvent;
@@ -34,6 +35,7 @@ import br.org.funcate.glue.model.exception.GlueServerException;
 import br.org.funcate.glue.model.request.TextRequest;
 import br.org.funcate.glue.model.tree.CustomNode;
 import br.org.funcate.glue.model.tree.TreeService;
+import br.org.funcate.glue.os.view.ServiceOrderCreatorScreen;
 import br.org.funcate.glue.view.TreeView;
 
 public class TreeController implements EventDispatcher, EventListener {
@@ -45,6 +47,7 @@ public class TreeController implements EventDispatcher, EventListener {
 	private EventTransmitter eventTransmitter;
 
 	private List<String> eventsToListen;
+	public static DefaultListModel<String> listModel;
 
 	public TreeController(TreeView treeView) {
 		this.treeView = treeView;
@@ -53,7 +56,6 @@ public class TreeController implements EventDispatcher, EventListener {
 		listenersHandler = new ListenersHandlerImpl();
 		eventHandler = new EventHandler();
 		eventTransmitter = new DirectedEventTransmitter(this);
-
 		eventsToListen = new ArrayList<String>();
 		eventsToListen.add(GetViewsEvent.class.getName());
 		eventsToListen.add(GetThemeAttributesEvent.class.getName());
@@ -61,7 +63,8 @@ public class TreeController implements EventDispatcher, EventListener {
 		eventsToListen.add(CleanThematicEvent.class.getName());
 		eventsToListen.add(SetLabelContextEvent.class.getName());
 		eventsToListen.add(TreeThemeChangeEvent.class.getName());
-		eventsToListen.add(DrawFeatureEvent.class.getName());
+		eventsToListen.add(GetSelectFeatureEvent.class.getName());
+		listModel = new DefaultListModel<String>();
 		
 	}
 
@@ -276,11 +279,29 @@ public class TreeController implements EventDispatcher, EventListener {
 			this.handle((SetLabelContextEvent) e);
 		} else if (e instanceof TreeThemeChangeEvent){
 			this.handle((TreeThemeChangeEvent) e);
-		} else if (e instanceof DrawFeatureEvent){
-			this.handle((DrawFeatureEvent)e);
+		} else if (e instanceof GetSelectFeatureEvent){
+			this.handle((GetSelectFeatureEvent)e);
 		}
 	}
-	private void handle(DrawFeatureEvent e){
+	
+	private void handle(GetSelectFeatureEvent e){
+		String id = e.getFeatureId();
+		boolean inList=false;
+		
+		if(!listModel.isEmpty()){
+			for (int i = 0; i < listModel.size(); i++) {
+				if(listModel.get(i).equals(id))
+					inList=true;
+			}
+		}
+		
+		if(!inList){
+			listModel.addElement(id);
+			ServiceOrderCreatorScreen.getInstance().getListIpIds().setModel(listModel);
+			ServiceOrderCreatorScreen.getInstance().setVisible(true);
+		}else{
+			//GlueMessageDialog.show("IP: "+id+" already been selected!", null, 3);
+		}
 		
 	}
 	
@@ -329,7 +350,6 @@ public class TreeController implements EventDispatcher, EventListener {
 		} catch (GlueServerException exception) {
 			exception.printStackTrace();
 			// TODO AGUARDANDO IMPLEMENTAÇÃO DO EXCEPTION HANDLER
-
 		}
 	}
 

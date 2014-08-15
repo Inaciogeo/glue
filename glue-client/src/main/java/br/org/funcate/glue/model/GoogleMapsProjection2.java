@@ -39,7 +39,7 @@ public class GoogleMapsProjection2 {
 
         // Truncating to 0.9999 effectively limits latitude to 89.189. This is
         // about a third of a tile past the edge of the world tile.
-        double siny = bound(Math.sin(degreesToRadians(lat)), -0.9999,0.9999);
+        double siny = bound(Math.sin(degreesToRadians(lat)), -0.9999, 0.9999);
         point.y = _pixelOrigin.y + 0.5 * Math.log((1 + siny) / (1 - siny)) *- _pixelsPerLonRadian;
 
         int numTiles = 1 << zoom;
@@ -64,9 +64,9 @@ public class GoogleMapsProjection2 {
     {
         GoogleMapsProjection2 gmap2 = new GoogleMapsProjection2();
 
-        PointF point1 = gmap2.fromLatLngToPoint(41.850033, -87.6500523, 10);
+        PointF point1 = gmap2.fromLatLngToPoint(-23.855482,-46.137842, 10);
         System.out.println(point1.x+"   "+point1.y);
-        PointF point2 = gmap2.fromPointToLatLng(point1,15);
+        PointF point2 = gmap2.fromPointToLatLng(point1,10);
         System.out.println(point2.x+"   "+point2.y);
     }
 }

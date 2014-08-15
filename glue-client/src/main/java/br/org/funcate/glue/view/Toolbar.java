@@ -2,10 +2,12 @@ package br.org.funcate.glue.view;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JToolBar;
 
 import br.org.funcate.glue.controller.listener.ToolbarListener;
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  * \class Toolbar Creates One ToolBar. \brief Creates One ToolBar. \author
@@ -164,6 +166,8 @@ public class Toolbar extends JToolBar {
 	// @}
 
 	private boolean googleSelected, wmsSelected, terraLibSelected;
+	private JLabel bntSeparator;
+	private static JButton openOS;
 
 	// ! create ImageIcon
 	/*
@@ -229,71 +233,86 @@ public class Toolbar extends JToolBar {
 
 	public Toolbar() {
 		setBackground(new Color(255, 255, 255));
-		setFloatable(false);
+		//setFloatable(false);
 
 		terraLib = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/newterraview.gif", Toolbar.class));
+		terraLib.setBackground(new Color(255, 255, 255));
 		terraLibSelected = true;
 		terraLib.setToolTipText("Habilita/Desabilita Árvore");
 		terraLib.setVisible(false);
 		paint = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt01.gif", Toolbar.class));
+		paint.setBackground(new Color(255, 255, 255));
 		// paint = new JButton(new ImageIcon(getImg("bt01.gif")));
 		paint.setToolTipText("Desenhar");
 
 		rebuild = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt02.gif", Toolbar.class));
+		rebuild.setBackground(new Color(255, 255, 255));
 		rebuild.setToolTipText("Recompor");
 
 		zoomIn = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt03.gif", Toolbar.class));
+		zoomIn.setBackground(new Color(255, 255, 255));
 		zoomIn.setToolTipText("Zoom Mais");
 
 		zoomOut = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt04.gif", Toolbar.class));
+		zoomOut.setBackground(new Color(255, 255, 255));
 		zoomOut.setToolTipText("Zoom Menos");
 
 		selectArea = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt05.gif", Toolbar.class));
+		selectArea.setBackground(new Color(255, 255, 255));
 		selectArea.setToolTipText("Zoom Área");
 
 		pan = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt06.gif", Toolbar.class));
+		pan.setBackground(new Color(255, 255, 255));
 		pan.setToolTipText("Pan");
 
 		distance = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt07.gif", Toolbar.class));
+		distance.setBackground(new Color(255, 255, 255));
 		distance.setToolTipText("Calcular Distância");
 
 		unDo = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/arrow_undo.gif", Toolbar.class));
+		unDo.setBackground(new Color(255, 255, 255));
 		unDo.setToolTipText("Voltar Última Visualização");
 
 		reDo = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/arrow_redo.gif", Toolbar.class));
+		reDo.setBackground(new Color(255, 255, 255));
 		reDo.setToolTipText("Avançar Visualização");
 
 		photoLocation = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt08.gif", Toolbar.class));
+		photoLocation.setBackground(new Color(255, 255, 255));
 		photoLocation.setVisible(false);
 		photoLocation.setToolTipText("Fotos Lotes");
 
 		info = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt09.gif", Toolbar.class));
+		info.setBackground(new Color(255, 255, 255));
 		info.setToolTipText("Informação Objeto");
 
 		links = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt10.gif", Toolbar.class));
+		links.setBackground(new Color(255, 255, 255));
 		links.setVisible(false);
 		links.setToolTipText("Habilitar/Desabilitar Links");
 
 		atribs = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt11.gif", Toolbar.class));
+		atribs.setBackground(new Color(255, 255, 255));
 		atribs.setVisible(false);
 		atribs.setToolTipText("Pesquisar");
 
 		clean = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/bt12.gif", Toolbar.class));
+		clean.setBackground(new Color(255, 255, 255));
 		clean.setToolTipText("Limpar Seleção");
 
 		pdf = new JButton(ImageIconLoader.createImageIcon(
@@ -313,14 +332,23 @@ public class Toolbar extends JToolBar {
 
 		openTileRequest = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/OpenStreetMapLogo.png", Toolbar.class));
+		openTileRequest.setBackground(new Color(255, 255, 255));
 		openTileRequest.setBorderPainted(false);
 		openTileRequest.setFocusPainted(false);
 		openTileRequest.setToolTipText("Ferramenta de requisi\u00E7\u00E3o de mapas remotos ");
 
 		wms = new JButton(ImageIconLoader.createImageIcon(
 				"br/org/funcate/glue/image/iconeToolWMS.gif", Toolbar.class));
+		wms.setBackground(new Color(255, 255, 255));
 		wms.setVisible(false);
 		wms.setToolTipText("Criar uma vizualização wms");
+		
+		openOS = new JButton("Off");
+		openOS.setBackground(new Color(255, 255, 255));
+		openOS.setForeground(new Color(128, 128, 128));
+		openOS.setFont(new Font("Arial", Font.BOLD, 12));
+		openOS.setToolTipText("Open Service Order ( IP )");
+		openOS.setIcon(new ImageIcon(Toolbar.class.getResource("/br/org/funcate/glue/image/access.png")));
 
 		ToolbarListener listener = new ToolbarListener(this);
 		this.addListener(listener);
@@ -343,9 +371,15 @@ public class Toolbar extends JToolBar {
 		this.add(links);
 		this.add(atribs);
 		this.add(clean);
+		
+		bntSeparator = new JLabel("");
+		bntSeparator.setBackground(new Color(192, 192, 192));
+		bntSeparator.setIcon(new ImageIcon(Toolbar.class.getResource("/br/org/funcate/glue/image/lineDashed.png")));
+		this.add(bntSeparator);
+		
+		this.add(openOS);
 		this.add(pdf);
 		this.add(export);
-
 		this.add(helpOnline);
 
 		/*
@@ -378,7 +412,7 @@ public class Toolbar extends JToolBar {
 		helpOnline.addActionListener(listener);
 		openTileRequest.addActionListener(listener);
 		wms.addActionListener(listener);
-		
+		openOS.addActionListener(listener);
 	}
 
 	/**
@@ -843,4 +877,12 @@ public class Toolbar extends JToolBar {
 		this.googleSelected = googleSelected;
 	}
 
+	public static JButton getOpenOS() {
+		return openOS;
+	}
+
+	public void setOpenOS(JButton openOS) {
+		Toolbar.openOS = openOS;
+	}
+	
 }

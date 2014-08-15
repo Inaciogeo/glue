@@ -581,7 +581,7 @@ public abstract class CanvasService {
 			box = new Box(foreground.getX1(), foreground.getY1(),
 					foreground.getX2(), foreground.getY2());
 		}
-
+		
 		return box;
 	}
 

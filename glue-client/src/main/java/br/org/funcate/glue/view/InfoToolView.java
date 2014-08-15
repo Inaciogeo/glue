@@ -44,10 +44,11 @@ public class InfoToolView extends JFrame {
 		panel_1.setLayout(null);
 
 		lblTitle = new JLabel("Resultado do Apontamento");
+		lblTitle.setForeground(new Color(105, 105, 105));
 		lblTitle.setBounds(0, 1, 543, 25);
 		panel_1.add(lblTitle);
 		lblTitle.setBackground(new Color(255, 255, 255));
-		lblTitle.setFont(new Font("Dialog", Font.ITALIC, 13));
+		lblTitle.setFont(new Font("Arial", Font.BOLD, 14));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
 		InfoToolAdapter adapter = new InfoToolAdapter(this);
@@ -66,9 +67,10 @@ public class InfoToolView extends JFrame {
 		mainPanel.add(btClose);
 
 		themesTabbedPane = new JTabbedPane();
+		themesTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		themesTabbedPane.setRequestFocusEnabled(false);
 		themesTabbedPane.setTabPlacement(JTabbedPane.BOTTOM);
-		themesTabbedPane.setFont(new Font("DejaVu Sans", Font.BOLD | Font.ITALIC, 10));
+		themesTabbedPane.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 10));
 		themesTabbedPane.setBackground(new Color(255, 255, 255));
 		themesTabbedPane.setBounds(35, 50, 469, 198);
 		mainPanel.add(themesTabbedPane);
