@@ -22,6 +22,7 @@ import br.org.funcate.eagles.kernel.transmitter.EventTransmitter;
 import br.org.funcate.glue.event.ScaleChangedEvent;
 import br.org.funcate.glue.main.AppSingleton;
 import br.org.funcate.glue.model.canvas.CanvasService;
+import br.org.funcate.glue.model.canvas.CanvasState;
 import br.org.funcate.glue.model.exception.GlueServerException;
 import br.org.funcate.glue.model.thread.PlotterController;
 import br.org.funcate.glue.model.toolbar.ToolEnum;
@@ -31,6 +32,7 @@ import br.org.funcate.glue.model.tree.TreeService;
 import br.org.funcate.glue.os.model.OSState;
 import br.org.funcate.glue.os.view.AuthenticationScreen;
 import br.org.funcate.glue.os.view.ServiceOrderCreatorScreen;
+import br.org.funcate.glue.os.view.ServiceOrderOnMapScreen;
 import br.org.funcate.glue.tool.CleanTool;
 import br.org.funcate.glue.tool.DistanceTool;
 import br.org.funcate.glue.tool.ExportTool;
@@ -631,13 +633,49 @@ public class ToolbarController implements EventDispatcher, EventListener {
 		return this.eventsToListen;
 	}
 
-	public void setOS() {
+	public void setAuthentication() {
 		if(OSState.isAuth()){
-			ServiceOrderCreatorScreen screenOs = ServiceOrderCreatorScreen.getInstance();
-			screenOs.setVisible(true);
+			Toolbar.getBtnOsSelect().setVisible(false);
+			Toolbar.getBtnOsShow().setVisible(false);
+			OSState.setAuth(false);
 		}else{
 			AuthenticationScreen screen = new AuthenticationScreen();
 			screen.setVisible(true);
 		}
+	}
+
+	public void setNewOS() {
+		ServiceOrderCreatorScreen osScreen = ServiceOrderCreatorScreen.getInstance();
+		osScreen.setVisible(true);	
+	}
+
+	public void setSelected() {
+		AppSingleton singleton = AppSingleton.getInstance();
+		Mediator mediator = singleton.getMediator();
+		CanvasState state = singleton.getCanvasState();
+		state.setGvSource("SelectFeatureEvent");
+		state.setGvSourceType("ip");
+
+		CanvasController canvasController = mediator.getCanvasController();
+		Thread ip = new Thread(canvasController);
+		ip.start();
+	}
+
+	public void setShowOS() {
+		ServiceOrderOnMapScreen mapScreen = ServiceOrderOnMapScreen.getInstance();
+		mapScreen.setVisible(true);
+	}
+
+	public void selectOS() {
+		AppSingleton singleton = AppSingleton.getInstance();
+		Mediator mediator = singleton.getMediator();
+		CanvasState state = singleton.getCanvasState();
+		state.setGvSource("SelectFeatureEvent");
+		state.setGvSourceType("os");
+
+		CanvasController canvasController = mediator.getCanvasController();
+		Thread ip = new Thread(canvasController);
+		ip.start();
+		
 	}
 }

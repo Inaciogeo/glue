@@ -935,7 +935,7 @@ public class TerraJavaJNI {
 			throws RuntimeException {
 		Vector<String> vectorIDs;
 		try {
-			vectorIDs = terraJava.locateObject(x, y, 12.0, sessionId);
+			vectorIDs = terraJava.locateObject(x, y, 8.0, sessionId);
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException(
 					"Ocorreu um erro ao realizar a consulta. ", e);

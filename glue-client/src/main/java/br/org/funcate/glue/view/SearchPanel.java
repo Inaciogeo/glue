@@ -30,11 +30,11 @@ import br.org.funcate.glue.model.ComboBoxScaleService;
 import br.org.funcate.glue.model.canvas.CanvasState;
 import br.org.funcate.glue.model.canvas.ZoomToolService;
 import br.org.funcate.glue.model.exception.GlueServerException;
+import br.org.funcate.glue.os.model.OSState;
 import br.org.funcate.glue.service.TerraJavaClient;
 import br.org.funcate.glue.service.utils.GeographicalSearchService;
 import br.org.funcate.glue.utilities.PropertiesReader;
 
-import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 import java.awt.Cursor;
 
@@ -168,6 +168,7 @@ public class SearchPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() > 1) {
 					execGeolocation();
+					OSState.setAddress(textSearch.getText());
 				}	
 			}
 		});
@@ -322,7 +323,7 @@ public class SearchPanel extends JPanel {
 	
 			CanvasController canvasController = mediator.getCanvasController();
 			// thread que executa dispatch do evento de drawFeature.
-			state.setGvSource("DrawFeatureEvent");
+			state.setGvSource("SearchDrawFeatureEvent");
 			Thread drawStreet = new Thread(canvasController);
 			drawStreet.start();
 		

@@ -58,6 +58,8 @@ public class CanvasState {
 	private String dataSource;
 	
 	private String gvSource;
+	
+	private String gvSourceType;
 
 	public CanvasState() {
 		this.canvasWidth = Integer.parseInt(PropertiesReader.getProperty("canvas.width"));
@@ -244,6 +246,14 @@ public class CanvasState {
 
 	public void setGvSource(String gvSource) {
 		this.gvSource = gvSource;
+	}
+
+	public String getGvSourceType() {
+		return gvSourceType;
+	}
+
+	public void setGvSourceType(String gvSourceType) {
+		this.gvSourceType = gvSourceType;
 	}
 	
 }

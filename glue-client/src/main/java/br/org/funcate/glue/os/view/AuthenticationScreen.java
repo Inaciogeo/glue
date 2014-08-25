@@ -40,7 +40,7 @@ public class AuthenticationScreen extends JDialog {
 	private static boolean validUser;
 	private static boolean validPass;
 	private JLabel lblHelp;
-	private JButton btnCloseServiceOrder;
+	private JButton btnLogin;
 
 	/**
 	 * Launch the application.
@@ -64,8 +64,8 @@ public class AuthenticationScreen extends JDialog {
 	 */
 	public AuthenticationScreen() {
 		setResizable(false);
-		
-		setBounds(100, 100, 360, 270);
+		setModal(true);
+		setBounds(100, 100, 360, 245);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,7 +74,7 @@ public class AuthenticationScreen extends JDialog {
 		
 		JLabel lblUser = new JLabel("User");
 		lblUser.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblUser.setBounds(51, 35, 47, 16);
+		lblUser.setBounds(23, 35, 33, 16);
 		contentPane.add(lblUser);
 		
 		textUser = new JTextField();
@@ -85,73 +85,50 @@ public class AuthenticationScreen extends JDialog {
 				
 				boolean check = checkUser(textUser.getText().trim());	
 				if(!check){
-					textUser.setBorder(new LineBorder(Color.RED));
+					textUser.setBorder(new LineBorder(Color.RED,2));
 					lblErroMensage.setVisible(true);
 					lblErroMensage.setText("User not found.!");
 					validUser = false;
 				}else{
-					textUser.setBorder(new LineBorder(Color.BLUE));
+					textUser.setBorder(new LineBorder(Color.BLUE,2));
 					lblErroMensage.setVisible(false);
 					validUser = true;
 				}
 			}
 		});
 		
-		textUser.setBounds(50, 49, 260, 28);
+		textUser.setBounds(22, 49, 240, 28);
 		contentPane.add(textUser);
 		textUser.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblPassword.setBounds(50, 81, 68, 16);
+		lblPassword.setBounds(22, 81, 68, 16);
 		contentPane.add(lblPassword);
 		
 		JLabel lblIMissMy = new JLabel("Miss your password?");
 		lblIMissMy.setForeground(new Color(0, 0, 205));
 		lblIMissMy.setBackground(new Color(255, 255, 255));
 		lblIMissMy.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblIMissMy.setBounds(121, 128, 123, 16);
+		lblIMissMy.setBounds(115, 161, 125, 16);
 		contentPane.add(lblIMissMy);
-		
-		final JButton btnOk = new JButton("Open Service Order");
-		btnOk.setActionCommand("Enter");
-		btnOk.setEnabled(false);
-		btnOk.setBackground(new Color(255, 255, 255));
-		btnOk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				ServiceOrderCreatorScreen screen = new ServiceOrderCreatorScreen();
-				screen.setVisible(true);
-				OSState.setUser(textUser.getText());
-				OSState.setAuth(true);
-				Toolbar.getOpenOS().setText("On");
-			}
-		});
-		btnOk.setBounds(19, 179, 148, 40);
-		contentPane.add(btnOk);
 		
 		passwordField = new JPasswordField();
 		passwordField.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
 				boolean checkPass = checkPassword(passwordField.getPassword());
 				if(!checkPass){
-					passwordField.setBorder(new LineBorder(Color.RED));
+					passwordField.setBorder(new LineBorder(Color.RED,2));
 					validPass = false;
 				}else{
-					passwordField.setBorder(new LineBorder(Color.BLUE));
+					passwordField.setBorder(new LineBorder(Color.BLUE,2));
 					validPass = true;
-				}
-				
-				if(validUser && validPass){
-					btnOk.setEnabled(true);
-				}else{
-					btnOk.setEnabled(false);
 				}
 			}
 		});
 		passwordField.setBorder(new LineBorder(new Color(192, 192, 192)));
 		passwordField.setBackground(new Color(255, 255, 255));
-		passwordField.setBounds(50, 96, 260, 28);
+		passwordField.setBounds(22, 96, 240, 28);
 		contentPane.add(passwordField);
 		
 		JPanel panel = new JPanel();
@@ -170,34 +147,43 @@ public class AuthenticationScreen extends JDialog {
 		lblErroMensage.setForeground(new Color(128, 128, 128));
 		lblErroMensage.setIcon(new ImageIcon(AuthenticationScreen.class.getResource("/br/org/funcate/glue/image/erro16.png")));
 		lblErroMensage.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 11));
-		lblErroMensage.setBounds(13, 223, 324, 16);
+		lblErroMensage.setBounds(6, 139, 342, 16);
 		contentPane.add(lblErroMensage);
-		
-		btnCloseServiceOrder = new JButton("Close Service Order");
-		btnCloseServiceOrder.setEnabled(false);
-		btnCloseServiceOrder.setBackground(Color.WHITE);
-		btnCloseServiceOrder.setActionCommand("Enter");
-		btnCloseServiceOrder.setBounds(185, 179, 148, 40);
-		contentPane.add(btnCloseServiceOrder);
 		
 		lblHelp = new JLabel("Help");
 		lblHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblHelp.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHelp.setForeground(new Color(0, 0, 205));
 		lblHelp.setBackground(Color.WHITE);
-		lblHelp.setBounds(121, 145, 116, 16);
+		lblHelp.setBounds(151, 182, 53, 16);
 		contentPane.add(lblHelp);
+		
+		btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(validUser && validPass){
+					Toolbar.getBtnOsSelect().setVisible(true);
+					Toolbar.getBtnOsShow().setVisible(true);
+					Toolbar.getBtnSelectOs().setVisible(true);
+					lblErroMensage.setVisible(false);
+					OSState.setAuth(true);
+					dispose();
+				}else{
+					Toolbar.getBtnOsSelect().setVisible(false);
+					Toolbar.getBtnOsShow().setVisible(false);
+					Toolbar.getBtnSelectOs().setVisible(false);
+					OSState.setAuth(false);
+					lblErroMensage.setVisible(true);
+					lblErroMensage.setText("you have no permission!");
+				}
+			}
+		});
+		btnLogin.setBackground(Color.WHITE);
+		btnLogin.setBounds(274, 88, 68, 38);
+		contentPane.add(btnLogin);
 		Utils.setScreenToCenter(this);	
 	}
 	
-
-	public JButton getBtnCloseServiceOrder() {
-		return btnCloseServiceOrder;
-	}
-
-	public void setBtnCloseServiceOrder(JButton btnCloseServiceOrder) {
-		this.btnCloseServiceOrder = btnCloseServiceOrder;
-	}
 
 	private boolean checkUser(String user) {
 		boolean checkUser = false;

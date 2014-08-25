@@ -4,6 +4,7 @@ public class OSState {
 	private static String user;
 	private static String Address;
 	private static boolean isAuth;
+	private static String osOnMap;
 	
 	public OSState() {
 		super();
@@ -50,4 +51,11 @@ public class OSState {
 		Address = address;
 	}
 	
+	public static void setOsOnMap(String ip) {
+		osOnMap = ip;	
+	}
+	public static String getOsOnMap() {
+		return osOnMap;
+	}
+
 }

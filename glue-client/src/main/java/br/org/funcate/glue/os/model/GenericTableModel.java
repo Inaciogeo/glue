@@ -1,6 +1,5 @@
 package br.org.funcate.glue.os.model;
 
-
 import javax.swing.table.AbstractTableModel;
 
 @SuppressWarnings("serial")
@@ -59,4 +58,6 @@ public class GenericTableModel  extends AbstractTableModel{
         data[row][col] = value;
         fireTableCellUpdated(row, col);
     }
+
+	
 }

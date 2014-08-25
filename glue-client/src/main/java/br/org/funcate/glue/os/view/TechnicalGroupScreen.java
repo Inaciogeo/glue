@@ -1,13 +1,10 @@
 package br.org.funcate.glue.os.view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -33,6 +30,14 @@ public class TechnicalGroupScreen extends JDialog {
 	private JButton btnNewGroup;
 	private JButton btnDeleteSelected;
 	private JButton btnFinish;
+	private static TechnicalGroupScreen instance; 
+	
+	public static TechnicalGroupScreen getInstance(){
+		if(instance == null)
+			instance = new TechnicalGroupScreen();
+		
+		return instance;
+	}
 
 	/**
 	 * Launch the application.

@@ -20,6 +20,7 @@ import br.org.funcate.eagles.kernel.transmitter.EventTransmitter;
 import br.org.funcate.glue.event.BoxChangedEvent;
 import br.org.funcate.glue.event.CanvasDrawEvent;
 import br.org.funcate.glue.event.CleanBufferEvent;
+import br.org.funcate.glue.event.CommitFeatureEvent;
 import br.org.funcate.glue.event.DrawFeatureEvent;
 import br.org.funcate.glue.event.DrawLayersEvent;
 import br.org.funcate.glue.event.DrawTilesEvent;
@@ -51,11 +52,11 @@ import br.org.funcate.glue.model.canvas.ThemeAttributesInfoTool;
 import br.org.funcate.glue.model.canvas.ToolRedirectionService;
 import br.org.funcate.glue.model.canvas.UndoRedoService;
 import br.org.funcate.glue.model.exception.GlueServerException;
+import br.org.funcate.glue.os.view.ServiceOrderCreatorScreen;
 
 import br.org.funcate.glue.view.AbstractCanvas;
 import br.org.funcate.glue.view.InfoToolView;
 import br.org.funcate.glue.view.SearchPanel;
-
 
 public class CanvasController implements EventDispatcher, EventListener, Runnable {
 
@@ -528,14 +529,26 @@ public class CanvasController implements EventDispatcher, EventListener, Runnabl
 		AppSingleton singleton = AppSingleton.getInstance();
 		CanvasState state = singleton.getCanvasState();
 		
-		if(state.getGvSource()=="DrawFeatureEvent"){
-			doDrawFeatureEvent();
+		if(state.getGvSource()=="SearchDrawFeatureEvent"){
+			doSearchDrawFeatureEvent();
 		}else if(state.getGvSource()=="SelectFeatureEvent"){
-			doSelectFeatureEvent();
+			doSelectFeatureEvent(state.getGvSourceType());	
+		}else if(state.getGvSource()=="OSDrawFeatureEvent"){
+			doOSDrawFeatureEvent();
+		}else if (state.getGvSource()=="CommitFeatureEvent") {
+			doCommitFeatureEvent();
 		}
 	}
-	
-	public void doDrawFeatureEvent(){
+	public void doOSDrawFeatureEvent(){
+		DrawFeatureEvent drawFeatureEvent = new DrawFeatureEvent(this);
+		try {
+			this.dispatch(transmitter,drawFeatureEvent);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+ 
+	public void doSearchDrawFeatureEvent(){
 		DrawFeatureEvent drawFeatureEvent = new DrawFeatureEvent(this);
 		drawFeatureEvent.setLineIds(SearchPanel.getStreetIds());
 		drawFeatureEvent.setPolygonIds(SearchPanel.getLotIds());
@@ -545,13 +558,28 @@ public class CanvasController implements EventDispatcher, EventListener, Runnabl
 			ex.printStackTrace();
 		}
 	}
-	public void doSelectFeatureEvent(){
+	public void doSelectFeatureEvent(String type){
 		SelectFeatureEvent selectFeatureEvent = new SelectFeatureEvent(this);
+		selectFeatureEvent.setType(type);
 		try {
 			this.dispatch(transmitter,selectFeatureEvent);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		
+	}
+	public void doCommitFeatureEvent(){ 
+		CommitFeatureEvent commitFeatureEvent = new CommitFeatureEvent(this);
+		commitFeatureEvent.setIp(TreeController.ip);
+		commitFeatureEvent.setX(TreeController.osX);
+		commitFeatureEvent.setY(TreeController.osY);
+		commitFeatureEvent.setOcurrence(ServiceOrderCreatorScreen.getInstance().getCboOcurrence().getSelectedItem().toString());
+		commitFeatureEvent.setOsid(ServiceOrderCreatorScreen.getInstance().getTxtServiceOrderNumber().getText());
+		
+		try {
+			this.dispatch(transmitter, commitFeatureEvent);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 }

@@ -119,10 +119,19 @@ public class ToolbarListener implements ActionListener {
 		if (e.getSource() == Toolbar.getWms()) {
 			//toolController.setWMS();
 		}
-		if (e.getSource() == toolbar.getOpenOS()) {
-			toolController.setOS();
+		if (e.getSource() == Toolbar.getOpenOS()) {
+			toolController.setAuthentication();
 		}
 		
+		if(e.getSource() == Toolbar.getBtnOsSelect()){
+			toolController.setSelected();
+		}
+		if(e.getSource() == Toolbar.getBtnOsShow()){
+			toolController.setShowOS();
+		}
+		if(e.getSource() == Toolbar.getBtnSelectOs()){
+			toolController.selectOS();
+		}
 	}
 
 }

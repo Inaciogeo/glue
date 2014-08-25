@@ -2,6 +2,7 @@ package br.org.funcate.glue.controller;
 
 import java.util.ArrayList;
 import java.util.EventObject;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -18,6 +19,7 @@ import br.org.funcate.eagles.kernel.listener.ListenersHandlerImpl;
 import br.org.funcate.eagles.kernel.transmitter.DirectedEventTransmitter;
 import br.org.funcate.eagles.kernel.transmitter.EventTransmitter;
 import br.org.funcate.glue.event.CleanThematicEvent;
+import br.org.funcate.glue.event.GetOsEvent;
 import br.org.funcate.glue.event.GetSelectFeatureEvent;
 import br.org.funcate.glue.event.GetThemeAttributesEvent;
 import br.org.funcate.glue.event.GetViewsEvent;
@@ -31,11 +33,16 @@ import br.org.funcate.glue.model.Layer;
 import br.org.funcate.glue.model.LoadingStatusService;
 import br.org.funcate.glue.model.UserType;
 import br.org.funcate.glue.model.canvas.CanvasService;
+import br.org.funcate.glue.model.canvas.CanvasState;
 import br.org.funcate.glue.model.exception.GlueServerException;
 import br.org.funcate.glue.model.request.TextRequest;
 import br.org.funcate.glue.model.tree.CustomNode;
 import br.org.funcate.glue.model.tree.TreeService;
+import br.org.funcate.glue.os.model.GenericTableModel;
+import br.org.funcate.glue.os.view.ProgramServiceOrderScreen;
 import br.org.funcate.glue.os.view.ServiceOrderCreatorScreen;
+import br.org.funcate.glue.os.view.ServiceOrderOnMapScreen;
+import br.org.funcate.glue.view.GlueMessageDialog;
 import br.org.funcate.glue.view.TreeView;
 
 public class TreeController implements EventDispatcher, EventListener {
@@ -48,7 +55,11 @@ public class TreeController implements EventDispatcher, EventListener {
 
 	private List<String> eventsToListen;
 	public static DefaultListModel<String> listModel;
-
+	public static GenericTableModel dataModel;
+	public static ArrayList<HashMap<String, String>> osCoods;	
+	public static String ip; 
+	public static String osX; 
+	public static String osY; 
 	public TreeController(TreeView treeView) {
 		this.treeView = treeView;
 		AppSingleton.getInstance().getMediator().setTreeController(this);
@@ -64,6 +75,7 @@ public class TreeController implements EventDispatcher, EventListener {
 		eventsToListen.add(SetLabelContextEvent.class.getName());
 		eventsToListen.add(TreeThemeChangeEvent.class.getName());
 		eventsToListen.add(GetSelectFeatureEvent.class.getName());
+		eventsToListen.add(GetOsEvent.class.getName());
 		listModel = new DefaultListModel<String>();
 		
 	}
@@ -281,29 +293,59 @@ public class TreeController implements EventDispatcher, EventListener {
 			this.handle((TreeThemeChangeEvent) e);
 		} else if (e instanceof GetSelectFeatureEvent){
 			this.handle((GetSelectFeatureEvent)e);
+		}else if (e instanceof GetOsEvent){
+			this.handle((GetOsEvent)e);
 		}
 	}
 	
+	private void handle(GetOsEvent e){
+		
+		String[]columnNames = {"OsID", "Ocorrence", "Status"};
+		Object[][] data;
+		
+		data = new Object[e.getOsIDs().size()][columnNames.length];
+		
+		for (int i = 0; i < e.getOsIDs().size(); i++) {
+			data[i][0] = e.getOsIDs().get(i);
+			data[i][1] = e.getOcorrences().get(i);
+			data[i][2] = e.getStatus().get(i);
+		}
+
+		dataModel = new GenericTableModel(columnNames, data);
+	}
+	
+
 	private void handle(GetSelectFeatureEvent e){
 		String id = e.getFeatureId();
-		boolean inList=false;
+		AppSingleton singleton = AppSingleton.getInstance();
+		CanvasState state = singleton.getCanvasState();
+		ip = e.getOsIP();
+		osX = e.getOsX();
+		osY = e.getOsY();
+//		listModel.clear();
+		//boolean inList = true;
+	
+		if(!id.equals("")){
 		
-		if(!listModel.isEmpty()){
-			for (int i = 0; i < listModel.size(); i++) {
-				if(listModel.get(i).equals(id))
-					inList=true;
+//			if (!listModel.isEmpty()) {
+//				for (int i = 0; i < listModel.size(); i++) {
+//					if (listModel.get(i).equals(id))
+//						inList = true;
+//				}
+//			}
+			if (state.getGvSourceType()=="ip") {
+				//listModel.addElement(id);
+				ServiceOrderCreatorScreen.getInstance().getTextIP().setText(id);
+				ServiceOrderCreatorScreen.getInstance().setVisible(true);
+			}else if(state.getGvSourceType()=="os"){
+				ProgramServiceOrderScreen.getInstance().getTextOS().setText(id);
+				ProgramServiceOrderScreen.getInstance().setVisible(true);
 			}
-		}
-		
-		if(!inList){
-			listModel.addElement(id);
-			ServiceOrderCreatorScreen.getInstance().getListIpIds().setModel(listModel);
-			ServiceOrderCreatorScreen.getInstance().setVisible(true);
 		}else{
-			//GlueMessageDialog.show("IP: "+id+" already been selected!", null, 3);
+			GlueMessageDialog.show("this ip has no Id", null, 2);
 		}
-		
 	}
+	
 	
 	private void handle(SetLabelContextEvent e){
 		ContextToLabelConfig contextToLabelConfig = e.getContext();

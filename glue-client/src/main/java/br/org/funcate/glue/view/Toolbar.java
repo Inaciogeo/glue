@@ -69,6 +69,7 @@ public class Toolbar extends JToolBar {
 	private static JButton wms;
 
 	private static JButton terraLib;
+	
 
 	// @}
 
@@ -168,6 +169,9 @@ public class Toolbar extends JToolBar {
 	private boolean googleSelected, wmsSelected, terraLibSelected;
 	private JLabel bntSeparator;
 	private static JButton openOS;
+	private static JButton btnOsShow;
+	private static JButton btnOsSelect;
+	private static JButton btnSelectOs;
 
 	// ! create ImageIcon
 	/*
@@ -343,12 +347,44 @@ public class Toolbar extends JToolBar {
 		wms.setVisible(false);
 		wms.setToolTipText("Criar uma vizualização wms");
 		
-		openOS = new JButton("Off");
+		openOS = new JButton("");
+		openOS.setFocusPainted(false);
+		openOS.setBorderPainted(false);
 		openOS.setBackground(new Color(255, 255, 255));
 		openOS.setForeground(new Color(128, 128, 128));
 		openOS.setFont(new Font("Arial", Font.BOLD, 12));
-		openOS.setToolTipText("Open Service Order ( IP )");
+		openOS.setToolTipText("Authentication service order");
 		openOS.setIcon(new ImageIcon(Toolbar.class.getResource("/br/org/funcate/glue/image/access.png")));
+		
+		btnOsShow = new JButton("Show ");
+		btnOsShow.setVisible(false);
+		btnOsShow.setFocusPainted(false);
+		btnOsShow.setBorderPainted(false);
+		btnOsShow.setToolTipText("Show list of service order on map");
+		btnOsShow.setForeground(Color.GRAY);
+		btnOsShow.setFont(new Font("Arial", Font.BOLD, 12));
+		btnOsShow.setBackground(Color.WHITE);
+		
+		btnOsSelect = new JButton("Select IP");
+		btnOsSelect.setFocusPainted(false);
+		btnOsSelect.setBorderPainted(false);
+		btnOsSelect.setToolTipText("Open new service order selecting an IP on the map");
+		btnOsSelect.setForeground(Color.GRAY);
+		btnOsSelect.setFont(new Font("Arial", Font.BOLD, 12));
+		btnOsSelect.setBackground(Color.WHITE);
+		
+		bntSeparator = new JLabel("");
+		bntSeparator.setBackground(new Color(192, 192, 192));
+		bntSeparator.setIcon(new ImageIcon(Toolbar.class.getResource("/br/org/funcate/glue/image/lineDashed.png")));
+		
+		btnSelectOs = new JButton("Select OS");
+		btnSelectOs.setVisible(false);
+		btnSelectOs.setToolTipText("Open new service order selecting an IP on the map");
+		btnSelectOs.setForeground(Color.GRAY);
+		btnSelectOs.setFont(new Font("Arial", Font.BOLD, 12));
+		btnSelectOs.setFocusPainted(false);
+		btnSelectOs.setBorderPainted(false);
+		btnSelectOs.setBackground(Color.WHITE);
 
 		ToolbarListener listener = new ToolbarListener(this);
 		this.addListener(listener);
@@ -365,19 +401,16 @@ public class Toolbar extends JToolBar {
 		this.add(distance);
 		this.add(unDo);
 		this.add(reDo);
-
 		this.add(photoLocation);
 		this.add(info);
 		this.add(links);
 		this.add(atribs);
 		this.add(clean);
-		
-		bntSeparator = new JLabel("");
-		bntSeparator.setBackground(new Color(192, 192, 192));
-		bntSeparator.setIcon(new ImageIcon(Toolbar.class.getResource("/br/org/funcate/glue/image/lineDashed.png")));
 		this.add(bntSeparator);
-		
 		this.add(openOS);
+		this.add(btnOsShow);
+		this.add(btnSelectOs);
+		this.add(btnOsSelect);
 		this.add(pdf);
 		this.add(export);
 		this.add(helpOnline);
@@ -413,6 +446,9 @@ public class Toolbar extends JToolBar {
 		openTileRequest.addActionListener(listener);
 		wms.addActionListener(listener);
 		openOS.addActionListener(listener);
+		btnOsSelect.addActionListener(listener);
+		btnOsShow.addActionListener(listener);
+		btnSelectOs.addActionListener(listener);
 	}
 
 	/**
@@ -883,6 +919,30 @@ public class Toolbar extends JToolBar {
 
 	public void setOpenOS(JButton openOS) {
 		Toolbar.openOS = openOS;
+	}
+
+	public static JButton getBtnOsShow() {
+		return btnOsShow;
+	}
+
+	public static void setBtnOsShow(JButton btnOsShow) {
+		Toolbar.btnOsShow = btnOsShow;
+	}
+
+	public static JButton getBtnOsSelect() {
+		return btnOsSelect;
+	}
+
+	public static void setBtnOsSelect(JButton btnOsSelect) {
+		Toolbar.btnOsSelect = btnOsSelect;
+	}
+
+	public static JButton getBtnSelectOs() {
+		return btnSelectOs;
+	}
+
+	public static void setBtnSelectOs(JButton btnSelectOs) {
+		Toolbar.btnSelectOs = btnSelectOs;
 	}
 	
 }
